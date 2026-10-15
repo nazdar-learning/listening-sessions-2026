@@ -156,6 +156,7 @@ details[open] > summary .more::after { content: " (hide)"; font-weight: 400; }
 .split dt { font-size: 13px; font-weight: 700; color: var(--ink-2); }
 .split dd { margin: 2px 0 0; padding-left: 12px; border-left: 3px solid var(--line-strong); }
 .split dd.b { border-color: var(--red); }
+.split dd.o { border-color: var(--a1); }
 
 /* Context: ranked bars, no tracks */
 .context { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 56px; }
@@ -173,7 +174,7 @@ details[open] > summary .more::after { content: " (hide)"; font-weight: 400; }
 .steps b { display: block; margin-bottom: 4px; }
 
 /* Appendix: all asks */
-.filters { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+.filters { display: grid; grid-template-columns: 2fr repeat(2, 1fr); gap: 12px; margin-bottom: 14px; }
 .filters label { display: grid; gap: 4px; font-size: 14px; font-weight: 700; }
 .filters input, .filters select { font: inherit; font-size: 15px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 8px 10px; min-width: 0; }
 .filters input::placeholder { color: var(--ink-2); }
@@ -221,14 +222,6 @@ td .sub { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px;
 .pick h3 { font-size: 17px; margin-bottom: 4px; }
 .pick p { font-size: 14px; color: var(--ink-2); }
 .pick .asks { margin-top: 12px; max-height: 520px; overflow: auto; padding-right: 4px; }
-
-/* Heatmap: area by session */
-.heat-wrap { overflow-x: auto; }
-.heat { display: grid; grid-template-columns: minmax(190px, 1.6fr) repeat(8, minmax(44px, 1fr)) 56px; gap: 3px; min-width: 720px; }
-.heat .rh { font-size: 15px; display: flex; align-items: center; padding-right: 8px; }
-.heat .ch { font-size: 13px; text-align: center; color: var(--ink-2); line-height: 1.25; padding-bottom: 4px; }
-.heat .ch b { display: block; color: var(--ink); }
-.heat .tot { font-size: 14px; color: var(--ink-2); display: grid; place-items: center; }
 
 /* Who owns what: status stacked bars */
 .owners { display: grid; gap: 14px; }
@@ -328,7 +321,7 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
     <div class="wrap">
       <div class="head">
         <h2>Where to start</h2>
-        <p class="lede">All 93 asks, sorted by how many sessions raised them and how hard they are to do. The red box is easy and widely felt. Pick any square to see its asks.</p>
+        <p class="lede">All 93 asks, sorted by how many sessions raised them and how hard they are to do. Effort is HR's first estimate, for leadership to correct. The red box is easy and widely felt. Pick any square to see its asks.</p>
       </div>
       <div class="start">
         <div>
@@ -391,17 +384,6 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
     </div>
   </section>
 
-  <section class="block" id="heat">
-    <div class="wrap">
-      <div class="head">
-        <h2>Where each issue came up</h2>
-        <p class="lede">Number of asks from each session, by area. A full row means every group felt it. A lone dark square belongs to one group.</p>
-      </div>
-      <div class="heat-wrap"><div class="heat" id="heat-grid" role="table" aria-label="Asks by area and session"></div></div>
-      <div class="legend" id="heat-legend"></div>
-    </div>
-  </section>
-
   <section class="block" id="context">
     <div class="wrap context">
       <div>
@@ -436,7 +418,6 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
         <div class="filters">
           <label>Search<input type="search" id="f-q" placeholder="Try: tubs, scales, trainer"></label>
           <label>Area<select id="f-area"></select></label>
-          <label>Session<select id="f-session"></select></label>
           <label>Status<select id="f-status"></select></label>
         </div>
         <div class="chips" id="type-chips" role="group" aria-label="Filter by type"><span>Type</span></div>
@@ -450,7 +431,7 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
         <div class="table-wrap">
           <table>
             <caption class="sr">All asks from the listening sessions</caption>
-            <thead><tr><th>Ask</th><th>Sessions</th><th>Type</th><th>Suggested owner</th><th>Effort</th><th>Status</th></tr></thead>
+            <thead><tr><th>Ask</th><th>Sessions</th><th>Type</th><th>Suggested owner</th><th>Effort (draft)</th><th>Status</th></tr></thead>
             <tbody id="ask-rows"></tbody>
           </table>
           <p class="empty" id="ask-empty" hidden>No asks match these filters. Clear filters to see everything.</p>
@@ -500,7 +481,7 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
   var askList = function (items) {
     return '<ul class="asks">' + items.map(function (i) {
       return '<li><span class="t">' + esc(i.t) + "</span>" + badge(i.st) +
-        '<span class="m">' + areaTag(i) + ". Suggested owner: " + esc(i.o) + ". Effort: " + i.e.toLowerCase() + ". Raised in " + i.s.length + " of 8 sessions (" + dates(i) + ").</span></li>";
+        '<span class="m">' + areaTag(i) + ". Suggested owner: " + esc(i.o) + ". Effort (draft): " + i.e.toLowerCase() + ". Raised in " + i.s.length + " of 8 sessions.</span></li>";
     }).join("") + "</ul>";
   };
 
@@ -532,7 +513,7 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
   }).join("");
 
   $("split-list").innerHTML = D.SPLITS.map(function (s) {
-    return '<div class="split"><h3>' + esc(s.t) + "</h3><dl><div><dt>" + esc(s.la) + "</dt><dd>" + esc(s.a) + "</dd></div><div><dt>" + esc(s.lb) + '</dt><dd class="b">' + esc(s.b) + "</dd></div></dl></div>";
+    return '<div class="split"><h3>' + esc(s.t) + "</h3><dl><div><dt>" + esc(s.la) + "</dt><dd>" + esc(s.a) + "</dd></div><div><dt>" + esc(s.lb) + '</dt><dd class="b">' + esc(s.b) + "</dd></div>" + (s.opt ? '<div><dt>A possible option</dt><dd class="o">' + esc(s.opt) + "</dd></div>" : "") + "</dl></div>";
   }).join("");
 
   var bars = function (rows, color) {
@@ -588,24 +569,6 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
     pick(e + " effort, raised in " + rr + " of 8 sessions", "Pick the square again to go back to the start-here list.", inCell(rr, e));
   });
 
-  // Heatmap: asks per area per session.
-  var rows = D.AREAS.map(function (a) { return a[2]; }).concat(D.AREA_NAMES.map(function (_, i) { return i; }).filter(function (i) { return !(i in slot); }));
-  var hv = function (a, k) { return D.ITEMS.filter(function (i) { return i.a === a && i.s.indexOf(k) > -1; }).length; };
-  var heatMax = 0;
-  rows.forEach(function (a) { D.SESSIONS.forEach(function (s) { heatMax = Math.max(heatMax, hv(a, s.k)); }); });
-  var h = '<span role="columnheader"></span>' + D.SESSIONS.map(function (s) { return '<span class="ch" role="columnheader"><b>' + esc(s.label) + "</b>" + s.shift + "</span>"; }).join("") + '<span class="ch" role="columnheader"><b>Total</b>asks</span>';
-  rows.forEach(function (a) {
-    var total = D.ITEMS.filter(function (i) { return i.a === a; }).length;
-    h += '<span class="rh" role="rowheader">' + sw(a) + esc(D.AREA_NAMES[a]) + "</span>";
-    D.SESSIONS.forEach(function (s) {
-      var v = hv(a, s.k), sh = shade(v, heatMax);
-      h += '<span role="cell" tabindex="0" class="' + sh.cls + '" style="' + sh.style + '" data-tip="' + esc(D.AREA_NAMES[a]) + ", " + esc(s.label) + " (" + s.shift.toLowerCase() + " shift): " + v + " of " + total + ' asks">' + v + "</span>";
-    });
-    h += '<span class="tot num" role="cell">' + total + "</span>";
-  });
-  $("heat-grid").innerHTML = h;
-  $("heat-legend").innerHTML = rampLegend("Fewer asks", "More asks");
-
   // Who owns what: status mix per suggested owner. Small owners fold into one row.
   var ST = [["Done", "done"], ["In motion", "motion"], ["Not started", "idle"], ["Declined", "declined"]];
   var own = {};
@@ -646,10 +609,9 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
   }).join("");
 
   // All asks: filters, table, CSV
-  var F = { q: "", area: "", session: "", status: "", types: [] };
+  var F = { q: "", area: "", status: "", types: [] };
   var opts = function (el, first, list) { el.innerHTML = '<option value="">' + first + "</option>" + list.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join(""); };
   opts($("f-area"), "All areas", D.AREA_NAMES.map(function (a, i) { return [i, a]; }));
-  opts($("f-session"), "All sessions", D.SESSIONS.map(function (s) { return [s.k, s.label + ", " + s.shift.toLowerCase() + " shift"]; }));
   opts($("f-status"), "Any status", ["Done", "In motion", "Not started", "Declined"].map(function (s) { return [s, label(s)]; }));
   D.TYPES.forEach(function (t) {
     var b = document.createElement("button");
@@ -667,7 +629,7 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
     var q = F.q.toLowerCase();
     return D.ITEMS.filter(function (i) {
       return (!q || (i.t + " " + (i.n || "") + " " + i.o + " " + areaName(i)).toLowerCase().indexOf(q) > -1) &&
-        (F.area === "" || String(i.a) === F.area) && (!F.session || i.s.indexOf(F.session) > -1) &&
+        (F.area === "" || String(i.a) === F.area) &&
         (!F.status || i.st === F.status) && (!F.types.length || F.types.indexOf(i.ty) > -1);
     }).sort(function (x, y) { return score(y) - score(x); });
   };
@@ -677,16 +639,16 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
     $("ask-empty").hidden = list.length > 0;
     $("ask-rows").innerHTML = list.map(function (i) {
       return '<tr><td data-l="Ask"><b>' + esc(i.t) + "</b>" + (i.n ? '<span class="sub">' + esc(i.n) + "</span>" : "") + '<span class="sub">' + areaTag(i) +
-        '</span></td><td data-l="Sessions" class="num" title="' + esc(dates(i)) + '">' + i.s.length + ' of 8</td><td data-l="Type">' + esc(i.ty) + '</td><td data-l="Suggested owner">' + esc(i.o) +
-        '</td><td data-l="Effort">' + esc(i.e) + '</td><td data-l="Status">' + badge(i.st) + "</td></tr>";
+        '</span></td><td data-l="Sessions" class="num">' + i.s.length + ' of 8</td><td data-l="Type">' + esc(i.ty) + '</td><td data-l="Suggested owner">' + esc(i.o) +
+        '</td><td data-l="Effort (draft)">' + esc(i.e) + '</td><td data-l="Status">' + badge(i.st) + "</td></tr>";
     }).join("");
   };
-  [["f-q", "q", "input"], ["f-area", "area", "change"], ["f-session", "session", "change"], ["f-status", "status", "change"]].forEach(function (x) {
+  [["f-q", "q", "input"], ["f-area", "area", "change"], ["f-status", "status", "change"]].forEach(function (x) {
     $(x[0]).addEventListener(x[2], function (e) { F[x[1]] = e.target.value; draw(); });
   });
   $("reset").onclick = function () {
-    F = { q: "", area: "", session: "", status: "", types: [] };
-    ["f-q", "f-area", "f-session", "f-status"].forEach(function (id) { $(id).value = ""; });
+    F = { q: "", area: "", status: "", types: [] };
+    ["f-q", "f-area", "f-status"].forEach(function (id) { $(id).value = ""; });
     document.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
     draw();
   };

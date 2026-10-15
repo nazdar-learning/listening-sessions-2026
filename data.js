@@ -1,5 +1,6 @@
 // Listening sessions 2026 data. Themes only, no names.
 // AREA_NAMES is indexed by ITEMS[].a. AREAS is the ranked focus-area list [name, sessions, index].
+// Effort ratings are drafts until manufacturing leadership weighs in.
 window.LISTENING_DATA = {
  "SESSIONS": [
   {
@@ -126,7 +127,7 @@ window.LISTENING_DATA = {
   },
   {
    "a": 0,
-   "t": "Revive or replace the specialist program, with specialists doing training",
+   "t": "Replace the shelved specialist program, with the people in the new role doing the training",
    "s": "abcdefgh",
    "ty": "Decision",
    "o": "HR / Operations",
@@ -704,7 +705,6 @@ window.LISTENING_DATA = {
   {
    "a": 7,
    "t": "It's OK to step into the morning leads meeting when you need help",
-   "n": "Jesse said no to interrupting DVS",
    "s": "h",
    "ty": "Quick win",
    "o": "Operations",
@@ -776,7 +776,7 @@ window.LISTENING_DATA = {
   },
   {
    "a": 8,
-   "t": "Clear boot requirements before day one, and boots on hand if needed",
+   "t": "Clear boot requirements before day one, and a way to buy boots through the company Walmart account",
    "s": "f",
    "ty": "Quick win",
    "o": "HR",
@@ -999,7 +999,7 @@ window.LISTENING_DATA = {
  "DONE": [
   "Manufacturing employees received a $2 an hour raise",
   "The referral bonus doubled to $1,400",
-  "New hires learn the boot requirements before day one, and boots are on hand if needed",
+  "New hires learn the boot requirements before day one and can buy boots through the company Walmart account",
   "Employees can reach HR resources on their phones using their time clock badge login"
  ],
  "UNDERWAY": [
@@ -1094,10 +1094,10 @@ window.LISTENING_DATA = {
   ],
   [
    "Career path",
-   "Bring back the specialist program, or replace it, so experienced specialists do the training and have a path to grow.",
+   "Replace the shelved specialist program so experienced employees do the training and have a path to grow.",
    8,
    [
-    "Revive or replace the specialist",
+    "Replace the shelved specialist",
     "A day shift specialist"
    ]
   ],
@@ -1173,9 +1173,9 @@ window.LISTENING_DATA = {
    ]
   ],
   [
-   "Should the specialist program be brought back, replaced, or retired?",
+   "The specialist program is shelved. What should replace it?",
    [
-    "Revive or replace the specialist",
+    "Replace the shelved specialist",
     "A day shift specialist"
    ]
   ],
@@ -1208,14 +1208,15 @@ window.LISTENING_DATA = {
    "la": "Employees",
    "a": "Want to be able to step into the morning leads meeting when they need help.",
    "lb": "Leadership's view",
-   "b": "Jesse said no to interrupting DVS."
+   "b": "The morning leads meeting needs to run without interruptions."
   },
   {
-   "t": "Holiday time off",
+   "t": "PTO scheduling",
    "la": "One group's view",
-   "a": "Rotating who gets holidays off is fair, because everyone gets a turn.",
+   "a": "Rotating who gets first pick of PTO around holidays is fair, because everyone gets a turn.",
    "lb": "Another group's view",
-   "b": "Rotating holidays ignores seniority, and it makes it hard to plan ahead."
+   "b": "Rotating ignores seniority, and it makes it hard to plan ahead.",
+   "opt": "For former Fuji employees, consider using their original hire date for PTO scheduling only."
   },
   {
    "t": "Attendance points dropping off sooner",
@@ -1243,7 +1244,8 @@ window.LISTENING_DATA = {
    "la": "Many employees",
    "a": "Like the early start because they get off work early in the afternoon.",
    "lb": "Other employees",
-   "b": "Say the early start discourages job candidates and makes it harder to refer friends."
+   "b": "Say the early start discourages job candidates and makes it harder to refer friends.",
+   "opt": "A 7:00 AM crossover shift for some roles."
   }
  ],
  "STEPS": [

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Prep Kit | Nazdar Learning</title>
+<style>
+/* Same tokens as the leader brief (../index.html). Dashboard layer, not brand-strict. */
+:root {
+  --red: #CF102D; --red-ink: #A91623; --ink: #323E48; --ink-2: #5E6873;
+  --page: #F7F8F9; --surface: #FFFFFF; --line: #DDE1E5; --line-strong: #C3C9CF;
+  --mark: #FDF3C4; --focus: #007CBA; --hr: #EEF4FB; --hr-line: #2a78d6;
+  --font: Campton, Calibri, Arial, Helvetica, sans-serif; --r: 4px;
+  --logo-light: block; --logo-dark: none; color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --red-ink: #F76B7B; --ink: #E8EBED; --ink-2: #A3ADB5; --page: #1B2126; --surface: #232B31; --line: #2E3740; --line-strong: #3E4952;
+    --mark: #5A4A12; --focus: #2AAEE4; --hr: #1E2C3A; --hr-line: #3987e5; --logo-light: none; --logo-dark: block; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 400 16px/1.5 var(--font); }
+h1, h2, h3 { margin: 0; line-height: 1.2; }
+p { margin: 0; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 14px; height: 56px; }
+.top img { height: 20px; width: auto; }
+.logo-l { display: var(--logo-light); } .logo-d { display: var(--logo-dark); }
+.top b { font-size: 15px; }
+.top .lock { margin-left: auto; font-size: 14px; color: var(--ink-2); background: none; border: 1px solid var(--line-strong); border-radius: var(--r); padding: 4px 10px; color: var(--ink); cursor: pointer; font: inherit; font-size: 14px; }
+
+/* Unlock */
+.gate { max-width: 420px; margin: 12vh auto 0; padding: 0 20px; }
+.gate h1 { font-size: 28px; margin-bottom: 8px; }
+.gate p { color: var(--ink-2); margin-bottom: 20px; }
+.gate label { display: grid; gap: 6px; font-weight: 700; font-size: 14px; }
+.row { display: flex; gap: 8px; }
+input[type=password], input[type=search] { flex: 1; min-width: 0; font: inherit; font-size: 17px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 10px 12px; }
+input::placeholder { color: var(--ink-2); }
+.btn { font: inherit; font-weight: 700; font-size: 15px; padding: 10px 16px; border-radius: var(--r); border: 1px solid var(--red); background: var(--red); color: #FFFFFF; cursor: pointer; }
+.err { color: var(--red-ink); font-size: 14px; margin-top: 10px; min-height: 1.5em; }
+
+/* Search */
+.ask { position: sticky; top: 0; z-index: 5; background: var(--page); padding: 20px 0 12px; border-bottom: 1px solid var(--line); }
+.ask input { width: 100%; font-size: 19px; padding: 14px 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip { font: inherit; font-size: 14px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--page); }
+.chips .lbl { font-size: 13px; color: var(--ink-2); align-self: center; margin-right: 2px; }
+.summary { margin: 18px 0 6px; color: var(--ink-2); font-size: 15px; }
+.group { margin: 22px 0 8px; font-size: 13px; font-weight: 700; color: var(--ink-2); }
+mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1px; }
+
+.card { background: var(--hr); border-left: 4px solid var(--hr-line); border-radius: var(--r); padding: 16px 18px; margin-bottom: 12px; }
+.card h3 { font-size: 18px; margin-bottom: 6px; }
+.card dl { margin: 10px 0 0; display: grid; gap: 8px; }
+.card dt { font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.card dd { margin: 0; }
+.card ul { margin: 0; padding-left: 18px; }
+
+.hit { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; margin-bottom: 8px; }
+.meta { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.meta b { color: var(--ink); }
+.hit .more { font: inherit; font-size: 13px; font-weight: 700; color: var(--red-ink); background: none; border: 0; padding: 0; margin-top: 6px; cursor: pointer; }
+.ctx { margin-top: 8px; border-left: 2px solid var(--line-strong); padding-left: 10px; display: grid; gap: 6px; font-size: 15px; }
+.ctx .me { font-weight: 700; }
+.ctx span { color: var(--ink-2); font-size: 13px; }
+.empty { padding: 32px 0; color: var(--ink-2); }
+.hint { margin-top: 28px; color: var(--ink-2); font-size: 15px; }
+.hint ul { padding-left: 18px; }
+.foot { margin: 40px 0; font-size: 13px; color: var(--ink-2); }
+@media (max-width: 640px) { .wrap { padding: 0 14px; } .ask input { font-size: 17px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <img class="logo-l" src="../logo/nazdar.png" alt="Nazdar" width="130" height="20">
+    <img class="logo-d" src="../logo/nazdar-reversed.png" alt="Nazdar" width="109" height="20">
+    <b>Listening sessions prep kit</b>
+    <button class="lock" type="button" id="lock" hidden>Lock</button>
+  </div>
+</header>
+
+<form class="gate" id="gate">
+  <h1>For HR only</h1>
+  <p>Transcripts, recap notes, and HR talking points. Enter the passphrase to unlock.</p>
+  <label for="pass">Passphrase</label>
+  <div class="row" style="margin-top:6px">
+    <input type="password" id="pass" autocomplete="current-password" required>
+    <button class="btn" type="submit" id="go">Unlock</button>
+  </div>
+  <p class="err" id="err" role="alert"></p>
+</form>
+
+<main class="wrap" id="app" hidden>
+  <div class="ask">
+    <label class="sr" for="q" style="position:absolute;left:-9999px">Search</label>
+    <input type="search" id="q" placeholder="Ask about a topic: Fuji PTO, specialist, boots, who mentioned the lift..." autocomplete="off">
+    <div class="chips" id="sugg"></div>
+    <div class="chips" id="sess" style="margin-top:8px"></div>
+  </div>
+  <div id="out" aria-live="polite"></div>
+  <p class="foot" id="foot"></p>
+</main>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var K = null;
+
+  // Decrypt: salt(16) | iv(12) | AES-GCM ciphertext of gzipped JSON. Built by tools/build-prep.mjs.
+  async function unlock(pass) {
+    var buf = new Uint8Array(await (await fetch("kit.enc", { cache: "no-store" })).arrayBuffer());
+    var base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+    var key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt: buf.slice(0, 16), iterations: 600000, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+    var plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: buf.slice(16, 28) }, key, buf.slice(28));
+    var text = await new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
+    return JSON.parse(text);
+  }
+
+  $("gate").onsubmit = async function (e) {
+    e.preventDefault();
+    $("err").textContent = "Unlocking..."; $("go").disabled = true;
+    try {
+      K = await unlock($("pass").value);
+      try { sessionStorage.setItem("prep-pass", $("pass").value); } catch (x) {}
+      start();
+    } catch (x) {
+      $("err").textContent = "That passphrase did not work. Check it and try again.";
+    }
+    $("go").disabled = false;
+  };
+  $("lock").onclick = function () { try { sessionStorage.removeItem("prep-pass"); } catch (x) {} location.reload(); };
+  try { var saved = sessionStorage.getItem("prep-pass"); if (saved) { $("pass").value = saved; $("gate").requestSubmit(); } } catch (x) {}
+
+  // Words people use for the same thing. Searching any word also searches its group.
+  var SYN = [
+    ["pto", "holiday", "holidays", "time off", "vacation", "seniority", "schedule pto"],
+    ["fuji", "acquisition", "acquired", "grandfathered"],
+    ["specialist", "specialists", "trainer", "trainers", "training", "six dollars", "$6"],
+    ["boots", "boot", "steel toe", "steel toes", "shoes"],
+    ["lift", "hoist", "crane", "rack lift"],
+    ["heat", "hot", "temperature", "sweat", "summer"],
+    ["pay", "wage", "wages", "raise", "money", "dollars", "bonus"],
+    ["lead", "leads", "supervisor", "supervisors", "boss"],
+    ["points", "attendance", "call in", "no call", "tardy", "late"],
+    ["5:30", "early start", "start time", "530", "crossover"],
+    ["tubs", "tub", "totes"],
+    ["scale", "scales", "battery", "batteries", "charger"],
+    ["handoff", "hand off", "shift change", "cleanup", "clean up", "mess"],
+    ["safety", "unsafe", "injury", "hurt", "ppe", "lockout", "lock out"],
+    ["material", "materials", "raw material", "inventory", "skid", "skids"],
+    ["dvs", "morning meeting", "huddle"],
+    ["referral", "referrals", "refer", "hiring", "job fair", "candidates"],
+    ["mid shift", "mid-shift", "midshift", "second shift", "night shift"]
+  ];
+  var expand = function (q) {
+    var words = q.toLowerCase().replace(/[?.,!"]/g, " ").split(/\s+/).filter(function (w) { return w.length > 1 && STOP.indexOf(w) < 0; });
+    return words.map(function (w) {
+      var g = SYN.find(function (grp) { return grp.some(function (s) { return s === w || (w.length > 3 && s.indexOf(w) === 0); }); });
+      return g ? g.concat(w) : [w];
+    });
+  };
+  var STOP = ["the", "and", "who", "what", "when", "where", "why", "how", "did", "does", "said", "say", "about", "mentioned", "mention", "talk", "talked", "was", "were", "any", "for", "with", "that", "this", "our", "they", "them", "from", "anyone", "someone"];
+  var rx = function (terms) { return new RegExp("(" + terms.map(function (t) { return t.replace(/[.*+?^${}()|[\]\\$]/g, "\\$&"); }).sort(function (a, b) { return b.length - a.length; }).join("|") + ")", "gi"); };
+  // Score: every query word (or its synonyms) must appear; more distinct hits rank higher.
+  var score = function (text, groups) {
+    var t = text.toLowerCase(), s = 0;
+    for (var i = 0; i < groups.length; i++) {
+      var hit = groups[i].filter(function (w) { return t.indexOf(w) > -1; }).length;
+      if (!hit) return 0;
+      s += hit;
+    }
+    return s;
+  };
+  var hl = function (text, re) { return esc(text).replace(re, "<mark>$1</mark>"); };
+
+  var sess = {}, active = "";
+  function start() {
+    $("gate").hidden = true; $("app").hidden = false; $("lock").hidden = false;
+    K.sessions.forEach(function (s) { sess[s.k] = s; });
+    sess.hr = { k: "hr", name: "HR huddle", label: "Oct 15", shift: "HR" };
+    var sugg = ["Fuji PTO", "specialist", "boots", "lift", "heat", "5:30 start", "leads know the work", "trainer pay", "points", "tubs", "scales", "DVS"];
+    $("sugg").innerHTML = '<span class="lbl">Try</span>' + sugg.map(function (s) { return '<button type="button" class="chip" data-q="' + esc(s) + '">' + esc(s) + "</button>"; }).join("");
+    $("sess").innerHTML = '<span class="lbl">Session</span><button type="button" class="chip" data-s="" aria-pressed="true">All</button>' +
+      K.sessions.concat([sess.hr]).map(function (s) { return '<button type="button" class="chip" data-s="' + s.k + '" aria-pressed="false">' + esc(s.label) + (s.shift === "Mid" ? " mid" : "") + "</button>"; }).join("");
+    $("sugg").onclick = function (e) { var b = e.target.closest("[data-q]"); if (b) { $("q").value = b.dataset.q; run(); $("q").focus(); } };
+    $("sess").onclick = function (e) {
+      var b = e.target.closest("[data-s]"); if (!b) return;
+      active = b.dataset.s;
+      $("sess").querySelectorAll("[data-s]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      run();
+    };
+    $("q").addEventListener("input", run);
+    $("foot").textContent = "Built " + K.built + " from " + K.recordings.length + " recordings and 8 recaps. Transcript speaker names come from the recording app and are often wrong. Recap notes have the checked attribution.";
+    $("q").focus();
+    run();
+  }
+
+  var where = function (k, extra) { var s = sess[k]; return "<b>" + esc(s.name) + "</b><span>" + esc(s.label) + (s.shift === "HR" ? "" : ", " + s.shift.toLowerCase() + " shift") + "</span>" + (extra || ""); };
+
+  function run() {
+    var q = $("q").value.trim();
+    if (q.length < 2) return home();
+    var groups = expand(q);
+    if (!groups.length) return home();
+    var re = rx([].concat.apply([], groups));
+    var inSess = function (k) { return !active || k === active; };
+
+    var cards = K.topics.map(function (t) {
+      return { t: t, s: score([t.title, t.tags.join(" "), t.said, t.facts.join(" "), t.hr, t.pushback, t.answer].join(" "), groups) };
+    }).filter(function (x) { return x.s; }).sort(function (a, b) { return b.s - a.s; });
+    var notes = K.notes.map(function (n, i) { return { n: n, s: inSess(n.s) ? score(n.h + " " + n.x, groups) : 0 }; })
+      .filter(function (x) { return x.s; }).sort(function (a, b) { return b.s - a.s; });
+    var turns = K.turns.map(function (t, i) { return { i: i, s: inSess(K.recordings[t.src].s) ? score(t.x, groups) : 0 }; })
+      .filter(function (x) { return x.s; }).sort(function (a, b) { return b.s - a.s; });
+
+    var nSess = {};
+    notes.forEach(function (x) { nSess[x.n.s] = 1; });
+    turns.forEach(function (x) { nSess[K.recordings[K.turns[x.i].src].s] = 1; });
+    var h = '<p class="summary">' + (cards.length + notes.length + turns.length ?
+      notes.length + " recap note" + (notes.length === 1 ? "" : "s") + " and " + turns.length + " transcript moment" + (turns.length === 1 ? "" : "s") + " across " + Object.keys(nSess).length + " session" + (Object.keys(nSess).length === 1 ? "" : "s") + "." :
+      "Nothing found. Try a shorter word, or one of the suggestions above.") + "</p>";
+
+    if (cards.length) h += '<p class="group">HR talking points</p>' + cards.map(function (x) { return card(x.t, re); }).join("");
+    if (notes.length) h += '<p class="group">From the recaps</p>' + notes.slice(0, 40).map(function (x) {
+      return '<div class="hit"><div class="meta">' + where(x.n.s, x.n.h ? "<span>" + esc(x.n.h) + "</span>" : "") + "</div>" + hl(x.n.x.replace(/\*\*/g, ""), re) + "</div>";
+    }).join("") + (notes.length > 40 ? '<p class="summary">Showing the top 40 recap notes. Add a word to narrow it down.</p>' : "");
+    if (turns.length) h += '<p class="group">From the transcripts</p>' + turns.slice(0, 40).map(function (x) {
+      var t = K.turns[x.i], r = K.recordings[t.src];
+      return '<div class="hit"><div class="meta">' + where(r.s, "<span>" + esc(t.sp) + " at " + esc(t.tm) + (r.phone ? ", " + esc(r.phone) + " phone" : "") + "</span>") + "</div>" +
+        hl(t.x, re) + '<br><button type="button" class="more" data-i="' + x.i + '">Show the conversation around this</button><div class="ctx" hidden></div></div>';
+    }).join("") + (turns.length > 40 ? '<p class="summary">Showing the top 40 transcript moments. Add a word or pick a session to narrow it down.</p>' : "");
+    $("out").innerHTML = h;
+  }
+
+  function card(t, re) {
+    var f = function (s) { return re ? hl(s, re) : esc(s); };
+    return '<div class="card"><h3>' + f(t.title) + "</h3><p>" + f(t.said) + "</p><dl>" +
+      (t.facts.length ? "<div><dt>What we know</dt><dd><ul>" + t.facts.map(function (x) { return "<li>" + f(x) + "</li>"; }).join("") + "</ul></dd></div>" : "") +
+      (t.hr ? "<div><dt>What HR suggests</dt><dd>" + f(t.hr) + "</dd></div>" : "") +
+      (t.pushback ? "<div><dt>If they say</dt><dd>“" + f(t.pushback) + "”</dd></div><div><dt>We can answer</dt><dd>" + f(t.answer) + "</dd></div>" : "") +
+      "</dl></div>";
+  }
+
+  function home() {
+    $("out").innerHTML = (K.topics.length ? '<p class="group">HR talking points</p>' + K.topics.map(function (t) { return card(t); }).join("") : "") +
+      '<div class="hint"><p>Type a word or a question. Results show as you type.</p><ul><li>Searching <b>holiday</b> also finds PTO and seniority.</li><li>Pick a session to see only what that group said.</li><li>Open a transcript moment to read the lines around it.</li></ul></div>';
+  }
+
+  $("out").addEventListener("click", function (e) {
+    var b = e.target.closest(".more"); if (!b) return;
+    var box = b.nextElementSibling, i = +b.dataset.i, src = K.turns[i].src;
+    if (!box.hidden) { box.hidden = true; b.textContent = "Show the conversation around this"; return; }
+    var lines = [];
+    for (var j = i - 4; j <= i + 4; j++) if (K.turns[j] && K.turns[j].src === src) lines.push(j);
+    box.innerHTML = lines.map(function (j) { var t = K.turns[j]; return "<div" + (j === i ? ' class="me"' : "") + "><span>" + esc(t.sp) + " " + esc(t.tm) + "</span><br>" + esc(t.x) + "</div>"; }).join("");
+    box.hidden = false; b.textContent = "Hide the conversation";
+  });
+})();
+</script>
+</body>
+</html>
