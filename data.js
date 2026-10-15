@@ -1,6 +1,6 @@
 // Listening sessions 2026 data. Themes only, no names.
 // AREA_NAMES is indexed by ITEMS[].a. AREAS is the ranked focus-area list [name, sessions, index].
-// Effort ratings are drafts until manufacturing leadership weighs in.
+// Counts rechecked against all 8 transcripts on Oct 15. Effort ratings are drafts.
 window.LISTENING_DATA = {
  "SESSIONS": [
   {
@@ -776,7 +776,7 @@ window.LISTENING_DATA = {
   },
   {
    "a": 8,
-   "t": "Clear boot requirements before day one, and a way to buy boots through the company Walmart account",
+   "t": "Clear boot requirements before day one, with boots available through the company Walmart account",
    "s": "f",
    "ty": "Quick win",
    "o": "HR",
@@ -940,11 +940,6 @@ window.LISTENING_DATA = {
    1
   ],
   [
-   "Smooth shift handoffs",
-   8,
-   2
-  ],
-  [
    "Equipment and workflow bottlenecks",
    8,
    6
@@ -955,8 +950,13 @@ window.LISTENING_DATA = {
    5
   ],
   [
+   "Smooth shift handoffs",
+   7,
+   2
+  ],
+  [
    "Leadership visibility and accountability on the floor",
-   8,
+   7,
    7
   ],
   [
@@ -977,19 +977,19 @@ window.LISTENING_DATA = {
   ],
   [
    "Schedule fit",
-   4
-  ],
-  [
-   "Stability and predictable work",
-   4
+   6
   ],
   [
    "Culture and belonging",
-   4
+   6
   ],
   [
    "Room to learn and grow",
-   4
+   5
+  ],
+  [
+   "Stability and predictable work",
+   3
   ],
   [
    "Benefits",
@@ -999,14 +999,14 @@ window.LISTENING_DATA = {
  "DONE": [
   "Manufacturing employees received a $2 an hour raise",
   "The referral bonus doubled to $1,400",
-  "New hires learn the boot requirements before day one and can buy boots through the company Walmart account",
+  "New hires see the boot requirement in their first-day email, and HR can get boots through the company Walmart account",
   "Employees can reach HR resources on their phones using their time clock badge login"
  ],
  "UNDERWAY": [
   "A communication wall with company news, safety information, and QR codes for benefits",
-  "An updated attendance policy takes effect January 1",
+  "Attendance policy updates are planned for January 1",
   "A train-the-trainer program, so every trainer teaches the same way",
-  "Production employees are joining the engagement committee"
+  "Production employees are being invited to engagement committee meetings"
  ],
  "SMALL": [
   [
@@ -1204,18 +1204,11 @@ window.LISTENING_DATA = {
  ],
  "SPLITS": [
   {
-   "t": "Stepping into the morning leads meeting (DVS)",
-   "la": "Employees",
-   "a": "Want to be able to step into the morning leads meeting when they need help.",
-   "lb": "Leadership's view",
-   "b": "The morning leads meeting needs to run without interruptions."
-  },
-  {
    "t": "PTO scheduling",
-   "la": "One group's view",
-   "a": "Rotating who gets first pick of PTO around holidays is fair, because everyone gets a turn.",
-   "lb": "Another group's view",
-   "b": "Rotating ignores seniority, and it makes it hard to plan ahead.",
+   "la": "Some employees",
+   "a": "Rotating who gets PTO around holidays gives everyone a turn.",
+   "lb": "Former Fuji employees",
+   "b": "They kept their PTO balance but their seniority restarted, so they hold the most PTO and are approved last.",
    "opt": "For former Fuji employees, consider using their original hire date for PTO scheduling only."
   },
   {
@@ -1271,13 +1264,13 @@ window.LISTENING_DATA = {
   "Review"
  ],
  "SUMMARY": {
-  "0": "New hires are often trained by people with a few months on the job, moved across lines before they learn one, and checked with a test that can be passed by guessing.",
+  "0": "New hires are often trained by people with a few months on the job, moved across lines before they learn one, and signed off without a real check.",
   "1": "The system can show material that is not on hand, so batches stall partway and people wait on material handlers.",
   "2": "Each shift says the other leaves batches, batteries, and cleanup unfinished. Both want one shared standard.",
   "3": "Priorities can change mid-run, and red folders no longer signal what comes first.",
   "4": "Concerns often get a “we're handling it” with no update afterward.",
   "5": "Working alone at night, repairs on running machines, a rack lift that stalls at height, and summer heat with chemical contact.",
-  "6": "Tub shortages, scale batteries, scanners, and label printers slow every line.",
+  "6": "Tub shortages, dead scale and scanner batteries, aging lines, and labelers that keep breaking slow the work.",
   "7": "Employees want leads who understand the work they lead and pitch in when the team is short."
  }
 };
