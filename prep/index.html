@@ -30,7 +30,7 @@ button { font: inherit; }
 .top img { height: 20px; width: auto; }
 .top .name { font-weight: 700; font-size: 15px; }
 .tabs { display: flex; gap: 4px; margin-left: auto; }
-.tab { border: 0; background: none; padding: 8px 14px; border-radius: var(--r); font-weight: 700; font-size: 15px; color: var(--ink-2); cursor: pointer; }
+.tab { white-space: nowrap; border: 0; background: none; padding: 8px 14px; border-radius: var(--r); font-weight: 700; font-size: 15px; color: var(--ink-2); cursor: pointer; }
 .tab[aria-selected="true"] { background: var(--ink); color: #FFFFFF; }
 .lock { border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: var(--r); padding: 6px 10px; font-size: 14px; cursor: pointer; }
 
@@ -78,32 +78,105 @@ input::placeholder { color: var(--ink-2); }
 .views .opt { color: var(--blue); font-weight: 700; }
 .decs { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
 
-/* Search */
-.ask { position: sticky; top: 58px; z-index: 5; background: var(--page); padding: 22px 0 12px; }
-.ask input { width: 100%; font-size: 19px; padding: 15px 16px; box-shadow: 0 1px 2px rgba(50, 62, 72, 0.08); }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; align-items: center; }
-.chip { font-size: 14px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; }
-.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #FFFFFF; }
-.lbl { font-size: 13px; color: var(--ink-2); margin-right: 2px; }
-.answer { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; margin: 8px 0 18px; }
-.answer b { font-size: 17px; }
-.answer p { color: var(--ink-2); font-size: 15px; margin-top: 4px; }
-.group { margin: 22px 0 8px; font-size: 14px; font-weight: 700; color: var(--ink-2); }
+/* Search: results on the left, a reader on the right that shows the conversation around the pick. */
+.srch { --day: #2a78d6; --day-bg: #E8F1FC; --mid: #4a3aa7; --mid-bg: #EEEBFA; --hr: #A91623; --hr-bg: #FBEDEF;
+  --s0: #F1F6FD; --s1: #cde2fb; --s2: #9ec5f4; --s3: #6da7ec; --s4: #3987e5; --s5: #256abf; --s6: #184f95; }
+.srch .wrap { max-width: 1200px; }
+.bar { position: sticky; top: 58px; z-index: 5; background: var(--page); border-bottom: 1px solid var(--line); padding: 18px 0 14px; }
+.field { display: flex; align-items: center; background: var(--surface); border: 2px solid var(--line-strong); border-radius: 10px; padding: 0 6px 0 16px; }
+.field:focus-within { border-color: var(--ink); }
+.field input { border: 0; padding: 14px 8px 14px 0; font-size: 20px; background: transparent; }
+.field input:focus-visible { outline: none; }
+.field .key { font-size: 13px; color: var(--ink-2); border: 1px solid var(--line-strong); border-radius: 4px; padding: 1px 7px; margin-right: 8px; }
+.field button { border: 0; background: none; color: var(--ink-2); font-size: 14px; font-weight: 700; padding: 8px 10px; cursor: pointer; border-radius: 6px; }
+.field button:hover { background: var(--page); color: var(--ink); }
+.also { font-size: 13px; color: var(--ink-2); margin: 8px 2px 0; min-height: 1.4em; }
+.also b { color: var(--ink); font-weight: 400; }
+
+/* Where it came up: one cell per session, shaded by hits */
+.strip { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 4px; margin-top: 12px; }
+.cell2 { border: 0; border-radius: 6px; padding: 7px 4px 6px; background: var(--s0); color: var(--ink); cursor: pointer; text-align: center; line-height: 1.15; }
+.cell2 .d { display: block; font-size: 13px; font-weight: 700; }
+.cell2 .s { display: block; font-size: 11px; opacity: .8; }
+.cell2 .n { display: block; font-size: 17px; font-weight: 700; margin-top: 3px; }
+.cell2.dark { color: #FFFFFF; }
+.cell2.none .n { opacity: .35; }
+.cell2[aria-pressed="true"] { outline: 3px solid var(--ink); outline-offset: 1px; }
+.cell2:disabled { cursor: default; }
+.kinds { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; align-items: center; }
+.kind { border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 5px 12px; font-size: 14px; cursor: pointer; }
+.kind b { margin-left: 4px; }
+.kind[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #FFFFFF; }
+.kinds .clearsess { margin-left: auto; font-size: 14px; color: var(--red-ink); font-weight: 700; background: none; border: 0; cursor: pointer; }
+
+.panes { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; padding-top: 16px; align-items: start; }
+.list { display: grid; gap: 2px; }
+.row { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 12px; padding: 12px 12px 12px 10px; border-radius: 8px; cursor: pointer; border-left: 3px solid transparent; }
+.row:hover { background: #EBEFF3; }
+.row[aria-selected="true"] { background: var(--surface); border-left-color: var(--red); box-shadow: 0 1px 3px rgba(50, 62, 72, .12); }
+.tag { align-self: start; border-radius: 6px; padding: 5px 6px; font-size: 12px; line-height: 1.2; text-align: center; font-weight: 700; }
+.tag span { display: block; font-weight: 400; }
+.tag.day { background: var(--day-bg); color: var(--day); }
+.tag.mid { background: var(--mid-bg); color: var(--mid); }
+.tag.hr { background: var(--hr-bg); color: var(--hr); }
+.tag.tp { background: #E9F5EE; color: #2E7D4F; }
+.row .x { font-size: 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.row .m { font-size: 13px; color: var(--ink-2); margin-top: 3px; }
+.row .slot:empty { display: none; }
+.row .slot { grid-column: 1 / -1; }
+.morebtn { margin: 10px 0 0; border: 1px solid var(--line-strong); background: var(--surface); border-radius: 8px; padding: 10px; font-weight: 700; font-size: 14px; cursor: pointer; color: var(--ink); }
+
+.reader { position: sticky; top: 300px; max-height: calc(100vh - 320px); overflow: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+.reader:empty { display: none; }
+.reader h3 { font-size: 17px; }
+.reader .sub { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+.script { margin-top: 14px; display: grid; gap: 10px; }
+.line { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; font-size: 15px; }
+.line .who { font-size: 12px; color: var(--ink-2); padding-top: 2px; overflow-wrap: anywhere; }
+.line.hit .say { background: var(--mark); border-radius: 4px; padding: 2px 6px; margin: -2px -6px; }
+.acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.act { border: 1px solid var(--line-strong); background: var(--surface); border-radius: 8px; padding: 7px 12px; font-size: 14px; font-weight: 700; cursor: pointer; color: var(--ink); }
+.act.main { background: var(--ink); border-color: var(--ink); color: #FFFFFF; }
+.reader blockquote { margin: 14px 0 0; font-size: 17px; line-height: 1.5; border-left: 3px solid var(--red); padding-left: 14px; }
+.reader .rel { margin-top: 16px; font-size: 14px; }
+.reader .rel p { color: var(--ink-2); margin-bottom: 6px; }
+.reader .rel ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.reader dl { margin: 12px 0 0; display: grid; gap: 10px; }
+.reader dt { font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.reader dd { margin: 2px 0 0; }
+
+.start { padding: 26px 0 40px; max-width: 760px; }
+.start h2 { font-size: 22px; }
+.start > p { color: var(--ink-2); margin-top: 4px; }
+.starts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+.starts button { text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 12px 14px; cursor: pointer; font-size: 15px; font-weight: 700; color: var(--ink); }
+.starts button span { display: block; font-weight: 400; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+.starts button:hover { border-color: var(--ink); }
+.recent { margin-top: 20px; font-size: 14px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.recent button { border: 0; background: none; color: var(--red-ink); font-weight: 700; cursor: pointer; padding: 2px 4px; font-size: 14px; }
+.none2 { padding: 28px 4px; }
+.none2 b { font-size: 18px; }
+.none2 p { color: var(--ink-2); margin-top: 4px; }
+.srch .foot { margin: 28px auto 48px; font-size: 13px; color: var(--ink-2); }
+
+@media (max-width: 900px) {
+  .panes { grid-template-columns: minmax(0, 1fr); }
+  .reader { display: none; }
+  .row .slot { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+  .bar { position: static; }
+  .strip { display: flex; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .cell2 { flex: 0 0 64px; padding: 5px 2px; }
+  .cell2 .s { display: none; }
+  .cell2 .n { font-size: 15px; margin-top: 1px; }
+  .starts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .field .key { display: none; }
+}
+@media (max-width: 520px) {
+  .row { grid-template-columns: 60px minmax(0, 1fr); }
+  .line { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .field input { font-size: 17px; }
+}
 mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1px; }
-.sess { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); margin-bottom: 10px; overflow: hidden; }
-.sess h3 { font-size: 15px; padding: 10px 14px; background: #FAFBFC; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 10px; }
-.sess h3 span { font-weight: 400; color: var(--ink-2); }
-.hit { padding: 10px 14px; }
-.hit + .hit { border-top: 1px solid var(--line); }
-.hit .where { font-size: 13px; color: var(--ink-2); margin-bottom: 2px; }
-.more { border: 0; background: none; padding: 0; margin-top: 6px; font-size: 13px; font-weight: 700; color: var(--red-ink); cursor: pointer; }
-.ctx { margin-top: 8px; border-left: 3px solid var(--line-strong); padding-left: 10px; display: grid; gap: 6px; font-size: 15px; }
-.ctx .me { background: var(--mark); border-radius: 2px; padding: 2px 4px; }
-.ctx span { color: var(--ink-2); font-size: 13px; }
-.showall { display: block; width: 100%; border: 0; border-top: 1px solid var(--line); background: #FAFBFC; padding: 8px; font-size: 14px; font-weight: 700; color: var(--red-ink); cursor: pointer; }
-.hint { margin-top: 18px; color: var(--ink-2); }
-.hint ul { padding-left: 18px; }
-.foot { margin: 36px 0 48px; font-size: 13px; color: var(--ink-2); }
 
 @media (max-width: 680px) {
   .wrap { padding: 0 14px; }
@@ -114,7 +187,7 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1
   .tab { padding: 8px 10px; }
 }
 @media print {
-  .top, .ask, .find { display: none; }
+  .top, .bar, .find { display: none; }
   .topic { break-inside: avoid; }
   .topic .body { display: grid !important; }
 }
@@ -181,15 +254,27 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1
   </div>
 </main>
 
-<main class="wrap" id="search" role="tabpanel" aria-labelledby="t-search" hidden>
-  <div class="ask">
-    <label class="sr" for="q">Search</label>
-    <input type="search" id="q" placeholder="Type a topic or a question, like Fuji PTO or who mentioned the lift" autocomplete="off">
-    <div class="chips" id="sugg"></div>
-    <div class="chips" id="sessf" style="margin-top:8px"></div>
+<main class="srch" id="search" role="tabpanel" aria-labelledby="t-search" hidden>
+  <div class="bar">
+    <div class="wrap">
+      <div class="field">
+        <label class="sr" for="q">Search the sessions</label>
+        <input type="search" id="q" placeholder="Search every session: Fuji PTO, trainer pay, the lift..." autocomplete="off">
+        <span class="key" aria-hidden="true">/</span>
+        <button type="button" id="qclear" hidden>Clear</button>
+      </div>
+      <p class="also" id="also"></p>
+      <div class="strip" id="strip" role="group" aria-label="Where it came up. Pick a session to see only that one."></div>
+      <div class="kinds" id="kinds" role="tablist" aria-label="Result type"></div>
+    </div>
   </div>
-  <div id="out" aria-live="polite"></div>
-  <p class="foot" id="foot"></p>
+  <div class="wrap panes">
+    <div>
+      <div class="list" id="list" role="listbox" aria-label="Results"></div>
+    </div>
+    <aside class="reader" id="reader" aria-live="polite" aria-label="Selected result"></aside>
+  </div>
+  <p class="wrap foot" id="foot"></p>
 </main>
 
 <script src="../data.js"></script>
@@ -306,94 +391,175 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1
     }
     return s;
   };
-  var hl = function (text, re) { return esc(text).replace(re, "<mark>$1</mark>"); };
+  var hl = function (text, re) { return re ? esc(text).replace(re, "<mark>$1</mark>") : esc(text); };
   var title = function (k) { var s = sess[k]; return s.k === "hr" ? "HR huddle, Oct 15" : s.name + ", " + s.label + ", " + s.shift.toLowerCase() + " shift"; };
+  var tagFor = function (k) {
+    var s = sess[k], c = s.k === "hr" ? "hr" : s.shift === "Mid" ? "mid" : "day";
+    return '<span class="tag ' + c + '">' + esc(s.label) + "<span>" + (s.k === "hr" ? "HR" : s.shift === "Mid" ? "Mid shift" : "Day shift") + "</span></span>";
+  };
+
+  var S = { q: "", re: null, groups: [], kind: "all", sess: "", sel: 0, limit: 50, items: [], ctx: 6 };
+  var order = function () { return K.sessions.map(function (s) { return s.k; }).concat("hr"); };
+  var narrow = matchMedia("(max-width: 900px)");
+  var RECENT = "prep-recent";
+  var recent = function () { try { return JSON.parse(localStorage.getItem(RECENT) || "[]"); } catch (x) { return []; } };
+  var remember = function (q) {
+    if (!q) return;
+    try { localStorage.setItem(RECENT, JSON.stringify([q].concat(recent().filter(function (r) { return r !== q; })).slice(0, 6))); } catch (x) {}
+  };
 
   function searchSetup() {
-    var sugg = ["Fuji PTO", "specialist", "trainer pay", "boots", "lift", "heat", "5:30 start", "leads", "points", "tubs", "scales", "DVS", "handoff"];
-    $("sugg").innerHTML = '<span class="lbl">Try</span>' + sugg.map(function (s) { return '<button type="button" class="chip" data-q="' + esc(s) + '">' + esc(s) + "</button>"; }).join("");
-    $("sessf").innerHTML = '<span class="lbl">Only show</span><button type="button" class="chip" data-s="" aria-pressed="true">All sessions</button>' +
-      K.sessions.concat([sess.hr]).map(function (s) { return '<button type="button" class="chip" data-s="' + s.k + '" aria-pressed="false">' + esc(s.label) + (s.shift === "Mid" ? " (mid)" : "") + "</button>"; }).join("");
-    $("sugg").onclick = function (e) { var b = e.target.closest("[data-q]"); if (b) { $("q").value = b.dataset.q; run(); } };
-    $("sessf").onclick = function (e) {
-      var b = e.target.closest("[data-s]"); if (!b) return;
-      active = b.dataset.s;
-      $("sessf").querySelectorAll("[data-s]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
-      run();
+    $("q").addEventListener("input", function () { S.sel = 0; S.limit = 50; S.ctx = 6; run(); });
+    $("q").addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { $("q").value = ""; run(); }
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); move(e.key === "ArrowDown" ? 1 : -1); }
+      if (e.key === "Enter") remember($("q").value.trim());
+    });
+    $("qclear").onclick = function () { $("q").value = ""; run(); $("q").focus(); };
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "/" && !$("search").hidden && document.activeElement.tagName !== "INPUT") { e.preventDefault(); $("q").focus(); }
+    });
+    $("strip").onclick = function (e) {
+      var b = e.target.closest("[data-s]"); if (!b || b.disabled) return;
+      S.sess = S.sess === b.dataset.s ? "" : b.dataset.s; S.sel = 0; S.limit = 50; run();
     };
-    $("q").addEventListener("input", run);
+    $("kinds").onclick = function (e) {
+      if (e.target.closest(".clearsess")) { S.sess = ""; S.sel = 0; run(); return; }
+      var b = e.target.closest("[data-k]"); if (!b) return;
+      S.kind = b.dataset.k; S.sel = 0; S.limit = 50; run();
+    };
+    $("list").addEventListener("click", function (e) {
+      var go = e.target.closest("[data-go]");
+      if (go) { $("q").value = go.dataset.go; run(); $("q").focus(); return; }
+      if (e.target.closest(".morebtn")) { S.limit += 50; run(); return; }
+      if (e.target.closest(".act") || e.target.closest("[data-topic]")) return readerClick(e);
+      var r = e.target.closest(".row"); if (!r) return;
+      S.sel = +r.dataset.n; S.ctx = 6; remember(S.q); paint();
+    });
+    $("reader").addEventListener("click", readerClick);
     $("foot").textContent = "Built " + K.built + " from " + K.recordings.length + " recordings and 8 recaps. Speaker names in transcripts come from the recording app and are often wrong. Recap notes have the checked names.";
     run();
   }
 
-  var open = {};
+  function move(d) {
+    if (!S.items.length) return;
+    S.sel = Math.max(0, Math.min(Math.min(S.items.length, S.limit) - 1, S.sel + d)); S.ctx = 6; paint();
+    var r = $("list").querySelector('[aria-selected="true"]'); if (r) r.scrollIntoView({ block: "nearest" });
+  }
+
+  // Build one ranked list of talking points, recap notes, and quotes.
   function run() {
-    var q = $("q").value.trim(), groups = q.length > 1 ? expand(q) : [];
-    if (!groups.length) {
-      $("out").innerHTML = '<div class="hint"><p><b>Type anything.</b> Results show as you type.</p><ul><li>Searching <b>holiday</b> also finds PTO and seniority.</li><li>Use "Only show" to see one session.</li><li>Open a quote to read the lines around it.</li></ul></div>';
-      return;
-    }
-    var re = rx([].concat.apply([], groups));
-    var inSess = function (k) { return !active || k === active; };
-    var topics = K.topics.filter(function (t) { return score([t.title, t.said, t.facts.join(" "), t.hr, t.ifTheySay, t.weSay].join(" "), groups); });
-    var notes = K.notes.map(function (n) { return { n: n, s: inSess(n.s) ? score(n.h + " " + n.x, groups) : 0 }; }).filter(function (x) { return x.s; }).sort(function (a, b) { return b.s - a.s; });
-    var turns = K.turns.map(function (t, i) { return { i: i, k: K.recordings[t.src].s, s: inSess(K.recordings[t.src].s) ? score(t.x, groups) : 0 }; }).filter(function (x) { return x.s; });
+    var q = $("q").value.trim();
+    S.q = q; S.groups = q.length > 1 ? expand(q) : [];
+    $("qclear").hidden = !q;
+    if (!S.groups.length) { S.re = null; S.items = []; return home(); }
+    S.re = rx([].concat.apply([], S.groups));
+    var g = S.groups, all = [];
+    K.topics.forEach(function (t, i) {
+      var s = score([t.title, t.said, t.facts.join(" "), t.hr, t.ifTheySay, t.weSay].join(" "), g);
+      if (s) all.push({ kind: "topic", i: i, s: s + 100, k: "" });
+    });
+    K.notes.forEach(function (n, i) { var s = score(n.h + " " + n.x, g); if (s) all.push({ kind: "note", i: i, s: s + 1, k: n.s }); });
+    K.turns.forEach(function (t, i) { var s = score(t.x, g); if (s) all.push({ kind: "quote", i: i, s: s, k: K.recordings[t.src].s }); });
+    all.sort(function (a, b) { return b.s - a.s; });
 
-    // Group transcript quotes by session, sessions with the most hits first.
-    var bySess = {};
-    turns.forEach(function (x) { (bySess[x.k] = bySess[x.k] || []).push(x); });
-    var order = Object.keys(bySess).sort(function (a, b) { return bySess[b].length - bySess[a].length; });
-    var nS = {}; notes.forEach(function (x) { nS[x.n.s] = 1; }); order.forEach(function (k) { nS[k] = 1; });
-    var count = Object.keys(nS).length;
+    // Synonyms the user did not type, shown so the extra matches make sense.
+    var typed = q.toLowerCase();
+    var extra = [].concat.apply([], g).filter(function (w, i, a) { return a.indexOf(w) === i && typed.indexOf(w) < 0; }).slice(0, 6);
+    $("also").innerHTML = extra.length ? "Also matching <b>" + extra.map(esc).join("</b>, <b>") + "</b>" : "";
 
-    var h = '<div class="answer">' + (notes.length + turns.length + topics.length ?
-      "<b>" + (count ? "Came up in " + count + " session" + (count === 1 ? "" : "s") : "Found in the talking points") + "</b><p>" + topics.length + " talking point" + (topics.length === 1 ? "" : "s") + ", " + notes.length + " recap note" + (notes.length === 1 ? "" : "s") + ", " + turns.length + " quote" + (turns.length === 1 ? "" : "s") + " from the transcripts.</p>" :
-      "<b>Nothing found.</b><p>Try a shorter word, or one of the suggestions above.</p>") + "</div>";
-
-    if (topics.length) h += '<p class="group">Talking points</p>' + topics.map(function (t) {
-      return '<div class="sess"><div class="hit"><b>' + hl(t.title, re) + "</b><p>" + hl(t.hr || t.said, re) + '</p><button type="button" class="more" data-topic="' + esc(t.title) + '">Open on the cheat sheet</button></div></div>';
+    // Where it came up, before the session filter is applied.
+    var per = {}; all.forEach(function (x) { if (x.k) per[x.k] = (per[x.k] || 0) + 1; });
+    var max = Math.max.apply(null, order().map(function (k) { return per[k] || 0; }).concat(1));
+    $("strip").innerHTML = order().map(function (k) {
+      var n = per[k] || 0, step = n ? Math.min(6, Math.ceil(Math.sqrt(n / max) * 6)) : 0, s = sess[k];
+      return '<button type="button" class="cell2' + (step >= 4 ? " dark" : "") + (n ? "" : " none") + '" data-s="' + k + '" aria-pressed="' + (S.sess === k) + '"' + (n ? "" : " disabled") +
+        ' style="background:var(--s' + step + ')" title="' + esc(title(k)) + ": " + n + ' results"><span class="d">' + esc(s.label) + '</span><span class="s">' + (k === "hr" ? "HR" : s.shift) + '</span><span class="n">' + n + "</span></button>";
     }).join("");
 
-    if (notes.length) {
-      var nb = {}; notes.forEach(function (x) { (nb[x.n.s] = nb[x.n.s] || []).push(x.n); });
-      h += '<p class="group">From the recaps</p>' + Object.keys(nb).sort(function (a, b) { return nb[b].length - nb[a].length; }).map(function (k) {
-        return block(k, nb[k].map(function (n) { return '<div class="hit">' + (n.h ? '<div class="where">' + esc(n.h) + "</div>" : "") + hl(n.x.replace(/\*\*/g, ""), re) + "</div>"; }), "n");
-      }).join("");
-    }
-    if (order.length) h += '<p class="group">What people said</p>' + order.map(function (k) {
-      return block(k, bySess[k].sort(function (a, b) { return b.s - a.s; }).map(function (x) {
-        var t = K.turns[x.i], r = K.recordings[t.src];
-        return '<div class="hit"><div class="where">' + esc(t.sp) + " at " + esc(t.tm) + (r.phone ? ", " + esc(r.phone) + "'s recording" : "") + "</div>" + hl(t.x, re) +
-          '<br><button type="button" class="more" data-i="' + x.i + '">Read the lines around this</button><div class="ctx" hidden></div></div>';
-      }), "t");
-    }).join("");
-    $("out").innerHTML = h;
-  }
-  // A session box shows 3 results until opened.
-  function block(k, items, kind) {
-    var id = kind + k, all = open[id], shown = all ? items : items.slice(0, 3);
-    return '<div class="sess"><h3>' + esc(title(k)) + "<span>" + items.length + "</span></h3>" + shown.join("") +
-      (items.length > 3 ? '<button type="button" class="showall" data-open="' + id + '">' + (all ? "Show fewer" : "Show all " + items.length) + "</button>" : "") + "</div>";
+    var inS = all.filter(function (x) { return !S.sess || x.k === S.sess || x.kind === "topic"; });
+    var count = function (kind) { return inS.filter(function (x) { return x.kind === kind; }).length; };
+    $("kinds").innerHTML = [["all", "All", inS.length], ["topic", "Talking points", count("topic")], ["note", "Recap notes", count("note")], ["quote", "Quotes", count("quote")]].map(function (k) {
+      return '<button type="button" class="kind" role="tab" data-k="' + k[0] + '" aria-selected="' + (S.kind === k[0]) + '">' + k[1] + "<b>" + k[2] + "</b></button>";
+    }).join("") + (S.sess ? '<button type="button" class="clearsess">Show all sessions</button>' : "");
+    S.items = inS.filter(function (x) { return S.kind === "all" || x.kind === S.kind; });
+    paint();
   }
 
-  $("out").addEventListener("click", function (e) {
-    var o = e.target.closest("[data-open]");
-    if (o) { open[o.dataset.open] = !open[o.dataset.open]; run(); return; }
-    var tp = e.target.closest("[data-topic]");
-    if (tp) {
+  function rowHTML(x, n) {
+    var tag, text, meta;
+    if (x.kind === "topic") { var t = K.topics[x.i]; tag = '<span class="tag tp">HR<span>Talking point</span></span>'; text = "<b>" + hl(t.title, S.re) + "</b> " + hl(t.hr || t.said, S.re); meta = "From the cheat sheet"; }
+    else if (x.kind === "note") { var no = K.notes[x.i]; tag = tagFor(no.s); text = hl(no.x.replace(/\*\*/g, ""), S.re); meta = "Recap note" + (no.h ? ", " + esc(no.h.split(" / ").pop()) : ""); }
+    else { var tu = K.turns[x.i]; tag = tagFor(x.k); text = "“" + hl(tu.x, S.re) + "”"; meta = "Quote at " + esc(tu.tm); }
+    return '<div class="row" role="option" data-n="' + n + '" aria-selected="' + (n === S.sel) + '">' + tag + '<div><div class="x">' + text + '</div><div class="m">' + meta + '</div></div><div class="slot"></div></div>';
+  }
+
+  function paint() {
+    if (!S.items.length) {
+      $("list").innerHTML = '<div class="none2"><b>' + (S.sess ? "Nothing in this session." : "Nothing found.") + "</b><p>" +
+        (S.sess ? "Pick another session above, or show all sessions." : "Try one word, like “tubs” or “points.”") + "</p></div>";
+      $("reader").innerHTML = ""; return;
+    }
+    var shown = S.items.slice(0, S.limit);
+    $("list").innerHTML = shown.map(rowHTML).join("") + (S.items.length > S.limit ? '<button type="button" class="morebtn">Show ' + Math.min(50, S.items.length - S.limit) + " more of " + S.items.length + "</button>" : "");
+    var html = readerHTML(S.items[S.sel]);
+    if (narrow.matches) { $("reader").innerHTML = ""; var slot = $("list").querySelector('[aria-selected="true"] .slot'); if (slot) slot.innerHTML = html; }
+    else { $("reader").innerHTML = html; $("reader").style.top = (58 + document.querySelector(".bar").offsetHeight + 12) + "px"; }
+    // Open the reader on the matched line, not the top of the window.
+    var box = narrow.matches ? null : $("reader"), hit = box && box.querySelector(".line.hit");
+    if (box) box.scrollTop = hit ? Math.max(0, hit.offsetTop - box.offsetTop - box.clientHeight / 3) : 0;
+  }
+
+  // The reader: the full item, with the conversation around a quote.
+  function readerHTML(x) {
+    if (x.kind === "topic") {
+      var t = K.topics[x.i];
+      return "<h3>" + esc(t.title) + '</h3><p class="sub">Talking point from the cheat sheet</p><blockquote>' + hl(t.said, S.re) + "</blockquote><dl>" +
+        (t.facts.length ? "<div><dt>What we know</dt><dd><ul>" + t.facts.map(function (f) { return "<li>" + hl(f, S.re) + "</li>"; }).join("") + "</ul></dd></div>" : "") +
+        (t.hr ? "<div><dt>What HR suggests</dt><dd>" + hl(t.hr, S.re) + "</dd></div>" : "") +
+        (t.ifTheySay ? "<div><dt>If they say</dt><dd>“" + esc(t.ifTheySay) + "”</dd></div><div><dt>We can answer</dt><dd>" + esc(t.weSay) + "</dd></div>" : "") +
+        '</dl><div class="acts"><button type="button" class="act main" data-topic="' + esc(t.title) + '">Open on the cheat sheet</button></div>';
+    }
+    if (x.kind === "note") {
+      var n = K.notes[x.i];
+      var rel = K.notes.filter(function (o, j) { return j !== x.i && o.s === n.s && o.h === n.h; }).slice(0, 8);
+      return "<h3>" + esc(title(n.s)) + '</h3><p class="sub">Recap note' + (n.h ? ": " + esc(n.h) : "") + "</p><blockquote>" + hl(n.x.replace(/\*\*/g, ""), S.re) + "</blockquote>" +
+        (rel.length ? '<div class="rel"><p>Also in this part of the recap</p><ul>' + rel.map(function (o) { return "<li>" + hl(o.x.replace(/\*\*/g, ""), S.re) + "</li>"; }).join("") + "</ul></div>" : "") +
+        '<div class="acts"><button type="button" class="act main" data-copy="note">Copy note</button></div>';
+    }
+    var tu = K.turns[x.i], r = K.recordings[tu.src], lines = [];
+    for (var j = x.i - S.ctx; j <= x.i + S.ctx; j++) if (K.turns[j] && K.turns[j].src === tu.src) lines.push(j);
+    return "<h3>" + esc(title(r.s)) + '</h3><p class="sub">Quote at ' + esc(tu.tm) + (r.phone ? ", from " + esc(r.phone) + "'s recording" : "") + '</p><div class="script">' +
+      lines.map(function (j) { var t = K.turns[j]; return '<div class="line' + (j === x.i ? " hit" : "") + '"><span class="who">' + esc(t.sp) + "<br>" + esc(t.tm) + '</span><span class="say">' + hl(t.x, S.re) + "</span></div>"; }).join("") +
+      '</div><div class="acts"><button type="button" class="act main" data-copy="quote">Copy quote</button><button type="button" class="act" data-ctx="1">Show more lines</button></div>';
+  }
+
+  function readerClick(e) {
+    var b = e.target.closest("[data-copy],[data-ctx],[data-topic]"); if (!b) return;
+    var x = S.items[S.sel];
+    if (b.dataset.ctx) { S.ctx += 6; paint(); return; }
+    if (b.dataset.topic) {
       show("sheet");
-      var d = [].find.call(document.querySelectorAll(".topic"), function (x) { return x.querySelector("h3").textContent === tp.dataset.topic; });
+      var d = [].find.call(document.querySelectorAll(".topic"), function (o) { return o.querySelector("h3").textContent === b.dataset.topic; });
       if (d) { d.open = true; d.scrollIntoView({ block: "start" }); }
       return;
     }
-    var b = e.target.closest("[data-i]"); if (!b) return;
-    var box = b.nextElementSibling, i = +b.dataset.i, src = K.turns[i].src;
-    if (!box.hidden) { box.hidden = true; b.textContent = "Read the lines around this"; return; }
-    var lines = [];
-    for (var j = i - 4; j <= i + 4; j++) if (K.turns[j] && K.turns[j].src === src) lines.push(j);
-    box.innerHTML = lines.map(function (j) { var t = K.turns[j]; return "<div" + (j === i ? ' class="me"' : "") + "><span>" + esc(t.sp) + " " + esc(t.tm) + "</span><br>" + esc(t.x) + "</div>"; }).join("");
-    box.hidden = false; b.textContent = "Hide the lines";
-  });
+    // Copied text carries the session, never the speaker, so it is safe to paste into chat.
+    var text = x.kind === "note" ? K.notes[x.i].x.replace(/\*\*/g, "") : "“" + K.turns[x.i].x + "”";
+    var src = title(x.kind === "note" ? K.notes[x.i].s : x.k);
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = x.kind === "note" ? "Copy note" : "Copy quote"; }, 1500); };
+    try { navigator.clipboard.writeText(text + " (" + src + ")").then(done, function () { b.textContent = "Copy failed. Select the text instead."; }); } catch (err) { b.textContent = "Copy failed. Select the text instead."; }
+  }
+
+  function home() {
+    $("also").innerHTML = ""; $("strip").innerHTML = ""; $("kinds").innerHTML = ""; $("reader").innerHTML = "";
+    var starts = [["Fuji PTO", "Seniority and PTO approval"], ["specialist", "The shelved program"], ["trainer pay", "Who trains and why not"], ["lift", "The small batch rack lift"],
+      ["heat", "Summer heat and chemicals"], ["5:30 start", "The early start time"], ["points", "Attendance points"], ["tubs", "Tub shortages"], ["handoff", "What each shift leaves"]];
+    var rec = recent();
+    $("list").innerHTML = '<div class="start"><h2>Search every session</h2><p>Type a word, a topic, or a question. Results show as you type, and the squares show which sessions it came up in.</p>' +
+      '<div class="starts">' + starts.map(function (s) { return '<button type="button" data-go="' + esc(s[0]) + '">' + esc(s[0]) + "<span>" + esc(s[1]) + "</span></button>"; }).join("") + "</div>" +
+      (rec.length ? '<div class="recent">Recent:' + rec.map(function (r) { return '<button type="button" data-go="' + esc(r) + '">' + esc(r) + "</button>"; }).join("") + "</div>" : "") + "</div>";
+  }
 })();
 </script>
 </body>

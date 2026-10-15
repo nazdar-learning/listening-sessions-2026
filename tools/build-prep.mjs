@@ -30,7 +30,8 @@ const turnsOf = (lines, src) => {
   const out = [];
   let cur = null;
   for (const line of lines) {
-    const h = line.match(/^([A-Z][A-Za-z .'-]{1,40}?)\s{2,}(\d{1,2}:\d{2}(?::\d{2})?)$/);
+    // Names may include digits: Otter labels unknown voices "Speaker 12".
+    const h = line.match(/^([A-Z][A-Za-z0-9 .'-]{1,40}?)\s{2,}(\d{1,2}:\d{2}(?::\d{2})?)$/);
     if (h) { cur = { src, sp: h[1].trim(), tm: h[2], x: "" }; out.push(cur); continue; }
     if (cur && line.trim()) cur.x += (cur.x ? " " : "") + line.trim();
   }
