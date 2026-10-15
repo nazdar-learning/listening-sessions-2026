@@ -4,7 +4,7 @@
 // Leader version is discussion-first: no effort, owners, types, or HR solution lists (Cindy, Oct 15).
 // HR's drafts of those are kept in OneDrive, Listening Session Recaps.
 window.LISTENING_DATA = {
- "VERSION": "1.5",
+ "VERSION": "1.6",
  "UPDATED": "October 15, 2026",
  "SESSIONS": [
   {
@@ -173,12 +173,6 @@ window.LISTENING_DATA = {
   },
   {
    "a": 0,
-   "t": "A day shift specialist trains new mid shift hires for their first 2 to 3 weeks",
-   "s": "g",
-   "st": "Not started"
-  },
-  {
-   "a": 0,
    "t": "Clarify the trainer's role when a trainee makes a mistake",
    "s": "h",
    "st": "Not started"
@@ -277,7 +271,7 @@ window.LISTENING_DATA = {
    "a": 2,
    "t": "When a hazard is spotted, move it right away when it's safe to",
    "s": "e",
-   "st": "In motion"
+   "st": "Not started"
   },
   {
    "a": 2,
@@ -340,12 +334,6 @@ window.LISTENING_DATA = {
    "st": "In motion"
   },
   {
-   "a": 4,
-   "t": "Phone access to HR's SharePoint resources with a printed QR code and login",
-   "s": "g",
-   "st": "Done"
-  },
-  {
    "a": 5,
    "t": "A buddy or check-in for anyone working alone, including on nights",
    "s": "ah",
@@ -391,7 +379,7 @@ window.LISTENING_DATA = {
    "a": 5,
    "t": "Add mixer chains and keep grounding wires clean",
    "s": "f",
-   "st": "In motion"
+   "st": "Not started"
   },
   {
    "a": 5,
@@ -577,7 +565,7 @@ window.LISTENING_DATA = {
    "a": 8,
    "t": "Attendance policy update for January 1",
    "s": "abcdef",
-   "st": "In motion"
+   "st": "Not started"
   },
   {
    "a": 8,
@@ -595,12 +583,6 @@ window.LISTENING_DATA = {
    "a": 8,
    "t": "Review shift differential and pay when moving between areas",
    "s": "e",
-   "st": "Not started"
-  },
-  {
-   "a": 8,
-   "t": "Clarity for former Fuji employees on how their service is counted",
-   "s": "bdeh",
    "st": "Not started"
   },
   {
@@ -625,13 +607,13 @@ window.LISTENING_DATA = {
    "a": 8,
    "t": "Janitorial help, possibly on a crossover shift",
    "s": "cf",
-   "st": "In motion"
+   "st": "Not started"
   },
   {
    "a": 8,
    "t": "More room in the women's locker room at shift start",
    "s": "f",
-   "st": "In motion"
+   "st": "Not started"
   },
   {
    "a": 8,
@@ -717,12 +699,10 @@ window.LISTENING_DATA = {
  "DONE": [
   "Manufacturing employees received a $2 an hour raise",
   "The referral bonus doubled to $1,400",
-  "New hires see the boot requirement in their first-day email, and HR can get boots through the company Walmart account",
-  "Employees can reach HR's SharePoint resources from their phones by scanning a printed QR code that has their login on the back"
+  "New hires see the boot requirement in their first-day email, and HR can get boots through the company Walmart account"
  ],
  "UNDERWAY": [
-  "A communication wall with company news, safety information, and QR codes for benefits",
-  "Attendance policy updates are planned for January 1"
+  "A communication wall with company news, safety information, and QR codes for benefits"
  ],
  "DECISIONS": [
   [
@@ -743,15 +723,7 @@ window.LISTENING_DATA = {
   [
    "The specialist program is shelved. How should experienced employees share what they know and grow?",
    [
-    "A new path for experienced",
-    "A day shift specialist"
-   ]
-  ],
-  [
-   "Should maintenance be available to mid shift after 4:00 PM?",
-   [
-    "Maintenance coverage after 4:00 PM",
-    "More maintenance training on digital"
+    "A new path for experienced"
    ]
   ],
   [
@@ -762,22 +734,9 @@ window.LISTENING_DATA = {
     "Backup label printers",
     "Rebuild aging lines"
    ]
-  ],
-  [
-   "Former Fuji employees asked how their service and experience are recognized. What can we tell them?",
-   [
-    "Clarity for former Fuji employees"
-   ]
   ]
  ],
  "SPLITS": [
-  {
-   "t": "PTO scheduling",
-   "la": "Some employees",
-   "a": "Rotating who gets first pick of PTO gives everyone a turn.",
-   "lb": "Former Fuji employees",
-   "b": "They kept their PTO balance, but their seniority restarted, so they schedule later in the order."
-  },
   {
    "t": "Attendance points dropping off sooner",
    "la": "Some employees",
@@ -892,33 +851,9 @@ window.LISTENING_DATA = {
    "q": "The communications wall should be up and done within about a month.",
    "who": "Cindy, HR, in the October 8 session"
   },
-  "Attendance policy updates are planned for January 1": {
-   "q": "That is gonna help you kind of earn some points back starting on one one. I don't want to announce anything here because it's not official.",
-   "who": "Cindy, HR, in the September 30 session"
-  },
-  "Attendance policy update for January 1": {
-   "q": "That is gonna help you kind of earn some points back starting on one one. I don't want to announce anything here because it's not official.",
-   "who": "Cindy, HR, in the September 30 session"
-  },
   "Dedicated scale batteries and charging stations": {
    "q": "It's a supply chain issue, and we can't seem to get them. But I hear they're on order.",
    "who": "Anissa, HR, in the October 8 session"
-  },
-  "When a hazard is spotted, move it right away when it's safe to": {
-   "q": "We have another one this week, and we did know if you take a picture, you can fix it.",
-   "who": "Cindy, HR, on the biweekly manufacturing meeting, October 5 session"
-  },
-  "Add mixer chains and keep grounding wires clean": {
-   "q": "He's gonna figure out why we don't have them chained up.",
-   "who": "An employee, about the safety team's follow-up"
-  },
-  "Janitorial help, possibly on a crossover shift": {
-   "q": "One or two janitors are already in the plan.",
-   "who": "Anissa, HR, from the October 7 session recap"
-  },
-  "More room in the women's locker room at shift start": {
-   "q": "They're going to plan to get that revamped, but I don't know if the space is going to be part of that.",
-   "who": "Anissa, HR, in the October 7 session"
   }
  }
 };
