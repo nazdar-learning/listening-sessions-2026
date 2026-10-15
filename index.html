@@ -25,7 +25,11 @@
 /* Value and progress: two columns side by side */
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
 .keep { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.keep li { display: grid; grid-template-columns: minmax(0, 1fr) 52px; gap: 4px 10px; }
+.keep > li summary { display: grid; grid-template-columns: minmax(0, 1fr) 52px; gap: 4px 10px; }
+.keep > li summary > span::after { content: " +"; color: var(--red-ink); font-weight: 700; }
+.keep > li details[open] summary > span::after { content: " (close)"; font-weight: 400; font-size: 14px; }
+.keep > li summary:hover > span { text-decoration: underline; text-underline-offset: 3px; }
+.said { list-style: none; margin: 8px 0 6px; padding: 0 0 0 12px; border-left: 3px solid var(--line-strong); display: grid; gap: 4px; font-size: 15px; color: var(--ink-2); }
 .keep i { grid-column: 1 / -1; height: 6px; background: var(--ink-2); border-radius: 2px; }
 .keep em { font-style: normal; text-align: right; color: var(--ink-2); font-size: 14px; }
 .changes { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
@@ -127,7 +131,7 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
       <div>
         <div class="head">
           <h2>What keeps people here</h2>
-          <p class="lede">Strengths to protect while making changes.</p>
+          <p class="lede">Strengths to protect while making changes. Open one to hear it in their words.</p>
         </div>
         <ul class="keep num" id="keep"></ul>
       </div>
@@ -210,7 +214,11 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
   $("facts").innerHTML = [[64, "employees"], [8, "sessions"], [D.DECISIONS.length, "decisions to discuss"], [D.DONE.length + D.UNDERWAY.length, "changes made or underway"]]
     .map(function (f) { return "<div><b>" + f[0] + "</b><span>" + f[1] + "</span></div>"; }).join("");
 
-  $("keep").innerHTML = D.KEEP.map(function (k) { return "<li><span>" + esc(k[0]) + "</span><em>" + k[1] + ' of 8</em><i style="width:' + (k[1] / 8 * 100) + '%"></i></li>'; }).join("");
+  // Each reason opens to a few things employees said, in their words.
+  $("keep").innerHTML = D.KEEP.map(function (k) {
+    return '<li><details><summary><span>' + esc(k[0]) + "</span><em>" + k[1] + ' of 8</em><i style="width:' + (k[1] / 8 * 100) + '%"></i></summary><ul class="said">' +
+      (D.KEEP_SAY[k[0]] || []).map(function (q) { return "<li>&ldquo;" + esc(q) + "&rdquo;</li>"; }).join("") + "</ul></details></li>";
+  }).join("");
 
   $("changes").innerHTML = D.DONE.map(function (t) { return '<li><span class="st st-done">Done</span><span>' + esc(t) + "</span></li>"; }).join("") +
     D.UNDERWAY.map(function (t) { return '<li><span class="st st-motion">Underway</span><span>' + esc(t) + "</span></li>"; }).join("");

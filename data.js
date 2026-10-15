@@ -2,7 +2,7 @@
 // AREA_NAMES is indexed by ITEMS[].a. AREAS is the ranked focus-area list [name, sessions, index].
 // Bump VERSION on every push (shown on all three pages). Counts rechecked against all 8 transcripts on Oct 15. Effort ratings are drafts.
 window.LISTENING_DATA = {
- "VERSION": "1.0",
+ "VERSION": "1.1",
  "UPDATED": "October 15, 2026",
  "SESSIONS": [
   {
@@ -1274,5 +1274,35 @@ window.LISTENING_DATA = {
   "5": "Working alone at night, repairs on running machines, a rack lift that stalls at height, and summer heat with chemical contact.",
   "6": "Tub shortages, dead scale and scanner batteries, aging lines, and labelers that keep breaking slow the work.",
   "7": "Employees want leads who understand the work they lead and pitch in when the team is short."
+ },
+ "KEEP_SAY": {
+  "Coworkers and relationships": [
+   "It was the people, the culture, and the family.",
+   "I just really like the people here. They're actually really nice.",
+   "Everybody helps. I feel like it's a village."
+  ],
+  "Schedule fit": [
+   "Getting up early, getting off early.",
+   "Just the schedule.",
+   "You get three days off."
+  ],
+  "Culture and belonging": [
+   "Everybody knows everybody, and that's nice.",
+   "They really do try to care about you.",
+   "When you kind of have like a work family."
+  ],
+  "Room to learn and grow": [
+   "There's room for opportunity to move up.",
+   "It's a good place to challenge yourself a little bit.",
+   "Being able to do different things."
+  ],
+  "Stability and predictable work": [
+   "The stability of the company.",
+   "You want to be in a stable environment."
+  ],
+  "Benefits": [
+   "The people, the perks.",
+   "The health insurance."
+  ]
  }
 };
