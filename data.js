@@ -109,7 +109,7 @@ window.LISTENING_DATA = {
   {
    "a": 0,
    "t": "Hands-on final check instead of the tablet test",
-   "n": "The current test can be passed by guessing",
+   "n": "One session said the current test can be passed by guessing",
    "s": "cdfgh",
    "ty": "Quick win",
    "o": "L&D",
@@ -452,7 +452,7 @@ window.LISTENING_DATA = {
   },
   {
    "a": 4,
-   "t": "Production employees on the engagement committee",
+   "t": "Production employees invited to engagement committee meetings",
    "s": "f",
    "ty": "Quick win",
    "o": "HR",
@@ -709,7 +709,7 @@ window.LISTENING_DATA = {
    "ty": "Quick win",
    "o": "Operations",
    "e": "Low",
-   "st": "Declined"
+   "st": "Not started"
   },
   {
    "a": 7,
@@ -1031,7 +1031,7 @@ window.LISTENING_DATA = {
    ]
   ],
   [
-   "Replace the tablet test with a hands-on final check, because the tablet test can be passed by guessing.",
+   "Replace the tablet test with a hands-on final check.",
    5,
    [
     "Hands-on final check"
@@ -1206,7 +1206,7 @@ window.LISTENING_DATA = {
   {
    "t": "PTO scheduling",
    "la": "Some employees",
-   "a": "Rotating who gets PTO around holidays gives everyone a turn.",
+   "a": "Rotating who gets first pick of PTO gives everyone a turn.",
    "lb": "Former Fuji employees",
    "b": "They kept their PTO balance but their seniority restarted, so they hold the most PTO and are approved last.",
    "opt": "For former Fuji employees, consider using their original hire date for PTO scheduling only."

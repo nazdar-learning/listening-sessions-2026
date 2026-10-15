@@ -39,6 +39,13 @@
 .areas .nm em { font-style: normal; font-weight: 400; font-size: 14px; color: var(--ink-2); white-space: nowrap; }
 .areas p { color: var(--ink-2); font-size: 16px; margin-top: 4px; }
 
+/* Quick wins: reach on the left, one line each */
+.quick { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.quick li { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.quick b { font-size: 26px; line-height: 1; color: var(--red-ink); }
+.quick b small { display: block; font-size: 12px; font-weight: 400; color: var(--ink-2); margin-top: 4px; }
+.quick em { font-style: normal; font-size: 14px; color: var(--ink-2); white-space: nowrap; }
+
 /* Decisions */
 .decisions { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: d; }
 .decisions li { counter-increment: d; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; }
@@ -67,6 +74,8 @@
 }
 @media (max-width: 760px) {
   .pair, .areas, .views, .steps { grid-template-columns: minmax(0, 1fr); }
+  .quick li { grid-template-columns: 56px minmax(0, 1fr); }
+  .quick em { grid-column: 2; white-space: normal; }
   .hero { padding: 32px 0 28px; }
   .why b { font-size: 52px; }
   .top .right a { display: none; }
@@ -112,10 +121,20 @@
       <div>
         <div class="head">
           <h2>Already changed</h2>
-          <p class="lede">Done or underway because of what employees said.</p>
+          <p class="lede">Done or underway while the sessions ran.</p>
         </div>
         <ul class="changes" id="changes"></ul>
       </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <h2>Quick wins to start now</h2>
+        <p class="lede">Low-cost changes one owner could make within 30 days, ranked by how many sessions raised them. Effort is our first estimate.</p>
+      </div>
+      <ul class="quick" id="quick"></ul>
     </div>
   </section>
 
@@ -186,6 +205,14 @@
   $("areas").innerHTML = D.AREAS.map(function (a, n) {
     return '<li><div class="nm"><span style="display:flex;align-items:center"><span class="sw" style="background:var(--a' + (n + 1) + ')"></span>' + esc(a[0]) +
       "</span><em>" + a[1] + " of 8 sessions</em></div><p>" + esc(D.SUMMARY[a[2]]) + "</p></li>";
+  }).join("");
+
+  // Top five small wins by reach. Effort and owner come from the matching ask.
+  var findOne = function (k) { return D.ITEMS.find(function (i) { return i.t.indexOf(k) === 0; }); };
+  $("quick").innerHTML = D.SMALL.slice().sort(function (a, b) { return b[1] - a[1]; }).slice(0, 5).map(function (w) {
+    var ask = findOne(w[2][0]);
+    return '<li><b class="num">' + w[1] + "<small>of 8 sessions</small></b><span>" + esc(w[0]) + "</span><em>" +
+      (ask ? "Suggested owner: " + esc(ask.o) + ". " + esc(ask.e) + " effort (draft)" : "Low effort (draft)") + "</em></li>";
   }).join("");
 
   // Each decision shows how widely its related asks came up.

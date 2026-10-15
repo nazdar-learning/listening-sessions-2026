@@ -94,7 +94,7 @@ td .sub { display: flex; align-items: center; font-size: 13px; color: var(--ink-
   var F = { q: "", area: "", status: "", types: [] };
   var opts = function (el, first, list) { el.innerHTML = '<option value="">' + first + "</option>" + list.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join(""); };
   opts($("f-area"), "All areas", D.AREA_NAMES.map(function (a, i) { return [i, a]; }));
-  opts($("f-status"), "Any status", ["Done", "In motion", "Not started", "Declined"].map(function (s) { return [s, label(s)]; }));
+  opts($("f-status"), "Any status", ["Done", "In motion", "Not started"].map(function (s) { return [s, label(s)]; }));
   D.TYPES.forEach(function (t) {
     var b = document.createElement("button");
     b.type = "button"; b.className = "chip"; b.textContent = t === "Quick win" ? "Quick wins" : t; b.setAttribute("aria-pressed", "false");
