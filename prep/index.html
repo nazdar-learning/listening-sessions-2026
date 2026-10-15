@@ -40,7 +40,7 @@ button { font: inherit; }
 .gate h1 { font-size: 28px; margin-bottom: 8px; }
 .gate p { color: var(--ink-2); margin-bottom: 18px; }
 .gate label { font-weight: 700; font-size: 14px; }
-.row { display: flex; gap: 8px; margin-top: 6px; }
+.gate-row { display: flex; gap: 8px; margin-top: 6px; }
 input { flex: 1; min-width: 0; font: inherit; font-size: 17px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 11px 13px; }
 input::placeholder { color: var(--ink-2); }
 .btn { font-weight: 700; font-size: 15px; padding: 10px 16px; border-radius: var(--r); border: 1px solid var(--red); background: var(--red); color: #FFFFFF; cursor: pointer; }
@@ -268,7 +268,7 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1
   <h1>For HR only</h1>
   <p>Talking points, recap notes, and session transcripts. Enter the passphrase to unlock.</p>
   <label for="pass">Passphrase</label>
-  <div class="row">
+  <div class="gate-row">
     <input type="password" id="pass" autocomplete="current-password" required>
     <button class="btn" type="submit" id="go">Unlock</button>
   </div>
