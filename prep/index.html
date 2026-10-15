@@ -125,7 +125,7 @@ input::placeholder { color: var(--ink-2); }
 .also b { color: var(--color-ink); font-weight: 400; }
 
 /* Where it came up: a nine-column readout. Bar height is the hit count. */
-.strip { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); margin-top: var(--space-sm); border: 1px solid var(--color-rule); border-radius: var(--radius); background: var(--color-surface); overflow: hidden; }
+.strip { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); margin-top: var(--space-sm); border: 1px solid var(--color-rule); border-radius: var(--radius); background: var(--color-surface); overflow: hidden; }
 .cell2 { position: relative; display: grid; grid-template-rows: 34px auto auto; align-items: end; gap: var(--space-3xs); border: 0; border-left: 1px solid var(--color-rule); background: none; color: var(--color-ink); font: inherit; padding: var(--space-2xs) var(--space-2xs) var(--space-2xs); cursor: pointer; text-align: left; transition: background var(--dur) var(--ease-out); }
 .cell2:first-child { border-left: 0; }
 .cell2 .rail { display: flex; align-items: flex-end; height: 34px; }
@@ -375,7 +375,6 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1
   function start() {
     $("gate").hidden = true; $("tabs").hidden = false; $("lock").hidden = false;
     K.sessions.forEach(function (s) { sess[s.k] = s; });
-    sess.hr = { k: "hr", name: "HR huddle", label: "Oct 15", shift: "HR" };
     sheet(); searchSetup(); show("sheet");
   }
 
@@ -450,14 +449,14 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1
     return s;
   };
   var hl = function (text, re) { return re ? esc(text).replace(re, "<mark>$1</mark>") : esc(text); };
-  var title = function (k) { var s = sess[k]; return s.k === "hr" ? "HR huddle, Oct 15" : s.name + ", " + s.label + ", " + s.shift.toLowerCase() + " shift"; };
+  var title = function (k) { var s = sess[k]; return s.name + ", " + s.label + ", " + s.shift.toLowerCase() + " shift"; };
   var tagFor = function (k) {
-    var s = sess[k], c = s.k === "hr" ? "hr" : s.shift === "Mid" ? "mid" : "day";
-    return '<span class="tag ' + c + '"><b>' + esc(s.label) + "</b><span>" + (s.k === "hr" ? "HR huddle" : s.shift === "Mid" ? "Mid shift" : "Day shift") + "</span></span>";
+    var s = sess[k], c = s.shift === "Mid" ? "mid" : "day";
+    return '<span class="tag ' + c + '"><b>' + esc(s.label) + "</b><span>" + (s.shift === "Mid" ? "Mid shift" : "Day shift") + "</span></span>";
   };
 
   var S = { q: "", re: null, groups: [], kind: "all", sess: "", sel: 0, limit: 50, items: [], ctx: 6 };
-  var order = function () { return K.sessions.map(function (s) { return s.k; }).concat("hr"); };
+  var order = function () { return K.sessions.map(function (s) { return s.k; }); };
   var narrow = matchMedia("(max-width: 900px)");
   var RECENT = "prep-recent";
   var recent = function () { try { return JSON.parse(localStorage.getItem(RECENT) || "[]"); } catch (x) { return []; } };
@@ -534,7 +533,7 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1
       var n = per[k] || 0, h = n ? Math.max(8, Math.round(Math.sqrt(n / max) * 100)) : 0, s = sess[k];
       return '<button type="button" class="cell2" data-s="' + k + '" aria-pressed="' + (S.sess === k) + '"' + (n ? "" : " disabled") +
         ' aria-label="' + esc(title(k)) + ": " + n + ' results"><span class="rail"><i style="height:' + h + '%"></i></span><span class="lab"><b>' + esc(s.label) +
-        "</b><span>" + (k === "hr" ? "HR" : s.shift) + '</span></span><span class="n">' + n + "</span></button>";
+        "</b><span>" + s.shift + '</span></span><span class="n">' + n + "</span></button>";
     }).join("");
 
     var inS = all.filter(function (x) { return !S.sess || x.k === S.sess || x.kind === "topic"; });

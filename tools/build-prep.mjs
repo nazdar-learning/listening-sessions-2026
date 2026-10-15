@@ -53,13 +53,10 @@ for (let i = 0; i < combined.length; i++) {
   turns = turns.concat(turnsOf(combined.slice(start + 1, end), r));
 }
 
-// 2. HR huddle, October 15.
-const huddleDir = join(dir, "Listening Session - Quick Convo");
-const huddleFile = readdirSync(huddleDir).find((f) => f.endsWith("_transcript.txt"));
-recordings.push({ s: "hr", phone: "" });
-turns = turns.concat(turnsOf(readFileSync(join(huddleDir, huddleFile), "utf8").split(/\r?\n/), recordings.length - 1));
+// HR huddles are deliberately left out: their content reaches the kit only
+// through the talking-point cards (topics.json). Only listening sessions are quoted.
 
-// 3. Recap notes: one entry per bullet or table row, with its heading path.
+// 2. Recap notes: one entry per bullet or table row, with its heading path.
 const recapDir = join(dir, "Listening Session Recaps");
 const notes = [];
 readdirSync(recapDir).filter((f) => /^\d\d .*\.md$/.test(f)).sort().forEach((f, n) => {
@@ -69,6 +66,8 @@ readdirSync(recapDir).filter((f) => /^\d\d .*\.md$/.test(f)).sort().forEach((f, 
     const line = raw.trim();
     if (!line || /^\|?\s*-{3}/.test(line) || /^# /.test(line)) continue;
     if (/^## /.test(line)) { h2 = line.slice(3); h3 = sub = ""; continue; }
+    // HR's own notes (chat cross-checks, next-session planning, series wrap-up) are not shown.
+    if (/^(Cross-check|Next session|Wrapping up)/.test(h2)) continue;
     if (/^### /.test(line)) { h3 = line.slice(4); sub = ""; continue; }
     if (/^\*\*[^*]+\*\*$/.test(line)) { sub = line.slice(2, -2); continue; }
     const x = line.replace(/^[-*] |^\d+\. /, "").replace(/^\|\s*|\s*\|$/g, "").replace(/\s*\|\s*/g, " · ");
