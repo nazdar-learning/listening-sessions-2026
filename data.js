@@ -4,7 +4,7 @@
 // Leader version is discussion-first: no effort, owners, types, or HR solution lists (Cindy, Oct 15).
 // HR's drafts of those are kept in OneDrive, Listening Session Recaps.
 window.LISTENING_DATA = {
- "VERSION": "1.4",
+ "VERSION": "1.5",
  "UPDATED": "October 15, 2026",
  "SESSIONS": [
   {
@@ -341,7 +341,7 @@ window.LISTENING_DATA = {
   },
   {
    "a": 4,
-   "t": "Phone access to HR resources using your time clock badge login",
+   "t": "Phone access to HR's SharePoint resources with a printed QR code and login",
    "s": "g",
    "st": "Done"
   },
@@ -718,7 +718,7 @@ window.LISTENING_DATA = {
   "Manufacturing employees received a $2 an hour raise",
   "The referral bonus doubled to $1,400",
   "New hires see the boot requirement in their first-day email, and HR can get boots through the company Walmart account",
-  "Employees can reach HR resources on their phones using their time clock badge login"
+  "Employees can reach HR's SharePoint resources from their phones by scanning a printed QR code that has their login on the back"
  ],
  "UNDERWAY": [
   "A communication wall with company news, safety information, and QR codes for benefits",
