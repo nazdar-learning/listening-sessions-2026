@@ -1,8 +1,9 @@
 // Listening sessions 2026 data. Themes only, no names.
 // AREA_NAMES is indexed by ITEMS[].a. AREAS is the ranked focus-area list [name, sessions, index].
-// Bump VERSION on every push (shown on all three pages). Counts rechecked against all 8 transcripts on Oct 15. Effort ratings are drafts.
+// Bump VERSION on every push (shown on all three pages). Counts rechecked against all 8 transcripts on Oct 15.
+// No effort ratings until leadership sets them (Cindy, Oct 15). HR's draft ratings are kept in OneDrive.
 window.LISTENING_DATA = {
- "VERSION": "1.1",
+ "VERSION": "1.2",
  "UPDATED": "October 15, 2026",
  "SESSIONS": [
   {
@@ -96,7 +97,6 @@ window.LISTENING_DATA = {
    "s": "abcdefgh",
    "ty": "Decision",
    "o": "HR / Operations",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -105,7 +105,6 @@ window.LISTENING_DATA = {
    "s": "bdefgh",
    "ty": "Policy",
    "o": "Operations / L&D",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -115,7 +114,6 @@ window.LISTENING_DATA = {
    "s": "cdfgh",
    "ty": "Quick win",
    "o": "L&D",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -124,7 +122,6 @@ window.LISTENING_DATA = {
    "s": "cdegh",
    "ty": "Budget",
    "o": "L&D",
-   "e": "Medium",
    "st": "Not started",
    "n": "In discussion, not started yet"
   },
@@ -134,7 +131,6 @@ window.LISTENING_DATA = {
    "s": "abcdefgh",
    "ty": "Decision",
    "o": "HR / Operations",
-   "e": "High",
    "st": "Not started"
   },
   {
@@ -143,7 +139,6 @@ window.LISTENING_DATA = {
    "s": "abdgh",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -152,7 +147,6 @@ window.LISTENING_DATA = {
    "s": "de",
    "ty": "Budget",
    "o": "L&D / Operations",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -161,7 +155,6 @@ window.LISTENING_DATA = {
    "s": "fg",
    "ty": "Quick win",
    "o": "L&D / Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -170,7 +163,6 @@ window.LISTENING_DATA = {
    "s": "cf",
    "ty": "Budget",
    "o": "L&D",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -179,7 +171,6 @@ window.LISTENING_DATA = {
    "s": "bcfg",
    "ty": "Quick win",
    "o": "EHS / L&D",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -188,7 +179,6 @@ window.LISTENING_DATA = {
    "s": "cgh",
    "ty": "Quick win",
    "o": "L&D",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -198,7 +188,6 @@ window.LISTENING_DATA = {
    "s": "deh",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -207,7 +196,6 @@ window.LISTENING_DATA = {
    "s": "g",
    "ty": "Policy",
    "o": "Operations / L&D",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -216,7 +204,6 @@ window.LISTENING_DATA = {
    "s": "g",
    "ty": "Decision",
    "o": "Operations",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -225,7 +212,6 @@ window.LISTENING_DATA = {
    "s": "h",
    "ty": "Decision",
    "o": "Manufacturing leadership",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -234,7 +220,6 @@ window.LISTENING_DATA = {
    "s": "b",
    "ty": "Budget",
    "o": "Operations / L&D",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -243,7 +228,6 @@ window.LISTENING_DATA = {
    "s": "abcdefgh",
    "ty": "Quick win",
    "o": "Operations / Inventory",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -252,7 +236,6 @@ window.LISTENING_DATA = {
    "s": "ah",
    "ty": "Decision",
    "o": "Planning",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -261,7 +244,6 @@ window.LISTENING_DATA = {
    "s": "a",
    "ty": "Budget",
    "o": "Planning / ERP",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -270,7 +252,6 @@ window.LISTENING_DATA = {
    "s": "cdeh",
    "ty": "Quick win",
    "o": "Inventory",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -279,7 +260,6 @@ window.LISTENING_DATA = {
    "s": "abde",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -288,7 +268,6 @@ window.LISTENING_DATA = {
    "s": "df",
    "ty": "Budget",
    "o": "Operations / EHS",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -297,7 +276,6 @@ window.LISTENING_DATA = {
    "s": "cdfh",
    "ty": "Decision",
    "o": "Operations",
-   "e": "Medium",
    "st": "In motion"
   },
   {
@@ -306,7 +284,6 @@ window.LISTENING_DATA = {
    "s": "ef",
    "ty": "Budget",
    "o": "Purchasing",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -315,7 +292,6 @@ window.LISTENING_DATA = {
    "s": "h",
    "ty": "Quick win",
    "o": "Purchasing",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -324,7 +300,6 @@ window.LISTENING_DATA = {
    "s": "a",
    "ty": "Quick win",
    "o": "Scheduling",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -333,7 +308,6 @@ window.LISTENING_DATA = {
    "s": "bcdefh",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -342,7 +316,6 @@ window.LISTENING_DATA = {
    "s": "befg",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -351,7 +324,6 @@ window.LISTENING_DATA = {
    "s": "egh",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -360,7 +332,6 @@ window.LISTENING_DATA = {
    "s": "g",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -369,7 +340,6 @@ window.LISTENING_DATA = {
    "s": "e",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "In motion"
   },
   {
@@ -378,7 +348,6 @@ window.LISTENING_DATA = {
    "s": "abc",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -387,7 +356,6 @@ window.LISTENING_DATA = {
    "s": "aef",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -396,7 +364,6 @@ window.LISTENING_DATA = {
    "s": "aef",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -405,7 +372,6 @@ window.LISTENING_DATA = {
    "s": "ah",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -414,7 +380,6 @@ window.LISTENING_DATA = {
    "s": "a",
    "ty": "Review",
    "o": "Scheduling",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -423,7 +388,6 @@ window.LISTENING_DATA = {
    "s": "a",
    "ty": "Quick win",
    "o": "Operations / IT",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -432,7 +396,6 @@ window.LISTENING_DATA = {
    "s": "cdef",
    "ty": "Quick win",
    "o": "HR",
-   "e": "Low",
    "st": "In motion"
   },
   {
@@ -441,7 +404,6 @@ window.LISTENING_DATA = {
    "s": "d",
    "ty": "Quick win",
    "o": "HR",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -450,7 +412,6 @@ window.LISTENING_DATA = {
    "s": "df",
    "ty": "Quick win",
    "o": "HR / Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -459,7 +420,6 @@ window.LISTENING_DATA = {
    "s": "f",
    "ty": "Quick win",
    "o": "HR",
-   "e": "Low",
    "st": "In motion"
   },
   {
@@ -468,7 +428,6 @@ window.LISTENING_DATA = {
    "s": "adg",
    "ty": "Budget",
    "o": "HR",
-   "e": "Medium",
    "st": "In motion"
   },
   {
@@ -477,7 +436,6 @@ window.LISTENING_DATA = {
    "s": "g",
    "ty": "Quick win",
    "o": "HR / IT",
-   "e": "Low",
    "st": "Done"
   },
   {
@@ -486,7 +444,6 @@ window.LISTENING_DATA = {
    "s": "ah",
    "ty": "Safety",
    "o": "EHS / Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -495,7 +452,6 @@ window.LISTENING_DATA = {
    "s": "e",
    "ty": "Safety",
    "o": "Maintenance / EHS",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -504,7 +460,6 @@ window.LISTENING_DATA = {
    "s": "e",
    "ty": "Safety",
    "o": "EHS",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -513,7 +468,6 @@ window.LISTENING_DATA = {
    "s": "b",
    "ty": "Safety",
    "o": "Maintenance / EHS",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -522,7 +476,6 @@ window.LISTENING_DATA = {
    "s": "bcdf",
    "ty": "Safety",
    "o": "EHS",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -531,7 +484,6 @@ window.LISTENING_DATA = {
    "s": "h",
    "ty": "Safety",
    "o": "EHS / Operations",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -540,7 +492,6 @@ window.LISTENING_DATA = {
    "s": "g",
    "ty": "Safety",
    "o": "Facilities",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -549,7 +500,6 @@ window.LISTENING_DATA = {
    "s": "f",
    "ty": "Safety",
    "o": "EHS",
-   "e": "Low",
    "st": "In motion"
   },
   {
@@ -558,7 +508,6 @@ window.LISTENING_DATA = {
    "s": "c",
    "ty": "Safety",
    "o": "HR / EHS",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -567,7 +516,6 @@ window.LISTENING_DATA = {
    "s": "h",
    "ty": "Review",
    "o": "EHS",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -576,7 +524,6 @@ window.LISTENING_DATA = {
    "s": "abfgh",
    "ty": "Budget",
    "o": "Purchasing / Operations",
-   "e": "Low",
    "st": "In motion"
   },
   {
@@ -585,7 +532,6 @@ window.LISTENING_DATA = {
    "s": "acg",
    "ty": "Quick win",
    "o": "Maintenance",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -594,7 +540,6 @@ window.LISTENING_DATA = {
    "s": "bdh",
    "ty": "Budget",
    "o": "IT / Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -603,7 +548,6 @@ window.LISTENING_DATA = {
    "s": "g",
    "ty": "Budget",
    "o": "Operations / IT",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -612,7 +556,6 @@ window.LISTENING_DATA = {
    "s": "gh",
    "ty": "Quick win",
    "o": "Maintenance",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -621,7 +564,6 @@ window.LISTENING_DATA = {
    "s": "g",
    "ty": "Decision",
    "o": "Maintenance",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -630,7 +572,6 @@ window.LISTENING_DATA = {
    "s": "h",
    "ty": "Quick win",
    "o": "Maintenance",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -639,7 +580,6 @@ window.LISTENING_DATA = {
    "s": "g",
    "ty": "Quick win",
    "o": "Maintenance",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -648,7 +588,6 @@ window.LISTENING_DATA = {
    "s": "abg",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -657,7 +596,6 @@ window.LISTENING_DATA = {
    "s": "e",
    "ty": "Quick win",
    "o": "Operations / Lab",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -666,7 +604,6 @@ window.LISTENING_DATA = {
    "s": "f",
    "ty": "Budget",
    "o": "Process engineering",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -675,7 +612,6 @@ window.LISTENING_DATA = {
    "s": "c",
    "ty": "Budget",
    "o": "Maintenance",
-   "e": "High",
    "st": "Not started"
   },
   {
@@ -684,7 +620,6 @@ window.LISTENING_DATA = {
    "s": "ad",
    "ty": "Quick win",
    "o": "IT / Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -693,7 +628,6 @@ window.LISTENING_DATA = {
    "s": "bdegh",
    "ty": "Decision",
    "o": "Manufacturing leadership",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -702,7 +636,6 @@ window.LISTENING_DATA = {
    "s": "efh",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -711,7 +644,6 @@ window.LISTENING_DATA = {
    "s": "h",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -720,7 +652,6 @@ window.LISTENING_DATA = {
    "s": "cf",
    "ty": "Decision",
    "o": "Operations",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -729,7 +660,6 @@ window.LISTENING_DATA = {
    "s": "def",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -738,7 +668,6 @@ window.LISTENING_DATA = {
    "s": "abch",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -747,7 +676,6 @@ window.LISTENING_DATA = {
    "s": "eh",
    "ty": "Policy",
    "o": "Operations / HR",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -756,7 +684,6 @@ window.LISTENING_DATA = {
    "s": "f",
    "ty": "Quick win",
    "o": "Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -765,7 +692,6 @@ window.LISTENING_DATA = {
    "s": "acdef",
    "ty": "Budget",
    "o": "HR",
-   "e": "High",
    "st": "Done"
   },
   {
@@ -774,7 +700,6 @@ window.LISTENING_DATA = {
    "s": "fg",
    "ty": "Budget",
    "o": "HR",
-   "e": "Low",
    "st": "Done"
   },
   {
@@ -783,7 +708,6 @@ window.LISTENING_DATA = {
    "s": "f",
    "ty": "Quick win",
    "o": "HR",
-   "e": "Low",
    "st": "Done"
   },
   {
@@ -792,7 +716,6 @@ window.LISTENING_DATA = {
    "s": "f",
    "ty": "Quick win",
    "o": "HR",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -801,7 +724,6 @@ window.LISTENING_DATA = {
    "s": "cf",
    "ty": "Quick win",
    "o": "HR",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -810,7 +732,6 @@ window.LISTENING_DATA = {
    "s": "acfh",
    "ty": "Quick win",
    "o": "HR / Operations",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -819,7 +740,6 @@ window.LISTENING_DATA = {
    "s": "cefg",
    "ty": "Quick win",
    "o": "HR",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -828,7 +748,6 @@ window.LISTENING_DATA = {
    "s": "abcdef",
    "ty": "Policy",
    "o": "HR",
-   "e": "Medium",
    "st": "In motion"
   },
   {
@@ -837,7 +756,6 @@ window.LISTENING_DATA = {
    "s": "c",
    "ty": "Policy",
    "o": "HR",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -846,7 +764,6 @@ window.LISTENING_DATA = {
    "s": "e",
    "ty": "Review",
    "o": "HR",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -855,7 +772,6 @@ window.LISTENING_DATA = {
    "s": "e",
    "ty": "Review",
    "o": "HR",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -864,7 +780,6 @@ window.LISTENING_DATA = {
    "s": "bdeh",
    "ty": "Decision",
    "o": "HR",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -873,7 +788,6 @@ window.LISTENING_DATA = {
    "s": "ad",
    "ty": "Review",
    "o": "HR",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -882,7 +796,6 @@ window.LISTENING_DATA = {
    "s": "d",
    "ty": "Review",
    "o": "HR",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -891,7 +804,6 @@ window.LISTENING_DATA = {
    "s": "ce",
    "ty": "Policy",
    "o": "HR",
-   "e": "Low",
    "st": "Not started"
   },
   {
@@ -900,7 +812,6 @@ window.LISTENING_DATA = {
    "s": "cf",
    "ty": "Budget",
    "o": "Facilities / HR",
-   "e": "Medium",
    "st": "In motion"
   },
   {
@@ -909,7 +820,6 @@ window.LISTENING_DATA = {
    "s": "f",
    "ty": "Budget",
    "o": "Facilities",
-   "e": "Medium",
    "st": "In motion"
   },
   {
@@ -918,7 +828,6 @@ window.LISTENING_DATA = {
    "s": "h",
    "ty": "Review",
    "o": "Operations / HR",
-   "e": "Medium",
    "st": "Not started"
   },
   {
@@ -927,7 +836,6 @@ window.LISTENING_DATA = {
    "s": "bd",
    "ty": "Review",
    "o": "Operations / HR",
-   "e": "Medium",
    "st": "Not started"
   }
  ],
@@ -1246,7 +1154,7 @@ window.LISTENING_DATA = {
  "STEPS": [
   {
    "when": "Monday, October 19",
-   "what": "Walk through this brief together and correct the effort ratings."
+   "what": "Walk through this brief together."
   },
   {
    "when": "Tuesday, October 20",

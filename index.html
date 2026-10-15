@@ -149,7 +149,7 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
     <div class="wrap">
       <div class="head">
         <h2>Quick wins to start now</h2>
-        <p class="lede">Low-cost changes one owner could make within 30 days, ranked by how many sessions raised them. Effort is our first estimate.</p>
+        <p class="lede">The asks raised in the most sessions that could be started soon. Leadership decides what to take on.</p>
       </div>
       <ul class="quick" id="quick"></ul>
     </div>
@@ -190,7 +190,7 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
       <div class="head"><h2>What happens next</h2></div>
       <ol class="steps" id="steps"></ol>
       <div class="input">
-        <p><b>Your input, please.</b> Each ask has a low, medium, or high effort rating. These are HR's first guesses. Please correct any that look wrong before Tuesday.</p>
+        <p><b>Every ask in one place.</b> The full list has each ask, how many sessions raised it, and a suggested owner, to look through before Tuesday.</p>
         <a class="btn primary" href="asks.html">Review all 93 asks</a>
       </div>
     </div>
@@ -229,7 +229,7 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
   var askList = function (items) {
     return '<ul class="asks">' + items.map(function (i) {
       return '<li><span class="t">' + esc(i.t) + '</span><span class="st ' + tone(i.st) + '">' + esc(label(i.st)) + '</span><span class="m">Raised in ' + i.s.length +
-        " of 8 sessions. Suggested owner: " + esc(i.o) + ". Effort (draft): " + i.e.toLowerCase() + ".</span></li>";
+        " of 8 sessions. Suggested owner: " + esc(i.o) + ".</span></li>";
     }).join("") + "</ul>";
   };
   var bySessions = function (a, b) { return b.s.length - a.s.length; };
@@ -240,12 +240,12 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
       "</span><em>" + a[1] + " of 8 sessions</em></div><p>" + esc(D.SUMMARY[a[2]]) + '</p><span class="open-asks">See the ' + asks.length + " asks</span></summary>" + askList(asks) + "</details></li>";
   }).join("");
 
-  // Top five small wins by reach. Effort and owner come from the matching ask.
+  // Top five small wins by reach. Owner comes from the matching ask. No effort shown: leadership sets that.
   var findOne = function (k) { return D.ITEMS.find(function (i) { return i.t.indexOf(k) === 0; }); };
   $("quick").innerHTML = D.SMALL.slice().sort(function (a, b) { return b[1] - a[1]; }).slice(0, 5).map(function (w) {
     var ask = findOne(w[2][0]);
     return '<li><b class="num">' + w[1] + "<small>of 8 sessions</small></b><span>" + esc(w[0]) + "</span><em>" +
-      (ask ? "Suggested owner: " + esc(ask.o) + ". " + esc(ask.e) + " effort (draft)" : "Low effort (draft)") + "</em></li>";
+      (ask ? "Suggested owner: " + esc(ask.o) : "") + "</em></li>";
   }).join("");
 
   // Each decision shows how widely its related asks came up.
