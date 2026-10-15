@@ -26,6 +26,11 @@
   --idle: #4E5862; --idle-bg: #EDEFF1;  /* Extended neutral */
   --focus: #007CBA;        /* Brand SourceOne Dark Blue. Focus rings */
   --bar: var(--red);
+  /* Data colors. Dashboard layer, not brand. Validated for colorblind separation (dataviz validator). */
+  --a1: #2a78d6; --a2: #eb6834; --a3: #1baf7a; --a4: #eda100; --a5: #e87ba4; --a6: #008300; --a7: #4a3aa7; --a8: #e34948; --a9: #98A1AA;
+  --s0: #cde2fb; --s1: #9ec5f4; --s2: #6da7ec; --s3: #3987e5; --s4: #256abf; --s5: #184f95; --s6: #0d366b;
+  --t0: #14191D; --t1: #14191D; --t2: #14191D; --t3: #FFFFFF; --t4: #FFFFFF; --t5: #FFFFFF; --t6: #FFFFFF;
+  --fill-done: #2E7D4F; --fill-motion: #E8A33D; --fill-idle: #C3C9CF; --fill-declined: #6B7580;
   --logo-light: block; --logo-dark: none;
   --font: Campton, Calibri, Arial, Helvetica, sans-serif;
   --r: 4px;
@@ -37,6 +42,10 @@
     --page: #1B2126; --surface: #232B31; --line: #2E3740; --line-strong: #3E4952;
     --band: #151A1E; --ok: #6FCB95; --ok-bg: #1E3328; --warn: #E8A33D; --warn-bg: #3A2C17;
     --idle: #B6BFC6; --idle-bg: #2E3740; --focus: #2AAEE4; --bar: #F76B7B;
+    --a1: #3987e5; --a2: #d95926; --a3: #199e70; --a4: #c98500; --a5: #d55181; --a6: #008300; --a7: #9085e9; --a8: #e66767; --a9: #6B7580;
+    --s0: #104281; --s1: #1c5cab; --s2: #2a78d6; --s3: #3987e5; --s4: #6da7ec; --s5: #9ec5f4; --s6: #cde2fb;
+    --t0: #FFFFFF; --t1: #FFFFFF; --t2: #FFFFFF; --t3: #FFFFFF; --t4: #14191D; --t5: #14191D; --t6: #14191D;
+    --fill-done: #6FCB95; --fill-motion: #E8A33D; --fill-idle: #4E5862; --fill-declined: #98A1AA;
     --logo-light: none; --logo-dark: block; color-scheme: dark;
   }
 }
@@ -190,6 +199,44 @@ td .sub { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px;
 .sess b { display: block; }
 .sess span { color: var(--ink-2); font-size: 14px; display: block; }
 
+/* Shared chart pieces */
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: 0; flex: none; }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; font-size: 13px; color: var(--ink-2); margin-top: 12px; }
+.legend .ramp { display: inline-flex; gap: 2px; margin: 0 6px; }
+.legend .ramp i { width: 18px; height: 10px; border-radius: 2px; }
+.cell { border: 0; border-radius: var(--r); font: inherit; font-weight: 700; font-size: 15px; display: grid; place-items: center; min-height: 40px; }
+.cell.zero { background: transparent; color: var(--line-strong); font-weight: 400; box-shadow: inset 0 0 0 1px var(--line); }
+#tip { position: fixed; z-index: 20; pointer-events: none; max-width: 280px; background: var(--ink); color: var(--page); font-size: 13px; line-height: 1.4; padding: 8px 10px; border-radius: var(--r); opacity: 0; transition: opacity .12s; }
+#tip.on { opacity: 1; }
+
+/* Where to start: effort by reach grid */
+.start { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 40px; align-items: start; }
+.grid3 { display: grid; grid-template-columns: 70px repeat(3, minmax(0, 1fr)); gap: 3px; }
+.grid3 .ax { font-size: 13px; color: var(--ink-2); display: grid; align-items: center; }
+.grid3 .ax.top { text-align: center; padding-bottom: 4px; font-weight: 700; color: var(--ink); }
+.grid3 button.cell { cursor: pointer; }
+.grid3 button.cell:hover, .grid3 button.cell[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 1px; }
+.grid3 .zone { box-shadow: inset 0 0 0 2px var(--red); }
+.axis-note { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-2); margin: 6px 0 0 73px; }
+.pick h3 { font-size: 17px; margin-bottom: 4px; }
+.pick p { font-size: 14px; color: var(--ink-2); }
+.pick .asks { margin-top: 12px; max-height: 520px; overflow: auto; padding-right: 4px; }
+
+/* Heatmap: area by session */
+.heat-wrap { overflow-x: auto; }
+.heat { display: grid; grid-template-columns: minmax(190px, 1.6fr) repeat(8, minmax(44px, 1fr)) 56px; gap: 3px; min-width: 720px; }
+.heat .rh { font-size: 15px; display: flex; align-items: center; padding-right: 8px; }
+.heat .ch { font-size: 13px; text-align: center; color: var(--ink-2); line-height: 1.25; padding-bottom: 4px; }
+.heat .ch b { display: block; color: var(--ink); }
+.heat .tot { font-size: 14px; color: var(--ink-2); display: grid; place-items: center; }
+
+/* Who owns what: status stacked bars */
+.owners { display: grid; gap: 14px; }
+.owner { display: grid; grid-template-columns: 180px minmax(0, 1fr) 64px; gap: 12px; align-items: center; font-size: 15px; }
+.owner .track { display: flex; gap: 2px; height: 22px; }
+.owner .track i { display: block; height: 100%; border-radius: 2px; min-width: 3px; }
+.owner em { font-style: normal; text-align: right; color: var(--ink-2); font-size: 14px; }
+
 footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--ink-2); font-size: 15px; }
 
 @media (max-width: 900px) {
@@ -199,6 +246,7 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
   .filters { grid-template-columns: 1fr 1fr; }
   .filters label:first-child { grid-column: 1 / -1; }
   .sessions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .start { grid-template-columns: minmax(0, 1fr); }
   .top nav { gap: 16px; }
 }
 @media (max-width: 760px) {
@@ -216,6 +264,8 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
   .win .asks { margin: 0 16px 16px; }
   .why b { font-size: 56px; }
   .filters { grid-template-columns: minmax(0, 1fr); }
+  .owner { grid-template-columns: minmax(0, 1fr) 48px; gap: 6px 10px; }
+  .owner .track { grid-column: 1 / -1; grid-row: 2; }
   /* Table becomes stacked rows */
   table, tbody, tr, td { display: block; }
   thead { display: none; }
@@ -237,9 +287,10 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
     </a>
     <nav aria-label="Sections">
       <a href="#decisions">Decisions</a>
+      <a href="#start">Where to start</a>
       <a href="#large-wins">Large wins</a>
       <a href="#small-wins">Small wins</a>
-      <a href="#progress">Progress</a>
+      <a href="#owners">Owners</a>
       <a href="#asks">All asks</a>
     </nav>
     <button class="theme" type="button" id="theme">Dark mode</button>
@@ -273,6 +324,22 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
     </div>
   </section>
 
+  <section class="block" id="start">
+    <div class="wrap">
+      <div class="head">
+        <h2>Where to start</h2>
+        <p class="lede">All 93 asks, sorted by how many sessions raised them and how hard they are to do. The red box is easy and widely felt. Pick any square to see its asks.</p>
+      </div>
+      <div class="start">
+        <div>
+          <div class="grid3" id="start-grid"></div>
+          <div class="legend" id="start-legend"></div>
+        </div>
+        <div class="pick" id="start-pick" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="large-wins">
     <div class="wrap">
       <div class="head">
@@ -303,6 +370,17 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
     </div>
   </section>
 
+  <section class="block" id="owners">
+    <div class="wrap">
+      <div class="head">
+        <h2>Who owns what</h2>
+        <p class="lede">Asks by suggested owner and status. An ask with two owners counts for both. Owners are suggested until leadership confirms them.</p>
+      </div>
+      <div class="owners" id="owner-bars"></div>
+      <div class="legend" id="owner-legend"></div>
+    </div>
+  </section>
+
   <section class="block" id="differences">
     <div class="wrap">
       <div class="head">
@@ -310,6 +388,17 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
         <p class="lede">Both views are worth weighing before a decision is made.</p>
       </div>
       <div class="splits" id="split-list"></div>
+    </div>
+  </section>
+
+  <section class="block" id="heat">
+    <div class="wrap">
+      <div class="head">
+        <h2>Where each issue came up</h2>
+        <p class="lede">Number of asks from each session, by area. A full row means every group felt it. A lone dark square belongs to one group.</p>
+      </div>
+      <div class="heat-wrap"><div class="heat" id="heat-grid" role="table" aria-label="Asks by area and session"></div></div>
+      <div class="legend" id="heat-legend"></div>
     </div>
   </section>
 
@@ -388,6 +477,7 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
   </div>
 </footer>
 
+<div id="tip" role="tooltip"></div>
 <script src="data.js"></script>
 <script>
 (function () {
@@ -401,10 +491,16 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
   var find = function (keys) { return keys.map(function (k) { return D.ITEMS.find(function (i) { return i.t.indexOf(k) === 0; }); }).filter(Boolean); };
   var dates = function (i) { return D.SESSIONS.filter(function (s) { return i.s.indexOf(s.k) > -1; }).map(function (s) { return s.label; }).join(", "); };
   var areaName = function (i) { return D.AREA_NAMES[i.a]; };
+  // Area colors follow the focus-area ranking; the catch-all area stays gray.
+  var slot = {};
+  D.AREAS.forEach(function (a, n) { slot[a[2]] = n + 1; });
+  var aColor = function (idx) { return "var(--a" + (slot[idx] || 9) + ")"; };
+  var sw = function (idx) { return '<span class="sw" style="background:' + aColor(idx) + '"></span>'; };
+  var areaTag = function (i) { return sw(i.a) + esc(areaName(i)); };
   var askList = function (items) {
     return '<ul class="asks">' + items.map(function (i) {
       return '<li><span class="t">' + esc(i.t) + "</span>" + badge(i.st) +
-        '<span class="m">Suggested owner: ' + esc(i.o) + ". Effort: " + i.e.toLowerCase() + ". Raised in " + i.s.length + " of 8 sessions (" + dates(i) + ").</span></li>";
+        '<span class="m">' + areaTag(i) + ". Suggested owner: " + esc(i.o) + ". Effort: " + i.e.toLowerCase() + ". Raised in " + i.s.length + " of 8 sessions (" + dates(i) + ").</span></li>";
     }).join("") + "</ul>";
   };
 
@@ -439,12 +535,110 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
     return '<div class="split"><h3>' + esc(s.t) + "</h3><dl><div><dt>" + esc(s.la) + "</dt><dd>" + esc(s.a) + "</dd></div><div><dt>" + esc(s.lb) + '</dt><dd class="b">' + esc(s.b) + "</dd></div></dl></div>";
   }).join("");
 
-  var bars = function (rows) {
-    return rows.map(function (r) { return "<li><span>" + esc(r[0]) + "</span><em>" + r[1] + ' of 8</em><i style="width:' + (r[1] / 8 * 100) + '%"></i></li>'; }).join("");
+  var bars = function (rows, color) {
+    return rows.map(function (r) {
+      return "<li><span>" + (color ? sw(r[2]) : "") + esc(r[0]) + "</span><em>" + r[1] + ' of 8</em><i style="width:' + (r[1] / 8 * 100) + "%" + (color ? ";background:" + aColor(r[2]) : "") + '"></i></li>';
+    }).join("");
   };
-  $("area-bars").innerHTML = bars(D.AREAS);
+  $("area-bars").innerHTML = bars(D.AREAS, true);
   $("keep-bars").innerHTML = bars(D.KEEP);
 
+  // Sequential shade: 7 steps, square-root scale so small counts still show.
+  var shade = function (v, max) {
+    if (!v) return { cls: "cell zero", style: "" };
+    var n = Math.min(6, Math.max(0, Math.ceil(Math.sqrt(v / max) * 7) - 1));
+    return { cls: "cell", style: "background:var(--s" + n + ");color:var(--t" + n + ")" };
+  };
+  var rampLegend = function (lo, hi) {
+    return lo + '<span class="ramp">' + [0, 1, 2, 3, 4, 5, 6].map(function (n) { return '<i style="background:var(--s' + n + ')"></i>'; }).join("") + "</span>" + hi;
+  };
+
+  // Where to start: reach (rows) by effort (columns).
+  var EFF = ["Low", "Medium", "High"];
+  var inCell = function (r, e) { return D.ITEMS.filter(function (i) { return i.s.length === r && i.e === e; }); };
+  var startMax = 0;
+  for (var r = 1; r <= 8; r++) EFF.forEach(function (e) { startMax = Math.max(startMax, inCell(r, e).length); });
+  var zone = function (r, e) { return e === "Low" && r >= 4; };
+  var g = '<span></span>' + EFF.map(function (e) { return '<span class="ax top">' + e + " effort</span>"; }).join("");
+  for (r = 8; r >= 1; r--) {
+    g += '<span class="ax">' + r + " of 8</span>";
+    EFF.forEach(function (e) {
+      var v = inCell(r, e).length, s = shade(v, startMax);
+      g += v ? '<button type="button" class="' + s.cls + (zone(r, e) ? " zone" : "") + '" style="' + s.style + '" data-r="' + r + '" data-e="' + e + '" aria-pressed="false" data-tip="' +
+        v + " ask" + (v > 1 ? "s" : "") + ", " + e.toLowerCase() + " effort, raised in " + r + ' of 8 sessions">' + v + "</button>"
+        : '<span class="' + s.cls + (zone(r, e) ? " zone" : "") + '">0</span>';
+    });
+  }
+  $("start-grid").innerHTML = g;
+  $("start-legend").innerHTML = rampLegend("Fewer asks", "More asks") + '<span><span class="sw" style="box-shadow:inset 0 0 0 2px var(--red)"></span>Start here</span>';
+  var pick = function (title, note, items) {
+    items = items.slice().sort(function (x, y) { return y.s.length - x.s.length; });
+    $("start-pick").innerHTML = "<h3>" + esc(title) + "</h3><p>" + esc(note) + "</p>" + askList(items);
+  };
+  var zoneItems = D.ITEMS.filter(function (i) { return zone(i.s.length, i.e); });
+  var pickZone = function () { pick("Start here: " + zoneItems.length + " asks", "Low effort, raised in 4 or more of the 8 sessions.", zoneItems); };
+  pickZone();
+  $("start-grid").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button.cell"); if (!b) return;
+    var on = b.getAttribute("aria-pressed") === "true";
+    $("start-grid").querySelectorAll("button.cell").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+    if (on) return pickZone();
+    b.setAttribute("aria-pressed", "true");
+    var rr = +b.dataset.r, e = b.dataset.e;
+    pick(e + " effort, raised in " + rr + " of 8 sessions", "Pick the square again to go back to the start-here list.", inCell(rr, e));
+  });
+
+  // Heatmap: asks per area per session.
+  var rows = D.AREAS.map(function (a) { return a[2]; }).concat(D.AREA_NAMES.map(function (_, i) { return i; }).filter(function (i) { return !(i in slot); }));
+  var hv = function (a, k) { return D.ITEMS.filter(function (i) { return i.a === a && i.s.indexOf(k) > -1; }).length; };
+  var heatMax = 0;
+  rows.forEach(function (a) { D.SESSIONS.forEach(function (s) { heatMax = Math.max(heatMax, hv(a, s.k)); }); });
+  var h = '<span role="columnheader"></span>' + D.SESSIONS.map(function (s) { return '<span class="ch" role="columnheader"><b>' + esc(s.label) + "</b>" + s.shift + "</span>"; }).join("") + '<span class="ch" role="columnheader"><b>Total</b>asks</span>';
+  rows.forEach(function (a) {
+    var total = D.ITEMS.filter(function (i) { return i.a === a; }).length;
+    h += '<span class="rh" role="rowheader">' + sw(a) + esc(D.AREA_NAMES[a]) + "</span>";
+    D.SESSIONS.forEach(function (s) {
+      var v = hv(a, s.k), sh = shade(v, heatMax);
+      h += '<span role="cell" tabindex="0" class="' + sh.cls + '" style="' + sh.style + '" data-tip="' + esc(D.AREA_NAMES[a]) + ", " + esc(s.label) + " (" + s.shift.toLowerCase() + " shift): " + v + " of " + total + ' asks">' + v + "</span>";
+    });
+    h += '<span class="tot num" role="cell">' + total + "</span>";
+  });
+  $("heat-grid").innerHTML = h;
+  $("heat-legend").innerHTML = rampLegend("Fewer asks", "More asks");
+
+  // Who owns what: status mix per suggested owner. Small owners fold into one row.
+  var ST = [["Done", "done"], ["In motion", "motion"], ["Not started", "idle"], ["Declined", "declined"]];
+  var own = {};
+  D.ITEMS.forEach(function (i) { i.o.split(" / ").forEach(function (o) { (own[o] = own[o] || []).push(i); }); });
+  var big = Object.keys(own).filter(function (o) { return own[o].length >= 5; }).sort(function (x, y) { return own[y].length - own[x].length; });
+  var small = Object.keys(own).filter(function (o) { return own[o].length < 5; });
+  var groups = big.map(function (o) { return [o, own[o], ""]; });
+  if (small.length) groups.push(["Other teams", [].concat.apply([], small.map(function (o) { return own[o]; })), small.join(", ")]);
+  var ownMax = Math.max.apply(null, groups.map(function (gr) { return gr[1].length; }));
+  $("owner-bars").innerHTML = groups.map(function (gr) {
+    var segs = ST.map(function (st) {
+      var n = gr[1].filter(function (i) { return i.st === st[0]; }).length;
+      return n ? '<i tabindex="0" style="flex:' + n + ";background:var(--fill-" + st[1] + ')" data-tip="' + esc(gr[0]) + ": " + n + " " + label(st[0]).toLowerCase() + '"></i>' : "";
+    }).join("");
+    return '<div class="owner"><span' + (gr[2] ? ' title="' + esc(gr[2]) + '"' : "") + ">" + esc(gr[0]) + '</span><div class="track" style="width:' + (gr[1].length / ownMax * 100) + '%">' + segs +
+      '</div><em class="num">' + gr[1].length + "</em></div>";
+  }).join("");
+  $("owner-legend").innerHTML = ST.map(function (st) { return '<span><span class="sw" style="background:var(--fill-' + st[1] + ')"></span>' + label(st[0]) + "</span>"; }).join("") +
+    "<span>Other teams: " + esc(small.join(", ")) + "</span>";
+
+  // One tooltip for every chart mark.
+  var tip = $("tip");
+  var showTip = function (ev) {
+    var el = ev.target.closest && ev.target.closest("[data-tip]"); if (!el) return;
+    var b = el.getBoundingClientRect();
+    tip.textContent = el.dataset.tip; tip.classList.add("on");
+    var x = Math.min(window.innerWidth - tip.offsetWidth - 8, Math.max(8, b.left + b.width / 2 - tip.offsetWidth / 2));
+    var y = b.top - tip.offsetHeight - 8; if (y < 68) y = b.bottom + 8;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  };
+  var hideTip = function () { tip.classList.remove("on"); };
+  document.addEventListener("mouseover", showTip); document.addEventListener("focusin", showTip);
+  document.addEventListener("mouseout", hideTip); document.addEventListener("focusout", hideTip);
   $("step-list").innerHTML = D.STEPS.map(function (s) { return "<li><b>" + esc(s.when) + "</b>" + esc(s.what) + "</li>"; }).join("");
 
   $("session-list").innerHTML = D.SESSIONS.map(function (s) {
@@ -482,7 +676,7 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--i
     $("count").textContent = "Showing " + list.length + " of " + D.ITEMS.length + " asks";
     $("ask-empty").hidden = list.length > 0;
     $("ask-rows").innerHTML = list.map(function (i) {
-      return '<tr><td data-l="Ask"><b>' + esc(i.t) + "</b>" + (i.n ? '<span class="sub">' + esc(i.n) + "</span>" : "") + '<span class="sub">' + esc(areaName(i)) +
+      return '<tr><td data-l="Ask"><b>' + esc(i.t) + "</b>" + (i.n ? '<span class="sub">' + esc(i.n) + "</span>" : "") + '<span class="sub">' + areaTag(i) +
         '</span></td><td data-l="Sessions" class="num" title="' + esc(dates(i)) + '">' + i.s.length + ' of 8</td><td data-l="Type">' + esc(i.ty) + '</td><td data-l="Suggested owner">' + esc(i.o) +
         '</td><td data-l="Effort">' + esc(i.e) + '</td><td data-l="Status">' + badge(i.st) + "</td></tr>";
     }).join("");
