@@ -218,18 +218,25 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
       (D.KEEP_SAY[k[0]] || []).map(function (q) { return "<li>&ldquo;" + esc(q) + "&rdquo;</li>"; }).join("") + "</ul></details></li>";
   }).join("");
 
-  $("changes").innerHTML = D.DONE.map(function (t) { return '<li><span class="st st-done">Done</span><span>' + esc(t) + "</span></li>"; }).join("") +
-    D.UNDERWAY.map(function (t) { return '<li><span class="st st-motion">Underway</span><span>' + esc(t) + "</span></li>"; }).join("");
-
   // The asks behind an area or decision. Reach only, never which session, so nothing traces to a group.
   var label = function (st) { return st === "In motion" ? "Underway" : st; };
   var tone = function (st) { return st === "Done" ? "st-done" : st === "In motion" ? "st-motion" : "st-idle"; };
   var askList = function (items) {
     return '<ul class="asks">' + items.map(function (i) {
-      return '<li><span class="t">' + esc(i.t) + '</span><span class="st ' + tone(i.st) + '">' + esc(label(i.st)) + '</span><span class="m">Raised in ' + i.s.length + " of 8 sessions.</span></li>";
+      return '<li><span class="t">' + esc(i.t) + '</span>' + proofBadge(i.st, i.t) + '<span class="m">Raised in ' + i.s.length + " of 8 sessions.</span></li>";
     }).join("") + "</ul>";
   };
   var bySessions = function (a, b) { return b.s.length - a.s.length; };
+  // Underway badge with its proof quote on hover or focus.
+  var proofBadge = function (st, key) {
+    var p = st === "In motion" && D.PROOF && D.PROOF[key];
+    if (!p) return '<span class="st ' + tone(st) + '">' + esc(label(st)) + "</span>";
+    return '<span class="st ' + tone(st) + ' proof" tabindex="0" aria-label="Underway. Proof: ' + esc(p.q) + " " + esc(p.who) + '">' + esc(label(st)) +
+      '<span class="tip" aria-hidden="true">“' + esc(p.q) + "”<i>" + esc(p.who) + "</i></span></span>";
+  };
+
+  $("changes").innerHTML = D.DONE.map(function (t) { return '<li><span class="st st-done">Done</span><span>' + esc(t) + "</span></li>"; }).join("") +
+    D.UNDERWAY.map(function (t) { return "<li>" + proofBadge("In motion", t) + "<span>" + esc(t) + "</span></li>"; }).join("");
 
   $("areas").innerHTML = D.AREAS.map(function (a, n) {
     var asks = D.ITEMS.filter(function (i) { return i.a === a[2]; }).sort(bySessions);

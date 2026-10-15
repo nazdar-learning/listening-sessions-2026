@@ -4,7 +4,7 @@
 // Leader version is discussion-first: no effort, owners, types, or HR solution lists (Cindy, Oct 15).
 // HR's drafts of those are kept in OneDrive, Listening Session Recaps.
 window.LISTENING_DATA = {
- "VERSION": "1.3",
+ "VERSION": "1.4",
  "UPDATED": "October 15, 2026",
  "SESSIONS": [
   {
@@ -229,7 +229,7 @@ window.LISTENING_DATA = {
    "a": 1,
    "t": "Coverage for weigh-ups, varnish, and powders so mills keep running",
    "s": "cdfh",
-   "st": "In motion"
+   "st": "Not started"
   },
   {
    "a": 1,
@@ -319,7 +319,7 @@ window.LISTENING_DATA = {
    "a": 4,
    "t": "Report back to every participant on what's changing",
    "s": "cdef",
-   "st": "In motion"
+   "st": "Not started"
   },
   {
    "a": 4,
@@ -882,5 +882,43 @@ window.LISTENING_DATA = {
    "Charged batteries, scanned stock, split orders: what should be ready for the next shift?",
    4
   ]
- ]
+ ],
+ "PROOF": {
+  "A communication wall with company news, safety information, and QR codes for benefits": {
+   "q": "The communications wall should be up and done within about a month.",
+   "who": "Cindy, HR, in the October 8 session"
+  },
+  "Communication wall with news, safety, and benefit QR codes": {
+   "q": "The communications wall should be up and done within about a month.",
+   "who": "Cindy, HR, in the October 8 session"
+  },
+  "Attendance policy updates are planned for January 1": {
+   "q": "That is gonna help you kind of earn some points back starting on one one. I don't want to announce anything here because it's not official.",
+   "who": "Cindy, HR, in the September 30 session"
+  },
+  "Attendance policy update for January 1": {
+   "q": "That is gonna help you kind of earn some points back starting on one one. I don't want to announce anything here because it's not official.",
+   "who": "Cindy, HR, in the September 30 session"
+  },
+  "Dedicated scale batteries and charging stations": {
+   "q": "It's a supply chain issue, and we can't seem to get them. But I hear they're on order.",
+   "who": "Anissa, HR, in the October 8 session"
+  },
+  "When a hazard is spotted, move it right away when it's safe to": {
+   "q": "We have another one this week, and we did know if you take a picture, you can fix it.",
+   "who": "Cindy, HR, on the biweekly manufacturing meeting, October 5 session"
+  },
+  "Add mixer chains and keep grounding wires clean": {
+   "q": "He's gonna figure out why we don't have them chained up.",
+   "who": "An employee, about the safety team's follow-up"
+  },
+  "Janitorial help, possibly on a crossover shift": {
+   "q": "One or two janitors are already in the plan.",
+   "who": "Anissa, HR, from the October 7 session recap"
+  },
+  "More room in the women's locker room at shift start": {
+   "q": "They're going to plan to get that revamped, but I don't know if the space is going to be part of that.",
+   "who": "Anissa, HR, in the October 7 session"
+  }
+ }
 };
