@@ -123,7 +123,8 @@ window.LISTENING_DATA = {
    "ty": "Budget",
    "o": "L&D",
    "e": "Medium",
-   "st": "In motion"
+   "st": "Not started",
+   "n": "In discussion, not started yet"
   },
   {
    "a": 0,
@@ -1005,7 +1006,6 @@ window.LISTENING_DATA = {
  "UNDERWAY": [
   "A communication wall with company news, safety information, and QR codes for benefits",
   "Attendance policy updates are planned for January 1",
-  "A train-the-trainer program, so every trainer teaches the same way",
   "Production employees are being invited to engagement committee meetings"
  ],
  "SMALL": [

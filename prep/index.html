@@ -269,7 +269,8 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1
   <p>Talking points, recap notes, and session transcripts. Enter the passphrase to unlock.</p>
   <label for="pass">Passphrase</label>
   <div class="gate-row">
-    <input type="password" id="pass" autocomplete="current-password" required>
+    <!-- Shared passphrase, not a personal login: keep password managers off this field. -->
+    <input type="password" id="pass" autocomplete="off" data-bwignore="true" data-lpignore="true" data-1p-ignore required>
     <button class="btn" type="submit" id="go">Unlock</button>
   </div>
   <p class="err" id="err" role="alert"></p>
