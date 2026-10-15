@@ -38,7 +38,7 @@ const turnsOf = (lines, src) => {
   return out.filter((t) => t.x);
 };
 
-// 1. Session transcripts (two phones for most sessions; both kept, labeled).
+// 1. Session transcripts.
 const combined = readFileSync(join(dir, "Listening Sessions - Combined Transcripts.txt"), "utf8").split(/\r?\n/);
 const recordings = [];
 let turns = [];
@@ -52,6 +52,32 @@ for (let i = 0; i < combined.length; i++) {
   recordings.push({ s: keyFor(m[2]), phone: m[3] || "" });
   turns = turns.concat(turnsOf(combined.slice(start + 1, end), r));
 }
+
+// Two phones recorded most sessions only as a backup. Keep the fuller recording
+// whole, and from the other keep only lines it heard that the fuller one missed
+// (dropouts, late starts, early cutoffs). Lines match on shared words, since the
+// two phones transcribe the same speech a little differently.
+const words = (x) => new Set(x.toLowerCase().replace(/[^a-z0-9' ]/g, " ").split(/\s+/).filter((w) => w.length > 2));
+const merged = { dropped: 0, kept: 0 };
+for (const s of new Set(recordings.map((r) => r.s))) {
+  const recs = recordings.map((r, i) => i).filter((i) => recordings[i].s === s);
+  if (recs.length < 2) continue;
+  const size = (r) => turns.filter((t) => t.src === r).reduce((n, t) => n + t.x.length, 0);
+  const [main, ...backups] = recs.sort((a, b) => size(b) - size(a));
+  const mainSets = turns.filter((t) => t.src === main).map((t) => words(t.x));
+  turns = turns.filter((t) => {
+    if (!backups.includes(t.src)) return true;
+    const w = words(t.x);
+    const dup = w.size < 6 || mainSets.some((m) => {
+      let shared = 0;
+      for (const x of w) if (m.has(x)) shared++;
+      return shared / Math.min(w.size, m.size || 1) >= 0.6 || shared / (w.size + m.size - shared) >= 0.35;
+    });
+    merged[dup ? "dropped" : "kept"]++;
+    return !dup;
+  });
+}
+console.log(`backup recordings: ${merged.dropped} duplicate lines dropped, ${merged.kept} unique lines kept`);
 
 // HR huddles are deliberately left out: their content reaches the kit only
 // through the talking-point cards (topics.json). Only listening sessions are quoted.
