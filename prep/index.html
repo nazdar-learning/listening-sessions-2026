@@ -495,7 +495,7 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1
       S.sel = +r.dataset.n; S.ctx = 6; remember(S.q); paint();
     });
     $("reader").addEventListener("click", readerClick);
-    $("foot").textContent = "Built " + K.built + " from " + K.recordings.length + " recordings and 8 recaps. Speaker names in transcripts come from the recording app and are often wrong. Recap notes have the checked names.";
+    $("foot").textContent = "Version " + D.VERSION + ". Data built " + K.built + " from " + K.recordings.length + " recordings and 8 recaps. Speaker names in transcripts come from the recording app and are often wrong. Recap notes have the checked names.";
     run();
   }
 

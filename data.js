@@ -1,7 +1,9 @@
 // Listening sessions 2026 data. Themes only, no names.
 // AREA_NAMES is indexed by ITEMS[].a. AREAS is the ranked focus-area list [name, sessions, index].
-// Counts rechecked against all 8 transcripts on Oct 15. Effort ratings are drafts.
+// Bump VERSION on every push (shown on all three pages). Counts rechecked against all 8 transcripts on Oct 15. Effort ratings are drafts.
 window.LISTENING_DATA = {
+ "VERSION": "1.0",
+ "UPDATED": "October 15, 2026",
  "SESSIONS": [
   {
    "k": "a",

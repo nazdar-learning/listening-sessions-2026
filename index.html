@@ -34,7 +34,7 @@
 
 /* Areas */
 .areas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
-.areas li { padding: 14px 0; border-top: 1px solid var(--line); }
+.areas > li { padding: 14px 0; border-top: 1px solid var(--line); }
 .areas .nm { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 700; }
 .areas .nm em { font-style: normal; font-weight: 400; font-size: 14px; color: var(--ink-2); white-space: nowrap; }
 .areas p { color: var(--ink-2); font-size: 16px; margin-top: 4px; }
@@ -46,12 +46,25 @@
 .quick b small { display: block; font-size: 12px; font-weight: 400; color: var(--ink-2); margin-top: 4px; }
 .quick em { font-style: normal; font-size: 14px; color: var(--ink-2); white-space: nowrap; }
 
+/* Click to open: the asks behind an area or a decision */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+.open-asks { display: inline-block; margin-top: 6px; font-size: 14px; font-weight: 700; color: var(--red-ink); }
+.open-asks::after { content: " +"; }
+details[open] .open-asks::after { content: " (close)"; font-weight: 400; }
+summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3px; }
+.asks { list-style: none; margin: 12px 0 4px; padding: 0; display: grid; gap: 8px; }
+.asks li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 12px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: start; }
+.asks .t { font-weight: 700; font-size: 15px; }
+.asks .m { font-size: 13px; color: var(--ink-2); }
+
 /* Decisions */
 .decisions { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: d; }
-.decisions li { counter-increment: d; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; }
-.decisions li::before { content: counter(d, decimal-leading-zero); font-size: 22px; font-weight: 700; color: var(--red-ink); line-height: 1.2; }
+.decisions > li { counter-increment: d; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; }
+.decisions > li::before { content: counter(d, decimal-leading-zero); font-size: 22px; font-weight: 700; color: var(--red-ink); line-height: 1.2; }
 .decisions b { display: block; font-size: 18px; line-height: 1.3; }
-.decisions span { font-size: 14px; color: var(--ink-2); }
+.decisions summary > span { font-size: 14px; color: var(--ink-2); }
+.decisions summary > .open-asks { color: var(--red-ink); }
 
 /* Views */
 .views { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 40px; }
@@ -183,7 +196,7 @@
 <footer>
   <div class="wrap">
     <p>Notes were taken on themes, not names. Nothing here is attributed to any person or session.</p>
-    <p style="margin-top:6px;font-size:14px">Draft updated October 15, 2026</p>
+    <p style="margin-top:6px;font-size:14px" id="ver"></p>
   </div>
 </footer>
 
@@ -202,9 +215,21 @@
   $("changes").innerHTML = D.DONE.map(function (t) { return '<li><span class="st st-done">Done</span><span>' + esc(t) + "</span></li>"; }).join("") +
     D.UNDERWAY.map(function (t) { return '<li><span class="st st-motion">Underway</span><span>' + esc(t) + "</span></li>"; }).join("");
 
+  // The asks behind an area or decision. Reach only, never which session, so nothing traces to a group.
+  var label = function (st) { return st === "In motion" ? "Underway" : st; };
+  var tone = function (st) { return st === "Done" ? "st-done" : st === "In motion" ? "st-motion" : "st-idle"; };
+  var askList = function (items) {
+    return '<ul class="asks">' + items.map(function (i) {
+      return '<li><span class="t">' + esc(i.t) + '</span><span class="st ' + tone(i.st) + '">' + esc(label(i.st)) + '</span><span class="m">Raised in ' + i.s.length +
+        " of 8 sessions. Suggested owner: " + esc(i.o) + ". Effort (draft): " + i.e.toLowerCase() + ".</span></li>";
+    }).join("") + "</ul>";
+  };
+  var bySessions = function (a, b) { return b.s.length - a.s.length; };
+
   $("areas").innerHTML = D.AREAS.map(function (a, n) {
-    return '<li><div class="nm"><span style="display:flex;align-items:center"><span class="sw" style="background:var(--a' + (n + 1) + ')"></span>' + esc(a[0]) +
-      "</span><em>" + a[1] + " of 8 sessions</em></div><p>" + esc(D.SUMMARY[a[2]]) + "</p></li>";
+    var asks = D.ITEMS.filter(function (i) { return i.a === a[2]; }).sort(bySessions);
+    return '<li><details><summary><div class="nm"><span style="display:flex;align-items:center"><span class="sw" style="background:var(--a' + (n + 1) + ')"></span>' + esc(a[0]) +
+      "</span><em>" + a[1] + " of 8 sessions</em></div><p>" + esc(D.SUMMARY[a[2]]) + '</p><span class="open-asks">See the ' + asks.length + " asks</span></summary>" + askList(asks) + "</details></li>";
   }).join("");
 
   // Top five small wins by reach. Effort and owner come from the matching ask.
@@ -219,12 +244,15 @@
   var find = function (keys) { return keys.map(function (k) { return D.ITEMS.find(function (i) { return i.t.indexOf(k) === 0; }); }).filter(Boolean); };
   $("decisions").innerHTML = D.DECISIONS.map(function (d) {
     var reach = find(d[1]).reduce(function (m, x) { return Math.max(m, x.s.length); }, 0);
-    return "<li><div><b>" + esc(d[0]) + "</b><span>Raised in up to " + reach + " of 8 sessions</span></div></li>";
+    var asks = find(d[1]).sort(bySessions);
+    return "<li><details><summary><b>" + esc(d[0]) + "</b><span>Raised in up to " + reach + ' of 8 sessions</span><br><span class="open-asks">See what employees asked for</span></summary>' + askList(asks) + "</details></li>";
   }).join("");
 
   $("views").innerHTML = D.SPLITS.map(function (s) {
     return "<div><h3>" + esc(s.t) + "</h3><p><b>" + esc(s.la) + ":</b> " + esc(s.a) + "</p><p><b>" + esc(s.lb) + ":</b> " + esc(s.b) + "</p></div>";
   }).join("");
+
+  $("ver").textContent = "Draft, version " + D.VERSION + ", updated " + D.UPDATED;
 
   $("steps").innerHTML = D.STEPS.map(function (s) { return "<li><b>" + esc(s.when) + "</b>" + esc(s.what) + "</li>"; }).join("");
 })();

@@ -76,6 +76,7 @@ td .sub { display: flex; align-items: center; font-size: 13px; color: var(--ink-
     </table>
     <p class="empty" id="empty" hidden>No asks match these filters. Clear filters to see everything.</p>
   </div>
+  <p id="ver" style="font-size:14px;color:var(--ink-2);margin:-32px 0 40px"></p>
 </main>
 
 <script src="data.js"></script>
@@ -141,6 +142,7 @@ td .sub { display: flex; align-items: center; font-size: 13px; color: var(--ink-
     a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
     a.download = "listening-session-asks.csv"; a.click(); URL.revokeObjectURL(a.href);
   };
+  $("ver").textContent = "Version " + D.VERSION + ", updated " + D.UPDATED;
   draw();
 })();
 </script>
