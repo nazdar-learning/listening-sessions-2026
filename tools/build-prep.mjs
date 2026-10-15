@@ -75,12 +75,19 @@ readdirSync(recapDir).filter((f) => /^\d\d .*\.md$/.test(f)).sort().forEach((f, 
   }
 });
 
+// Rosters come from the original page's data script (window.LISTENING_DATA.SESSIONS[].people).
+function rosters(path) {
+  const window = {};
+  new Function("window", readFileSync(path, "utf8"))(window);
+  return Object.fromEntries(window.LISTENING_DATA.SESSIONS.map((s) => [s.k, s.people || []]));
+}
+
 const kit = {
   built: new Date().toISOString().slice(0, 10),
   sessions: SESS.map(([k, name, label, shift]) => ({ k, name, label, shift })),
   recordings, turns, notes,
   topics: topicsPath ? JSON.parse(readFileSync(topicsPath, "utf8")) : [],
-  attendees: attendeesPath ? JSON.parse(readFileSync(attendeesPath, "utf8")) : {},
+  attendees: attendeesPath ? rosters(attendeesPath) : {},
 };
 
 const salt = crypto.getRandomValues(new Uint8Array(16));

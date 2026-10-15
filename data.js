@@ -1250,12 +1250,12 @@ window.LISTENING_DATA = {
  ],
  "STEPS": [
   {
-   "when": "Week of October 19",
-   "what": "HR walks manufacturing leadership through what employees said."
+   "when": "Monday, October 19",
+   "what": "Walk through this brief together and correct the effort ratings."
   },
   {
-   "when": "Next",
-   "what": "Executives review the plan and name an owner for each action."
+   "when": "Tuesday, October 20",
+   "what": "Review with the wider leadership team and name an owner for each action."
   },
   {
    "when": "Then",
@@ -1269,5 +1269,15 @@ window.LISTENING_DATA = {
   "Budget",
   "Policy",
   "Review"
- ]
+ ],
+ "SUMMARY": {
+  "0": "New hires are often trained by people with a few months on the job, moved across lines before they learn one, and checked with a test that can be passed by guessing.",
+  "1": "The system can show material that is not on hand, so batches stall partway and people wait on material handlers.",
+  "2": "Each shift says the other leaves batches, batteries, and cleanup unfinished. Both want one shared standard.",
+  "3": "Priorities can change mid-run, and red folders no longer signal what comes first.",
+  "4": "Concerns often get a “we're handling it” with no update afterward.",
+  "5": "Working alone at night, repairs on running machines, a rack lift that stalls at height, and summer heat with chemical contact.",
+  "6": "Tub shortages, scale batteries, scanners, and label printers slow every line.",
+  "7": "Employees want leads who understand the work they lead and pitch in when the team is short."
+ }
 };

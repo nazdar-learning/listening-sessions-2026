@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All asks | Nazdar Learning</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-head { padding: 36px 0 20px; }
+.page-head h1 { font-size: clamp(30px, 4vw, 40px); }
+.filters { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.filters label { display: grid; gap: 4px; font-size: 14px; font-weight: 700; }
+.filters input, .filters select { font: inherit; font-size: 15px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 8px 10px; min-width: 0; }
+.filters input::placeholder { color: var(--ink-2); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+.chips span { font-size: 14px; font-weight: 700; margin-right: 4px; }
+.chip { font: inherit; font-size: 14px; padding: 5px 12px; border-radius: var(--r); border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--page); }
+.bar-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 15px; color: var(--ink-2); }
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); margin-bottom: 48px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 12px 14px; vertical-align: top; }
+th { font-size: 13px; color: var(--ink-2); border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
+tbody tr + tr td { border-top: 1px solid var(--line); }
+td .sub { display: flex; align-items: center; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+.empty { padding: 28px; text-align: center; color: var(--ink-2); }
+@media (max-width: 760px) {
+  .filters { grid-template-columns: minmax(0, 1fr); }
+  table, tbody, tr, td { display: block; }
+  thead { display: none; }
+  tbody tr { padding: 12px 14px; }
+  tbody tr + tr { border-top: 1px solid var(--line); }
+  tbody tr + tr td { border-top: 0; }
+  td { padding: 2px 0; }
+  td[data-l]::before { content: attr(data-l) ": "; font-weight: 700; font-size: 13px; color: var(--ink-2); }
+  td[data-l="Ask"]::before { content: none; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a href="./" aria-label="Back to the brief">
+      <img class="logo-l" src="logo/nazdar.png" alt="" width="143" height="22">
+      <img class="logo-d" src="logo/nazdar-reversed.png" alt="" width="120" height="22">
+    </a>
+    <div class="right">
+      <a href="./">Back to the brief</a>
+      <button class="theme" type="button" id="theme">Dark mode</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1>Every ask we heard</h1>
+    <p class="lede" id="intro"></p>
+  </div>
+  <div class="filters">
+    <label>Search<input type="search" id="f-q" placeholder="Try: tubs, scales, trainer"></label>
+    <label>Area<select id="f-area"></select></label>
+    <label>Status<select id="f-status"></select></label>
+  </div>
+  <div class="chips" id="type-chips" role="group" aria-label="Filter by type"><span>Type</span></div>
+  <div class="bar-row">
+    <span id="count" aria-live="polite"></span>
+    <span style="display:flex;gap:8px">
+      <button class="btn" type="button" id="reset">Clear filters</button>
+      <button class="btn primary" type="button" id="csv">Download CSV</button>
+    </span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <caption class="sr">All asks from the listening sessions</caption>
+      <thead><tr><th>Ask</th><th>Sessions</th><th>Type</th><th>Suggested owner</th><th>Effort (draft)</th><th>Status</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="empty" id="empty" hidden>No asks match these filters. Clear filters to see everything.</p>
+  </div>
+</main>
+
+<script src="data.js"></script>
+<script src="theme.js"></script>
+<script>
+(function () {
+  var D = window.LISTENING_DATA;
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var label = function (st) { return st === "In motion" ? "Underway" : st; };
+  var tone = function (st) { return st === "Done" ? "st-done" : st === "In motion" ? "st-motion" : "st-idle"; };
+  var slot = {};
+  D.AREAS.forEach(function (a, n) { slot[a[2]] = n + 1; });
+  var area = function (i) { return '<span class="sw" style="background:var(--a' + (slot[i.a] || 9) + ')"></span>' + esc(D.AREA_NAMES[i.a]); };
+
+  $("intro").textContent = "All " + D.ITEMS.length + " asks with suggested owner, effort, and status. Owners and effort are HR's first guesses until leadership confirms them.";
+  var F = { q: "", area: "", status: "", types: [] };
+  var opts = function (el, first, list) { el.innerHTML = '<option value="">' + first + "</option>" + list.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join(""); };
+  opts($("f-area"), "All areas", D.AREA_NAMES.map(function (a, i) { return [i, a]; }));
+  opts($("f-status"), "Any status", ["Done", "In motion", "Not started", "Declined"].map(function (s) { return [s, label(s)]; }));
+  D.TYPES.forEach(function (t) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = t === "Quick win" ? "Quick wins" : t; b.setAttribute("aria-pressed", "false");
+    b.onclick = function () {
+      var on = F.types.indexOf(t) > -1;
+      F.types = on ? F.types.filter(function (x) { return x !== t; }) : F.types.concat(t);
+      b.setAttribute("aria-pressed", String(!on)); draw();
+    };
+    $("type-chips").appendChild(b);
+  });
+  // Safety first, then reach, then quick wins.
+  var score = function (i) { return (i.ty === "Safety" ? 1000 : 0) + i.s.length * 10 + (i.ty === "Quick win" ? 1 : 0); };
+  var filtered = function () {
+    var q = F.q.toLowerCase();
+    return D.ITEMS.filter(function (i) {
+      return (!q || (i.t + " " + (i.n || "") + " " + i.o + " " + D.AREA_NAMES[i.a]).toLowerCase().indexOf(q) > -1) &&
+        (F.area === "" || String(i.a) === F.area) && (!F.status || i.st === F.status) && (!F.types.length || F.types.indexOf(i.ty) > -1);
+    }).sort(function (x, y) { return score(y) - score(x); });
+  };
+  var draw = function () {
+    var list = filtered();
+    $("count").textContent = "Showing " + list.length + " of " + D.ITEMS.length + " asks";
+    $("empty").hidden = list.length > 0;
+    $("rows").innerHTML = list.map(function (i) {
+      return '<tr><td data-l="Ask"><b>' + esc(i.t) + "</b>" + (i.n ? '<span class="sub">' + esc(i.n) + "</span>" : "") + '<span class="sub">' + area(i) +
+        '</span></td><td data-l="Sessions" class="num">' + i.s.length + ' of 8</td><td data-l="Type">' + esc(i.ty) + '</td><td data-l="Suggested owner">' + esc(i.o) +
+        '</td><td data-l="Effort (draft)">' + esc(i.e) + '</td><td data-l="Status"><span class="st ' + tone(i.st) + '">' + esc(label(i.st)) + "</span></td></tr>";
+    }).join("");
+  };
+  [["f-q", "q", "input"], ["f-area", "area", "change"], ["f-status", "status", "change"]].forEach(function (x) {
+    $(x[0]).addEventListener(x[2], function (e) { F[x[1]] = e.target.value; draw(); });
+  });
+  $("reset").onclick = function () {
+    F = { q: "", area: "", status: "", types: [] };
+    ["f-q", "f-area", "f-status"].forEach(function (id) { $(id).value = ""; });
+    document.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+    draw();
+  };
+  $("csv").onclick = function () {
+    var head = ["Ask", "Note", "Area", "Sessions raised", "Type", "Suggested owner", "Effort (draft)", "Status"];
+    var rows = filtered().map(function (i) { return [i.t, i.n || "", D.AREA_NAMES[i.a], i.s.length, i.ty, i.o, i.e, label(i.st)]; });
+    var csv = [head].concat(rows).map(function (r) { return r.map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(","); }).join("\r\n");
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = "listening-session-asks.csv"; a.click(); URL.revokeObjectURL(a.href);
+  };
+  draw();
+})();
+</script>
+</body>
+</html>

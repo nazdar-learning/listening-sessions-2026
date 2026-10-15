@@ -4,675 +4,204 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What the floor told us | Nazdar Learning</title>
-<meta name="description" content="Frontline listening sessions 2026: what 64 manufacturing employees told HR, and the decisions it puts in front of leadership.">
+<meta name="description" content="Frontline listening sessions 2026: a short brief for manufacturing leadership.">
+<link rel="stylesheet" href="style.css">
 <style>
-/* Brand layer: Nazdar Logo Guidelines (2023). Extended layer: neutrals, status, dark mode.
-   Values mirror nazdar-design-system/src/styles/tokens.css. */
-:root {
-  --red: #CF102D;          /* Brand. 5.58:1 on white. Fills, display, primary action */
-  --red-ink: #A91623;      /* Brand. 7.43:1 on white. Brand text, links */
-  --ink: #323E48;          /* Brand. 10.95:1 on white. Body text */
-  --ink-2: #5E6873;        /* Extended. 5.9:1 on --page. Secondary text */
-  --page: #F7F8F9;         /* Extended neutral-50 */
-  --surface: #FFFFFF;
-  --line: #DDE1E5;         /* Extended neutral-200 */
-  --line-strong: #C3C9CF;  /* Extended neutral-300 */
-  --band: #323E48;         /* Dark Gray panel */
-  --band-text: #FFFFFF;
-  --band-dim: #C9D0D6;     /* 7.4:1 on --band */
-  --band-accent: #F76B7B;  /* Red on dark, 5.03:1. Brand red fails on dark */
-  --ok: #2E7D4F;  --ok-bg: #EAF4EE;     /* Extended success */
-  --warn: #8F530B; --warn-bg: #FDF3E3;  /* Extended warning, darkened for 6:1 on its bg */
-  --idle: #4E5862; --idle-bg: #EDEFF1;  /* Extended neutral */
-  --focus: #007CBA;        /* Brand SourceOne Dark Blue. Focus rings */
-  --bar: var(--red);
-  /* Data colors. Dashboard layer, not brand. Validated for colorblind separation (dataviz validator). */
-  --a1: #2a78d6; --a2: #eb6834; --a3: #1baf7a; --a4: #eda100; --a5: #e87ba4; --a6: #008300; --a7: #4a3aa7; --a8: #e34948; --a9: #98A1AA;
-  --s0: #cde2fb; --s1: #9ec5f4; --s2: #6da7ec; --s3: #3987e5; --s4: #256abf; --s5: #184f95; --s6: #0d366b;
-  --t0: #14191D; --t1: #14191D; --t2: #14191D; --t3: #FFFFFF; --t4: #FFFFFF; --t5: #FFFFFF; --t6: #FFFFFF;
-  --fill-done: #2E7D4F; --fill-motion: #E8A33D; --fill-idle: #C3C9CF; --fill-declined: #6B7580;
-  --logo-light: block; --logo-dark: none;
-  --font: Campton, Calibri, Arial, Helvetica, sans-serif;
-  --r: 4px;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --red-ink: #F76B7B; --ink: #E8EBED; --ink-2: #A3ADB5;
-    --page: #1B2126; --surface: #232B31; --line: #2E3740; --line-strong: #3E4952;
-    --band: #151A1E; --ok: #6FCB95; --ok-bg: #1E3328; --warn: #E8A33D; --warn-bg: #3A2C17;
-    --idle: #B6BFC6; --idle-bg: #2E3740; --focus: #2AAEE4; --bar: #F76B7B;
-    --a1: #3987e5; --a2: #d95926; --a3: #199e70; --a4: #c98500; --a5: #d55181; --a6: #008300; --a7: #9085e9; --a8: #e66767; --a9: #6B7580;
-    --s0: #104281; --s1: #1c5cab; --s2: #2a78d6; --s3: #3987e5; --s4: #6da7ec; --s5: #9ec5f4; --s6: #cde2fb;
-    --t0: #FFFFFF; --t1: #FFFFFF; --t2: #FFFFFF; --t3: #FFFFFF; --t4: #14191D; --t5: #14191D; --t6: #14191D;
-    --fill-done: #6FCB95; --fill-motion: #E8A33D; --fill-idle: #4E5862; --fill-declined: #98A1AA;
-    --logo-light: none; --logo-dark: block; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --red-ink: #F76B7B; --ink: #E8EBED; --ink-2: #A3ADB5;
-  --page: #1B2126; --surface: #232B31; --line: #2E3740; --line-strong: #3E4952;
-  --band: #151A1E; --ok: #6FCB95; --ok-bg: #1E3328; --warn: #E8A33D; --warn-bg: #3A2C17;
-  --idle: #B6BFC6; --idle-bg: #2E3740; --focus: #2AAEE4; --bar: #F76B7B;
-  --logo-light: none; --logo-dark: block; color-scheme: dark;
-}
-
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 72px; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body { margin: 0; background: var(--page); color: var(--ink); font: 400 17px/1.55 var(--font); -webkit-font-smoothing: antialiased; }
-h1, h2, h3 { line-height: 1.15; margin: 0; font-weight: 700; letter-spacing: -0.01em; }
-h2 { font-size: clamp(26px, 3.2vw, 34px); }
-h3 { font-size: 19px; }
-p { margin: 0; }
-a { color: var(--red-ink); text-underline-offset: 2px; }
-:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-.lede { color: var(--ink-2); max-width: 62ch; margin-top: 10px; }
-.num { font-variant-numeric: tabular-nums; }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
-/* Top bar */
-.top { position: sticky; top: 0; z-index: 10; background: var(--surface); border-bottom: 1px solid var(--line); }
-.top .wrap { display: flex; align-items: center; gap: 24px; height: 60px; }
-.top img { height: 22px; width: auto; }
-.logo-l { display: var(--logo-light); } .logo-d { display: var(--logo-dark); }
-.top nav { display: flex; gap: 22px; margin-left: auto; }
-.top nav a { color: var(--ink); text-decoration: none; font-size: 15px; white-space: nowrap; padding: 4px 0; border-bottom: 2px solid transparent; }
-.top nav a:hover { border-color: var(--red); }
-.theme { background: none; border: 1px solid var(--line-strong); color: var(--ink); border-radius: var(--r); font: inherit; font-size: 14px; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
-
-/* Hero */
-.hero { padding: 56px 0 52px; }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 48px; align-items: stretch; }
-.kicker { color: var(--red-ink); font-weight: 700; font-size: 15px; margin-bottom: 14px; }
-.hero h1 { font-size: clamp(40px, 6vw, 64px); letter-spacing: -0.02em; }
-.hero .lede { font-size: 19px; margin-top: 18px; }
-.facts { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 12px 36px; margin-top: 32px; }
-.facts b { display: block; font-size: 34px; line-height: 1; color: var(--red-ink); }
+.hero { padding: 44px 0 40px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 40px; align-items: stretch; }
+.kicker { color: var(--red-ink); font-weight: 700; font-size: 15px; margin-bottom: 12px; }
+.hero h1 { font-size: clamp(36px, 5.5vw, 56px); letter-spacing: -0.02em; }
+.hero .lede { font-size: 19px; margin-top: 14px; }
+.facts { display: flex; flex-wrap: wrap; gap: 12px 36px; margin-top: 26px; }
+.facts b { display: block; font-size: 32px; line-height: 1; color: var(--red-ink); }
 .facts span { font-size: 14px; color: var(--ink-2); }
-/* Signature diagonal cut on the stat panel */
-.why { background: var(--band); color: var(--band-text); border-radius: var(--r); padding: 36px 32px 32px 60px; clip-path: polygon(32px 0, 100% 0, 100% 100%, 0 100%); display: flex; flex-direction: column; justify-content: center; }
-.why b { font-size: 72px; line-height: 1; color: var(--band-accent); }
-.why p { margin-top: 10px; font-size: 18px; }
-.why small { display: block; margin-top: 16px; font-size: 14px; color: var(--band-dim); }
+/* Signature diagonal cut */
+.why { background: var(--band); color: var(--band-text); border-radius: var(--r); padding: 30px 28px 28px 56px; clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%); display: flex; flex-direction: column; justify-content: center; }
+.why b { font-size: 64px; line-height: 1; color: var(--band-accent); }
+.why p { margin-top: 8px; font-size: 17px; }
+.why small { display: block; margin-top: 12px; font-size: 14px; color: var(--band-dim); }
 
-section.block { padding: 64px 0; border-top: 1px solid var(--line); }
-.head { margin-bottom: 28px; }
-.more { color: var(--red-ink); font-weight: 700; }
-details > summary { list-style: none; cursor: pointer; }
-details > summary::-webkit-details-marker { display: none; }
-details[open] > summary .more::after { content: " (hide)"; font-weight: 400; }
+/* Value and progress: two columns side by side */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.keep { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.keep li { display: grid; grid-template-columns: minmax(0, 1fr) 52px; gap: 4px 10px; }
+.keep i { grid-column: 1 / -1; height: 6px; background: var(--ink-2); border-radius: 2px; }
+.keep em { font-style: normal; text-align: right; color: var(--ink-2); font-size: 14px; }
+.changes { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.changes li { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 10px; align-items: start; }
+.changes .st { justify-self: start; }
 
-/* Decisions: numbered, two columns */
-.decisions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
-.decision { border-top: 3px solid var(--ink); padding: 18px 0 24px; }
-.decision summary { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 6px 12px; }
-.decision .n { grid-row: span 2; font-size: 28px; font-weight: 700; color: var(--red-ink); line-height: 1.1; }
-.decision .q { font-size: 19px; font-weight: 700; line-height: 1.3; }
-.decision .meta { font-size: 14px; color: var(--ink-2); }
-.decision .asks { margin-left: 56px; }
+/* Areas */
+.areas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.areas li { padding: 14px 0; border-top: 1px solid var(--line); }
+.areas .nm { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 700; }
+.areas .nm em { font-style: normal; font-weight: 400; font-size: 14px; color: var(--ink-2); white-space: nowrap; }
+.areas p { color: var(--ink-2); font-size: 16px; margin-top: 4px; }
 
-/* Ask list inside every disclosure */
-.asks { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
-.asks li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: start; }
-.asks .t { font-weight: 700; font-size: 16px; }
-.asks .m { font-size: 14px; color: var(--ink-2); }
+/* Decisions */
+.decisions { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: d; }
+.decisions li { counter-increment: d; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; }
+.decisions li::before { content: counter(d, decimal-leading-zero); font-size: 22px; font-weight: 700; color: var(--red-ink); line-height: 1.2; }
+.decisions b { display: block; font-size: 18px; line-height: 1.3; }
+.decisions span { font-size: 14px; color: var(--ink-2); }
 
-/* Status badges: never red */
-.st { font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: var(--r); white-space: nowrap; }
-.st-done { color: var(--ok); background: var(--ok-bg); }
-.st-motion { color: var(--warn); background: var(--warn-bg); }
-.st-idle { color: var(--idle); background: var(--idle-bg); }
+/* Views */
+.views { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 40px; }
+.views h3 { font-size: 17px; margin-bottom: 6px; }
+.views p { font-size: 16px; padding-left: 12px; border-left: 3px solid var(--line-strong); margin-top: 6px; }
+.views p + p { border-color: var(--red); }
+.views p b { font-weight: 700; }
 
-/* Large wins: ranked rows, reach on the left */
-.large { display: grid; gap: 12px; }
-.win { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--red); border-radius: var(--r); }
-.win summary { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 16px; padding: 20px 22px; }
-.reach b { display: block; font-size: 36px; line-height: 1; }
-.reach span { font-size: 13px; color: var(--ink-2); }
-.win h3 { margin-bottom: 6px; }
-.win p { color: var(--ink-2); max-width: 75ch; }
-.win .more { display: inline-block; margin-top: 10px; font-size: 15px; }
-.win .asks { margin: 0 22px 20px 130px; }
-
-/* Small wins: compact two-column list */
-.small { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
-.small li { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
-.small li b { font-size: 22px; color: var(--red-ink); line-height: 1.2; }
-.small li b small { display: block; font-size: 12px; color: var(--ink-2); font-weight: 400; }
-
-/* Progress */
-.progress { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-.col { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; }
-.col h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 17px; }
-.col h3 .st { font-size: 14px; }
-.col ul { margin: 0; padding-left: 20px; display: grid; gap: 10px; }
-
-/* Differences: paired views */
-.splits { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 32px 40px; }
-.split h3 { font-size: 17px; margin-bottom: 10px; }
-.split dl { margin: 0; display: grid; gap: 10px; }
-.split dt { font-size: 13px; font-weight: 700; color: var(--ink-2); }
-.split dd { margin: 2px 0 0; padding-left: 12px; border-left: 3px solid var(--line-strong); }
-.split dd.b { border-color: var(--red); }
-.split dd.o { border-color: var(--a1); }
-
-/* Context: ranked bars, no tracks */
-.context { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 56px; }
-.bars { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 14px; }
-.bars li { display: grid; grid-template-columns: minmax(0, 1fr) 48px; gap: 4px 12px; font-size: 16px; }
-.bars i { grid-column: 1 / -1; display: block; height: 8px; background: var(--bar); border-radius: 2px; }
-.bars em { font-style: normal; text-align: right; color: var(--ink-2); font-size: 14px; }
-.bars.keep i { background: var(--ink-2); }
-.note { margin-top: 16px; font-size: 14px; color: var(--ink-2); }
-
-/* Next steps */
+/* Next */
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-.steps li { border-top: 3px solid var(--line-strong); padding-top: 14px; }
+.steps li { border-top: 3px solid var(--line-strong); padding-top: 12px; }
 .steps li:first-child { border-color: var(--red); }
 .steps b { display: block; margin-bottom: 4px; }
-
-/* Appendix: all asks */
-.filters { display: grid; grid-template-columns: 2fr repeat(2, 1fr); gap: 12px; margin-bottom: 14px; }
-.filters label { display: grid; gap: 4px; font-size: 14px; font-weight: 700; }
-.filters input, .filters select { font: inherit; font-size: 15px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 8px 10px; min-width: 0; }
-.filters input::placeholder { color: var(--ink-2); }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
-.chips span { font-size: 14px; font-weight: 700; margin-right: 4px; }
-.chip { font: inherit; font-size: 14px; padding: 5px 12px; border-radius: var(--r); border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; }
-.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--page); }
-.bar-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 15px; color: var(--ink-2); }
-.btn { font: inherit; font-size: 15px; font-weight: 700; padding: 7px 14px; border-radius: var(--r); cursor: pointer; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); }
-.btn.primary { background: var(--red); border-color: var(--red); color: #FFFFFF; } /* white on red, 5.58:1 */
-.btn:active { transform: translateY(1px); }
-.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); }
-table { border-collapse: collapse; width: 100%; font-size: 15px; }
-th, td { text-align: left; padding: 12px 14px; vertical-align: top; }
-th { font-size: 13px; color: var(--ink-2); border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
-tbody tr + tr td { border-top: 1px solid var(--line); }
-td .sub { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
-.empty { padding: 28px; text-align: center; color: var(--ink-2); }
-
-.sessions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.sess { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--red); border-radius: var(--r); padding: 14px; font-size: 15px; }
-.sess.mid { border-top-color: var(--ink-2); }
-.sess b { display: block; }
-.sess span { color: var(--ink-2); font-size: 14px; display: block; }
-
-/* Shared chart pieces */
-.sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: 0; flex: none; }
-.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; font-size: 13px; color: var(--ink-2); margin-top: 12px; }
-.legend .ramp { display: inline-flex; gap: 2px; margin: 0 6px; }
-.legend .ramp i { width: 18px; height: 10px; border-radius: 2px; }
-.cell { border: 0; border-radius: var(--r); font: inherit; font-weight: 700; font-size: 15px; display: grid; place-items: center; min-height: 40px; }
-.cell.zero { background: transparent; color: var(--line-strong); font-weight: 400; box-shadow: inset 0 0 0 1px var(--line); }
-#tip { position: fixed; z-index: 20; pointer-events: none; max-width: 280px; background: var(--ink); color: var(--page); font-size: 13px; line-height: 1.4; padding: 8px 10px; border-radius: var(--r); opacity: 0; transition: opacity .12s; }
-#tip.on { opacity: 1; }
-
-/* Where to start: effort by reach grid */
-.start { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 40px; align-items: start; }
-.grid3 { display: grid; grid-template-columns: 70px repeat(3, minmax(0, 1fr)); gap: 3px; }
-.grid3 .ax { font-size: 13px; color: var(--ink-2); display: grid; align-items: center; }
-.grid3 .ax.top { text-align: center; padding-bottom: 4px; font-weight: 700; color: var(--ink); }
-.grid3 button.cell { cursor: pointer; }
-.grid3 button.cell:hover, .grid3 button.cell[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 1px; }
-.grid3 .zone { box-shadow: inset 0 0 0 2px var(--red); }
-.axis-note { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-2); margin: 6px 0 0 73px; }
-.pick h3 { font-size: 17px; margin-bottom: 4px; }
-.pick p { font-size: 14px; color: var(--ink-2); }
-.pick .asks { margin-top: 12px; max-height: 520px; overflow: auto; padding-right: 4px; }
-
-/* Who owns what: status stacked bars */
-.owners { display: grid; gap: 14px; }
-.owner { display: grid; grid-template-columns: 180px minmax(0, 1fr) 64px; gap: 12px; align-items: center; font-size: 15px; }
-.owner .track { display: flex; gap: 2px; height: 22px; }
-.owner .track i { display: block; height: 100%; border-radius: 2px; min-width: 3px; }
-.owner em { font-style: normal; text-align: right; color: var(--ink-2); font-size: 14px; }
-
-footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--ink-2); font-size: 15px; }
+.input { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 20px; }
+.input p { flex: 1 1 320px; }
 
 @media (max-width: 900px) {
-  .hero .wrap, .context { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-  .why { clip-path: none; padding: 28px; }
-  .facts { grid-template-columns: repeat(2, auto); }
-  .filters { grid-template-columns: 1fr 1fr; }
-  .filters label:first-child { grid-column: 1 / -1; }
-  .sessions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .start { grid-template-columns: minmax(0, 1fr); }
-  .top nav { gap: 16px; }
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .why { clip-path: none; padding: 24px; }
 }
 @media (max-width: 760px) {
-  body { font-size: 16px; }
-  .wrap { padding: 0 16px; }
-  .top nav { display: none; }
-  .theme { margin-left: auto; }
-  .hero { padding: 36px 0 32px; }
-  section.block { padding: 44px 0; }
-  .decisions, .small, .progress, .steps { grid-template-columns: minmax(0, 1fr); }
-  .decision .asks { margin-left: 0; }
-  .asks li { grid-template-columns: minmax(0, 1fr); }
-  .asks li .st { justify-self: start; }
-  .win summary { grid-template-columns: 56px minmax(0, 1fr); padding: 16px; gap: 12px; }
-  .win .asks { margin: 0 16px 16px; }
-  .why b { font-size: 56px; }
-  .filters { grid-template-columns: minmax(0, 1fr); }
-  .owner { grid-template-columns: minmax(0, 1fr) 48px; gap: 6px 10px; }
-  .owner .track { grid-column: 1 / -1; grid-row: 2; }
-  /* Table becomes stacked rows */
-  table, tbody, tr, td { display: block; }
-  thead { display: none; }
-  tbody tr { padding: 12px 14px; }
-  tbody tr + tr { border-top: 1px solid var(--line); }
-  tbody tr + tr td { border-top: 0; }
-  td { padding: 2px 0; }
-  td[data-l]::before { content: attr(data-l) ": "; font-weight: 700; font-size: 13px; color: var(--ink-2); }
-  td[data-l="Ask"]::before { content: none; }
+  .pair, .areas, .views, .steps { grid-template-columns: minmax(0, 1fr); }
+  .hero { padding: 32px 0 28px; }
+  .why b { font-size: 52px; }
+  .top .right a { display: none; }
 }
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a href="#top" aria-label="Nazdar, back to top">
-      <img class="logo-l" src="logo/nazdar.png" alt="" width="143" height="22">
-      <img class="logo-d" src="logo/nazdar-reversed.png" alt="" width="120" height="22">
-    </a>
-    <nav aria-label="Sections">
-      <a href="#decisions">Decisions</a>
-      <a href="#start">Where to start</a>
-      <a href="#large-wins">Large wins</a>
-      <a href="#small-wins">Small wins</a>
-      <a href="#owners">Owners</a>
-      <a href="#asks">All asks</a>
-    </nav>
-    <button class="theme" type="button" id="theme">Dark mode</button>
+    <img class="logo-l" src="logo/nazdar.png" alt="Nazdar" width="143" height="22">
+    <img class="logo-d" src="logo/nazdar-reversed.png" alt="Nazdar" width="120" height="22">
+    <div class="right">
+      <a href="asks.html">All 93 asks</a>
+      <button class="theme" type="button" id="theme">Dark mode</button>
+    </div>
   </div>
 </header>
 
-<main id="top">
+<main>
   <section class="hero">
     <div class="wrap">
       <div>
-        <p class="kicker">Frontline listening sessions 2026</p>
+        <p class="kicker">Frontline listening sessions 2026 · Draft for discussion</p>
         <h1>What the floor told us</h1>
-        <p class="lede">64 manufacturing employees joined 8 sessions with HR. Six decisions now sit with leadership.</p>
+        <p class="lede">64 manufacturing employees joined 8 sessions with HR. Here is what they value, what they raised, and what needs a decision.</p>
         <div class="facts num" id="facts"></div>
       </div>
       <aside class="why" aria-label="Why it matters">
         <b class="num">41%</b>
         <p>of manufacturing departures happened within the first 30 days on the job.</p>
-        <small>Shared by HR at the first session. Training and the first month came up in every session.</small>
+        <small>Training and the first month came up in every session.</small>
       </aside>
     </div>
   </section>
 
-  <section class="block" id="decisions">
-    <div class="wrap">
-      <div class="head">
-        <h2>Decisions for leadership</h2>
-        <p class="lede">Open questions for manufacturing leadership and HR. Open one to see what employees asked for.</p>
-      </div>
-      <div class="decisions" id="decision-list"></div>
-    </div>
-  </section>
-
-  <section class="block" id="start">
-    <div class="wrap">
-      <div class="head">
-        <h2>Where to start</h2>
-        <p class="lede">All 93 asks, sorted by how many sessions raised them and how hard they are to do. Effort is HR's first estimate, for leadership to correct. The red box is easy and widely felt. Pick any square to see its asks.</p>
-      </div>
-      <div class="start">
-        <div>
-          <div class="grid3" id="start-grid"></div>
-          <div class="legend" id="start-legend"></div>
+  <section class="block">
+    <div class="wrap pair">
+      <div>
+        <div class="head">
+          <h2>What keeps people here</h2>
+          <p class="lede">Strengths to protect while making changes.</p>
         </div>
-        <div class="pick" id="start-pick" aria-live="polite"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="large-wins">
-    <div class="wrap">
-      <div class="head">
-        <h2>Large wins</h2>
-        <p class="lede">Changes that need a leadership decision, a budget, or 60 to 180 days. Ranked by how many of the 8 sessions raised them.</p>
-      </div>
-      <div class="large" id="large-list"></div>
-    </div>
-  </section>
-
-  <section class="block" id="small-wins">
-    <div class="wrap">
-      <div class="head">
-        <h2>Small wins</h2>
-        <p class="lede">Low-cost changes one owner can make within 30 days. The number is how many of the 8 sessions raised it.</p>
-      </div>
-      <ul class="small" id="small-list"></ul>
-    </div>
-  </section>
-
-  <section class="block" id="progress">
-    <div class="wrap">
-      <div class="head">
-        <h2>Already done or underway</h2>
-        <p class="lede">Changes that came out of what employees told us.</p>
-      </div>
-      <div class="progress" id="progress-cols"></div>
-    </div>
-  </section>
-
-  <section class="block" id="owners">
-    <div class="wrap">
-      <div class="head">
-        <h2>Who owns what</h2>
-        <p class="lede">Asks by suggested owner and status. An ask with two owners counts for both. Owners are suggested until leadership confirms them.</p>
-      </div>
-      <div class="owners" id="owner-bars"></div>
-      <div class="legend" id="owner-legend"></div>
-    </div>
-  </section>
-
-  <section class="block" id="differences">
-    <div class="wrap">
-      <div class="head">
-        <h2>Where groups saw it differently</h2>
-        <p class="lede">Both views are worth weighing before a decision is made.</p>
-      </div>
-      <div class="splits" id="split-list"></div>
-    </div>
-  </section>
-
-  <section class="block" id="context">
-    <div class="wrap context">
-      <div>
-        <h2>Eight focus areas</h2>
-        <p class="lede">How many of the 8 sessions raised each area.</p>
-        <ul class="bars num" id="area-bars"></ul>
+        <ul class="keep num" id="keep"></ul>
       </div>
       <div>
-        <h2>What keeps people here</h2>
-        <p class="lede">Strengths to protect while making changes.</p>
-        <ul class="bars keep num" id="keep-bars"></ul>
-        <p class="note">Counted from the session summaries. The October 1 summary did not list reasons for staying.</p>
+        <div class="head">
+          <h2>Already changed</h2>
+          <p class="lede">Done or underway because of what employees said.</p>
+        </div>
+        <ul class="changes" id="changes"></ul>
       </div>
     </div>
   </section>
 
-  <section class="block" id="next">
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <h2>Eight areas we heard about</h2>
+        <p class="lede">Ranked by how many of the 8 sessions raised each one.</p>
+      </div>
+      <ul class="areas" id="areas"></ul>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <h2>Decisions to discuss</h2>
+        <p class="lede">Open questions for manufacturing leadership and HR.</p>
+      </div>
+      <ol class="decisions" id="decisions"></ol>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <h2>Where views differ</h2>
+        <p class="lede">Both sides came up in the sessions. Worth weighing before deciding.</p>
+      </div>
+      <div class="views" id="views"></div>
+    </div>
+  </section>
+
+  <section class="block">
     <div class="wrap">
       <div class="head"><h2>What happens next</h2></div>
-      <ol class="steps" id="step-list"></ol>
-    </div>
-  </section>
-
-  <section class="block" id="asks">
-    <div class="wrap">
-      <div class="head">
-        <h2>Every ask we heard</h2>
-        <p class="lede" id="asks-intro"></p>
+      <ol class="steps" id="steps"></ol>
+      <div class="input">
+        <p><b>Your input, please.</b> Each ask has a low, medium, or high effort rating. These are HR's first guesses. Please correct any that look wrong before Tuesday.</p>
+        <a class="btn primary" href="asks.html">Review all 93 asks</a>
       </div>
-      <button class="btn" type="button" id="toggle-all" aria-expanded="false" aria-controls="ask-panel"></button>
-      <div id="ask-panel" hidden style="margin-top:20px">
-        <div class="filters">
-          <label>Search<input type="search" id="f-q" placeholder="Try: tubs, scales, trainer"></label>
-          <label>Area<select id="f-area"></select></label>
-          <label>Status<select id="f-status"></select></label>
-        </div>
-        <div class="chips" id="type-chips" role="group" aria-label="Filter by type"><span>Type</span></div>
-        <div class="bar-row">
-          <span id="count" aria-live="polite"></span>
-          <span style="display:flex;gap:8px">
-            <button class="btn" type="button" id="reset">Clear filters</button>
-            <button class="btn primary" type="button" id="csv">Download CSV</button>
-          </span>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <caption class="sr">All asks from the listening sessions</caption>
-            <thead><tr><th>Ask</th><th>Sessions</th><th>Type</th><th>Suggested owner</th><th>Effort (draft)</th><th>Status</th></tr></thead>
-            <tbody id="ask-rows"></tbody>
-          </table>
-          <p class="empty" id="ask-empty" hidden>No asks match these filters. Clear filters to see everything.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="sessions">
-    <div class="wrap">
-      <div class="head">
-        <h2>Session schedule</h2>
-        <p class="lede">All sessions were held in the SHA Classroom. Red marks day shift, gray marks mid shift.</p>
-      </div>
-      <div class="sessions" id="session-list"></div>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <p>Notes were taken on themes, not names. Nothing here is attributed to any one person.</p>
-    <p style="margin-top:6px;font-size:14px">Updated October 15, 2026</p>
+    <p>Notes were taken on themes, not names. Nothing here is attributed to any person or session.</p>
+    <p style="margin-top:6px;font-size:14px">Draft updated October 15, 2026</p>
   </div>
 </footer>
 
-<div id="tip" role="tooltip"></div>
 <script src="data.js"></script>
+<script src="theme.js"></script>
 <script>
 (function () {
   var D = window.LISTENING_DATA;
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
-  var label = function (st) { return st === "In motion" ? "Underway" : st; };
-  var tone = function (st) { return st === "Done" ? "st-done" : st === "In motion" ? "st-motion" : "st-idle"; };
-  var badge = function (st) { return '<span class="st ' + tone(st) + '">' + esc(label(st)) + "</span>"; };
-  // Wins and decisions name their asks by the first words of the ask text.
-  var find = function (keys) { return keys.map(function (k) { return D.ITEMS.find(function (i) { return i.t.indexOf(k) === 0; }); }).filter(Boolean); };
-  var dates = function (i) { return D.SESSIONS.filter(function (s) { return i.s.indexOf(s.k) > -1; }).map(function (s) { return s.label; }).join(", "); };
-  var areaName = function (i) { return D.AREA_NAMES[i.a]; };
-  // Area colors follow the focus-area ranking; the catch-all area stays gray.
-  var slot = {};
-  D.AREAS.forEach(function (a, n) { slot[a[2]] = n + 1; });
-  var aColor = function (idx) { return "var(--a" + (slot[idx] || 9) + ")"; };
-  var sw = function (idx) { return '<span class="sw" style="background:' + aColor(idx) + '"></span>'; };
-  var areaTag = function (i) { return sw(i.a) + esc(areaName(i)); };
-  var askList = function (items) {
-    return '<ul class="asks">' + items.map(function (i) {
-      return '<li><span class="t">' + esc(i.t) + "</span>" + badge(i.st) +
-        '<span class="m">' + areaTag(i) + ". Suggested owner: " + esc(i.o) + ". Effort (draft): " + i.e.toLowerCase() + ". Raised in " + i.s.length + " of 8 sessions.</span></li>";
-    }).join("") + "</ul>";
-  };
 
-  var decisions = D.DECISIONS.map(function (d) {
-    var asks = find(d[1]);
-    return { q: d[0], asks: asks, reach: asks.reduce(function (m, x) { return Math.max(m, x.s.length); }, 0) };
-  });
-  $("facts").innerHTML = [[64, "employees"], [8, "sessions"], [decisions.length, "decisions for leadership"], [D.DONE.length + D.UNDERWAY.length, "changes made or underway"]]
+  $("facts").innerHTML = [[64, "employees"], [8, "sessions"], [D.DECISIONS.length, "decisions to discuss"], [D.DONE.length + D.UNDERWAY.length, "changes made or underway"]]
     .map(function (f) { return "<div><b>" + f[0] + "</b><span>" + f[1] + "</span></div>"; }).join("");
 
-  $("decision-list").innerHTML = decisions.map(function (d, n) {
-    return '<details class="decision"><summary><span class="n num">' + String(n + 1).padStart(2, "0") + '</span><span class="q">' + esc(d.q) +
-      '</span><span class="meta">Raised in up to ' + d.reach + ' of 8 sessions. <span class="more">See the asks</span></span></summary>' + askList(d.asks) + "</details>";
+  $("keep").innerHTML = D.KEEP.map(function (k) { return "<li><span>" + esc(k[0]) + "</span><em>" + k[1] + ' of 8</em><i style="width:' + (k[1] / 8 * 100) + '%"></i></li>'; }).join("");
+
+  $("changes").innerHTML = D.DONE.map(function (t) { return '<li><span class="st st-done">Done</span><span>' + esc(t) + "</span></li>"; }).join("") +
+    D.UNDERWAY.map(function (t) { return '<li><span class="st st-motion">Underway</span><span>' + esc(t) + "</span></li>"; }).join("");
+
+  $("areas").innerHTML = D.AREAS.map(function (a, n) {
+    return '<li><div class="nm"><span style="display:flex;align-items:center"><span class="sw" style="background:var(--a' + (n + 1) + ')"></span>' + esc(a[0]) +
+      "</span><em>" + a[1] + " of 8 sessions</em></div><p>" + esc(D.SUMMARY[a[2]]) + "</p></li>";
   }).join("");
 
-  $("large-list").innerHTML = D.LARGE.slice().sort(function (a, b) { return b[2] - a[2]; }).map(function (w) {
-    var asks = find(w[3]);
-    return '<details class="win"><summary><div class="reach num"><b>' + w[2] + '</b><span>of 8 sessions</span></div><div><h3>' + esc(w[0]) + "</h3><p>" + esc(w[1]) +
-      '</p><span class="more">See ' + asks.length + " related asks</span></div></summary>" + askList(asks) + "</details>";
+  // Each decision shows how widely its related asks came up.
+  var find = function (keys) { return keys.map(function (k) { return D.ITEMS.find(function (i) { return i.t.indexOf(k) === 0; }); }).filter(Boolean); };
+  $("decisions").innerHTML = D.DECISIONS.map(function (d) {
+    var reach = find(d[1]).reduce(function (m, x) { return Math.max(m, x.s.length); }, 0);
+    return "<li><div><b>" + esc(d[0]) + "</b><span>Raised in up to " + reach + " of 8 sessions</span></div></li>";
   }).join("");
 
-  $("small-list").innerHTML = D.SMALL.map(function (w) {
-    return '<li><b class="num">' + w[1] + "<small>of 8</small></b><span>" + esc(w[0]) + "</span></li>";
+  $("views").innerHTML = D.SPLITS.map(function (s) {
+    return "<div><h3>" + esc(s.t) + "</h3><p><b>" + esc(s.la) + ":</b> " + esc(s.a) + "</p><p><b>" + esc(s.lb) + ":</b> " + esc(s.b) + "</p></div>";
   }).join("");
 
-  $("progress-cols").innerHTML = [["Done", D.DONE], ["In motion", D.UNDERWAY]].map(function (c) {
-    return '<div class="col"><h3>' + badge(c[0]) + '<span class="num">' + c[1].length + " changes</span></h3><ul>" +
-      c[1].map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></div>";
-  }).join("");
-
-  $("split-list").innerHTML = D.SPLITS.map(function (s) {
-    return '<div class="split"><h3>' + esc(s.t) + "</h3><dl><div><dt>" + esc(s.la) + "</dt><dd>" + esc(s.a) + "</dd></div><div><dt>" + esc(s.lb) + '</dt><dd class="b">' + esc(s.b) + "</dd></div>" + (s.opt ? '<div><dt>A possible option</dt><dd class="o">' + esc(s.opt) + "</dd></div>" : "") + "</dl></div>";
-  }).join("");
-
-  var bars = function (rows, color) {
-    return rows.map(function (r) {
-      return "<li><span>" + (color ? sw(r[2]) : "") + esc(r[0]) + "</span><em>" + r[1] + ' of 8</em><i style="width:' + (r[1] / 8 * 100) + "%" + (color ? ";background:" + aColor(r[2]) : "") + '"></i></li>';
-    }).join("");
-  };
-  $("area-bars").innerHTML = bars(D.AREAS, true);
-  $("keep-bars").innerHTML = bars(D.KEEP);
-
-  // Sequential shade: 7 steps, square-root scale so small counts still show.
-  var shade = function (v, max) {
-    if (!v) return { cls: "cell zero", style: "" };
-    var n = Math.min(6, Math.max(0, Math.ceil(Math.sqrt(v / max) * 7) - 1));
-    return { cls: "cell", style: "background:var(--s" + n + ");color:var(--t" + n + ")" };
-  };
-  var rampLegend = function (lo, hi) {
-    return lo + '<span class="ramp">' + [0, 1, 2, 3, 4, 5, 6].map(function (n) { return '<i style="background:var(--s' + n + ')"></i>'; }).join("") + "</span>" + hi;
-  };
-
-  // Where to start: reach (rows) by effort (columns).
-  var EFF = ["Low", "Medium", "High"];
-  var inCell = function (r, e) { return D.ITEMS.filter(function (i) { return i.s.length === r && i.e === e; }); };
-  var startMax = 0;
-  for (var r = 1; r <= 8; r++) EFF.forEach(function (e) { startMax = Math.max(startMax, inCell(r, e).length); });
-  var zone = function (r, e) { return e === "Low" && r >= 4; };
-  var g = '<span></span>' + EFF.map(function (e) { return '<span class="ax top">' + e + " effort</span>"; }).join("");
-  for (r = 8; r >= 1; r--) {
-    g += '<span class="ax">' + r + " of 8</span>";
-    EFF.forEach(function (e) {
-      var v = inCell(r, e).length, s = shade(v, startMax);
-      g += v ? '<button type="button" class="' + s.cls + (zone(r, e) ? " zone" : "") + '" style="' + s.style + '" data-r="' + r + '" data-e="' + e + '" aria-pressed="false" data-tip="' +
-        v + " ask" + (v > 1 ? "s" : "") + ", " + e.toLowerCase() + " effort, raised in " + r + ' of 8 sessions">' + v + "</button>"
-        : '<span class="' + s.cls + (zone(r, e) ? " zone" : "") + '">0</span>';
-    });
-  }
-  $("start-grid").innerHTML = g;
-  $("start-legend").innerHTML = rampLegend("Fewer asks", "More asks") + '<span><span class="sw" style="box-shadow:inset 0 0 0 2px var(--red)"></span>Start here</span>';
-  var pick = function (title, note, items) {
-    items = items.slice().sort(function (x, y) { return y.s.length - x.s.length; });
-    $("start-pick").innerHTML = "<h3>" + esc(title) + "</h3><p>" + esc(note) + "</p>" + askList(items);
-  };
-  var zoneItems = D.ITEMS.filter(function (i) { return zone(i.s.length, i.e); });
-  var pickZone = function () { pick("Start here: " + zoneItems.length + " asks", "Low effort, raised in 4 or more of the 8 sessions.", zoneItems); };
-  pickZone();
-  $("start-grid").addEventListener("click", function (ev) {
-    var b = ev.target.closest("button.cell"); if (!b) return;
-    var on = b.getAttribute("aria-pressed") === "true";
-    $("start-grid").querySelectorAll("button.cell").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
-    if (on) return pickZone();
-    b.setAttribute("aria-pressed", "true");
-    var rr = +b.dataset.r, e = b.dataset.e;
-    pick(e + " effort, raised in " + rr + " of 8 sessions", "Pick the square again to go back to the start-here list.", inCell(rr, e));
-  });
-
-  // Who owns what: status mix per suggested owner. Small owners fold into one row.
-  var ST = [["Done", "done"], ["In motion", "motion"], ["Not started", "idle"], ["Declined", "declined"]];
-  var own = {};
-  D.ITEMS.forEach(function (i) { i.o.split(" / ").forEach(function (o) { (own[o] = own[o] || []).push(i); }); });
-  var big = Object.keys(own).filter(function (o) { return own[o].length >= 5; }).sort(function (x, y) { return own[y].length - own[x].length; });
-  var small = Object.keys(own).filter(function (o) { return own[o].length < 5; });
-  var groups = big.map(function (o) { return [o, own[o], ""]; });
-  if (small.length) groups.push(["Other teams", [].concat.apply([], small.map(function (o) { return own[o]; })), small.join(", ")]);
-  var ownMax = Math.max.apply(null, groups.map(function (gr) { return gr[1].length; }));
-  $("owner-bars").innerHTML = groups.map(function (gr) {
-    var segs = ST.map(function (st) {
-      var n = gr[1].filter(function (i) { return i.st === st[0]; }).length;
-      return n ? '<i tabindex="0" style="flex:' + n + ";background:var(--fill-" + st[1] + ')" data-tip="' + esc(gr[0]) + ": " + n + " " + label(st[0]).toLowerCase() + '"></i>' : "";
-    }).join("");
-    return '<div class="owner"><span' + (gr[2] ? ' title="' + esc(gr[2]) + '"' : "") + ">" + esc(gr[0]) + '</span><div class="track" style="width:' + (gr[1].length / ownMax * 100) + '%">' + segs +
-      '</div><em class="num">' + gr[1].length + "</em></div>";
-  }).join("");
-  $("owner-legend").innerHTML = ST.map(function (st) { return '<span><span class="sw" style="background:var(--fill-' + st[1] + ')"></span>' + label(st[0]) + "</span>"; }).join("") +
-    "<span>Other teams: " + esc(small.join(", ")) + "</span>";
-
-  // One tooltip for every chart mark.
-  var tip = $("tip");
-  var showTip = function (ev) {
-    var el = ev.target.closest && ev.target.closest("[data-tip]"); if (!el) return;
-    var b = el.getBoundingClientRect();
-    tip.textContent = el.dataset.tip; tip.classList.add("on");
-    var x = Math.min(window.innerWidth - tip.offsetWidth - 8, Math.max(8, b.left + b.width / 2 - tip.offsetWidth / 2));
-    var y = b.top - tip.offsetHeight - 8; if (y < 68) y = b.bottom + 8;
-    tip.style.left = x + "px"; tip.style.top = y + "px";
-  };
-  var hideTip = function () { tip.classList.remove("on"); };
-  document.addEventListener("mouseover", showTip); document.addEventListener("focusin", showTip);
-  document.addEventListener("mouseout", hideTip); document.addEventListener("focusout", hideTip);
-  $("step-list").innerHTML = D.STEPS.map(function (s) { return "<li><b>" + esc(s.when) + "</b>" + esc(s.what) + "</li>"; }).join("");
-
-  $("session-list").innerHTML = D.SESSIONS.map(function (s) {
-    return '<div class="sess' + (s.shift === "Mid" ? " mid" : "") + '"><b>' + esc(s.date) + "</b><span>" + esc(s.time) + "</span><span>" + s.shift + " shift, " + s.n + " employees</span></div>";
-  }).join("");
-
-  // All asks: filters, table, CSV
-  var F = { q: "", area: "", status: "", types: [] };
-  var opts = function (el, first, list) { el.innerHTML = '<option value="">' + first + "</option>" + list.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join(""); };
-  opts($("f-area"), "All areas", D.AREA_NAMES.map(function (a, i) { return [i, a]; }));
-  opts($("f-status"), "Any status", ["Done", "In motion", "Not started", "Declined"].map(function (s) { return [s, label(s)]; }));
-  D.TYPES.forEach(function (t) {
-    var b = document.createElement("button");
-    b.type = "button"; b.className = "chip"; b.textContent = t === "Quick win" ? "Quick wins" : t; b.setAttribute("aria-pressed", "false");
-    b.onclick = function () {
-      var on = F.types.indexOf(t) > -1;
-      F.types = on ? F.types.filter(function (x) { return x !== t; }) : F.types.concat(t);
-      b.setAttribute("aria-pressed", String(!on)); draw();
-    };
-    $("type-chips").appendChild(b);
-  });
-  // Safety first, then reach, then quick wins.
-  var score = function (i) { return (i.ty === "Safety" ? 1000 : 0) + i.s.length * 10 + (i.ty === "Quick win" ? 1 : 0); };
-  var filtered = function () {
-    var q = F.q.toLowerCase();
-    return D.ITEMS.filter(function (i) {
-      return (!q || (i.t + " " + (i.n || "") + " " + i.o + " " + areaName(i)).toLowerCase().indexOf(q) > -1) &&
-        (F.area === "" || String(i.a) === F.area) &&
-        (!F.status || i.st === F.status) && (!F.types.length || F.types.indexOf(i.ty) > -1);
-    }).sort(function (x, y) { return score(y) - score(x); });
-  };
-  var draw = function () {
-    var list = filtered();
-    $("count").textContent = "Showing " + list.length + " of " + D.ITEMS.length + " asks";
-    $("ask-empty").hidden = list.length > 0;
-    $("ask-rows").innerHTML = list.map(function (i) {
-      return '<tr><td data-l="Ask"><b>' + esc(i.t) + "</b>" + (i.n ? '<span class="sub">' + esc(i.n) + "</span>" : "") + '<span class="sub">' + areaTag(i) +
-        '</span></td><td data-l="Sessions" class="num">' + i.s.length + ' of 8</td><td data-l="Type">' + esc(i.ty) + '</td><td data-l="Suggested owner">' + esc(i.o) +
-        '</td><td data-l="Effort (draft)">' + esc(i.e) + '</td><td data-l="Status">' + badge(i.st) + "</td></tr>";
-    }).join("");
-  };
-  [["f-q", "q", "input"], ["f-area", "area", "change"], ["f-status", "status", "change"]].forEach(function (x) {
-    $(x[0]).addEventListener(x[2], function (e) { F[x[1]] = e.target.value; draw(); });
-  });
-  $("reset").onclick = function () {
-    F = { q: "", area: "", status: "", types: [] };
-    ["f-q", "f-area", "f-status"].forEach(function (id) { $(id).value = ""; });
-    document.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
-    draw();
-  };
-  $("csv").onclick = function () {
-    var head = ["Ask", "Note", "Area", "Sessions raised", "Type", "Suggested owner", "Effort", "Status"];
-    var rows = filtered().map(function (i) { return [i.t, i.n || "", areaName(i), i.s.length, i.ty, i.o, i.e, label(i.st)]; });
-    var csv = [head].concat(rows).map(function (r) { return r.map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(","); }).join("\r\n");
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
-    a.download = "listening-session-asks.csv"; a.click(); URL.revokeObjectURL(a.href);
-  };
-  $("asks-intro").textContent = "All " + D.ITEMS.length + " asks with suggested owner, effort, and status. Owners are suggested until leadership confirms them.";
-  var tog = $("toggle-all");
-  var setTog = function (open) { $("ask-panel").hidden = !open; tog.setAttribute("aria-expanded", String(open)); tog.textContent = open ? "Hide the list" : "Show all " + D.ITEMS.length + " asks"; };
-  tog.onclick = function () { setTog($("ask-panel").hidden); };
-  setTog(false); draw();
-
-  // Theme toggle follows the system until clicked.
-  var root = document.documentElement, btn = $("theme");
-  var dark = function () { return root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
-  var sync = function () { btn.textContent = dark() ? "Light mode" : "Dark mode"; };
-  btn.onclick = function () { root.dataset.theme = dark() ? "light" : "dark"; sync(); };
-  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", sync);
-  sync();
+  $("steps").innerHTML = D.STEPS.map(function (s) { return "<li><b>" + esc(s.when) + "</b>" + esc(s.what) + "</li>"; }).join("");
 })();
 </script>
 </body>
