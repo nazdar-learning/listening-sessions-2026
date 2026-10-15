@@ -43,12 +43,11 @@
 .areas .nm em { font-style: normal; font-weight: 400; font-size: 14px; color: var(--ink-2); white-space: nowrap; }
 .areas p { color: var(--ink-2); font-size: 16px; margin-top: 4px; }
 
-/* Quick wins: reach on the left, one line each */
+/* Where to start: reach on the left, one question each */
 .quick { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.quick li { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.quick li { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .quick b { font-size: 26px; line-height: 1; color: var(--red-ink); }
 .quick b small { display: block; font-size: 12px; font-weight: 400; color: var(--ink-2); margin-top: 4px; }
-.quick em { font-style: normal; font-size: 14px; color: var(--ink-2); white-space: nowrap; }
 
 /* Click to open: the asks behind an area or a decision */
 details > summary { list-style: none; cursor: pointer; }
@@ -92,7 +91,6 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
 @media (max-width: 760px) {
   .pair, .areas, .views, .steps { grid-template-columns: minmax(0, 1fr); }
   .quick li { grid-template-columns: 56px minmax(0, 1fr); }
-  .quick em { grid-column: 2; white-space: normal; }
   .hero { padding: 32px 0 28px; }
   .why b { font-size: 52px; }
   .top .right a { display: none; }
@@ -104,7 +102,7 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
   <div class="wrap">
     <img src="logo/nazdar.png" alt="Nazdar" width="143" height="22">
     <div class="right">
-      <a href="asks.html">All 93 asks</a>
+      <a href="asks.html" class="n-asks">All asks</a>
     </div>
   </div>
 </header>
@@ -148,8 +146,8 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
   <section class="block">
     <div class="wrap">
       <div class="head">
-        <h2>Quick wins to start now</h2>
-        <p class="lede">The asks raised in the most sessions that could be started soon. Leadership decides what to take on.</p>
+        <h2>Where to start the conversation</h2>
+        <p class="lede">The topics raised in the most sessions, as questions to work through together.</p>
       </div>
       <ul class="quick" id="quick"></ul>
     </div>
@@ -190,8 +188,8 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
       <div class="head"><h2>What happens next</h2></div>
       <ol class="steps" id="steps"></ol>
       <div class="input">
-        <p><b>Every ask in one place.</b> The full list has each ask, how many sessions raised it, and a suggested owner, to look through before Tuesday.</p>
-        <a class="btn primary" href="asks.html">Review all 93 asks</a>
+        <p><b>Every ask in one place.</b> Everything employees asked for, and how many sessions raised it, to look through before Tuesday.</p>
+        <a class="btn primary n-asks" href="asks.html">Review all asks</a>
       </div>
     </div>
   </section>
@@ -228,8 +226,7 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
   var tone = function (st) { return st === "Done" ? "st-done" : st === "In motion" ? "st-motion" : "st-idle"; };
   var askList = function (items) {
     return '<ul class="asks">' + items.map(function (i) {
-      return '<li><span class="t">' + esc(i.t) + '</span><span class="st ' + tone(i.st) + '">' + esc(label(i.st)) + '</span><span class="m">Raised in ' + i.s.length +
-        " of 8 sessions. Suggested owner: " + esc(i.o) + ".</span></li>";
+      return '<li><span class="t">' + esc(i.t) + '</span><span class="st ' + tone(i.st) + '">' + esc(label(i.st)) + '</span><span class="m">Raised in ' + i.s.length + " of 8 sessions.</span></li>";
     }).join("") + "</ul>";
   };
   var bySessions = function (a, b) { return b.s.length - a.s.length; };
@@ -237,15 +234,12 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
   $("areas").innerHTML = D.AREAS.map(function (a, n) {
     var asks = D.ITEMS.filter(function (i) { return i.a === a[2]; }).sort(bySessions);
     return '<li><details><summary><div class="nm"><span style="display:flex;align-items:center"><span class="sw" style="background:var(--a' + (n + 1) + ')"></span>' + esc(a[0]) +
-      "</span><em>" + a[1] + " of 8 sessions</em></div><p>" + esc(D.SUMMARY[a[2]]) + '</p><span class="open-asks">See the ' + asks.length + " asks</span></summary>" + askList(asks) + "</details></li>";
+      "</span><em>" + a[1] + " of 8 sessions</em></div><p>" + esc(D.SUMMARY[a[2]]) + '</p><span class="open-asks">See what employees asked for (' + asks.length + ")</span></summary>" + askList(asks) + "</details></li>";
   }).join("");
 
-  // Top five small wins by reach. Owner comes from the matching ask. No effort shown: leadership sets that.
-  var findOne = function (k) { return D.ITEMS.find(function (i) { return i.t.indexOf(k) === 0; }); };
-  $("quick").innerHTML = D.SMALL.slice().sort(function (a, b) { return b[1] - a[1]; }).slice(0, 5).map(function (w) {
-    var ask = findOne(w[2][0]);
-    return '<li><b class="num">' + w[1] + "<small>of 8 sessions</small></b><span>" + esc(w[0]) + "</span><em>" +
-      (ask ? "Suggested owner: " + esc(ask.o) : "") + "</em></li>";
+  // Problems as open questions, not answers. No owners or effort: leadership decides those.
+  $("quick").innerHTML = D.QUICK.map(function (w) {
+    return '<li><b class="num">' + w[1] + "<small>of 8 sessions</small></b><span>" + esc(w[0]) + "</span></li>";
   }).join("");
 
   // Each decision shows how widely its related asks came up.
@@ -259,6 +253,9 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
   $("views").innerHTML = D.SPLITS.map(function (s) {
     return "<div><h3>" + esc(s.t) + "</h3><p><b>" + esc(s.la) + ":</b> " + esc(s.a) + "</p><p><b>" + esc(s.lb) + ":</b> " + esc(s.b) + "</p></div>";
   }).join("");
+
+  // Ask count comes from the data, so links stay right when asks change.
+  document.querySelectorAll(".n-asks").forEach(function (a) { a.textContent = a.textContent.replace("all asks", "all " + D.ITEMS.length + " asks").replace("All asks", "All " + D.ITEMS.length + " asks"); });
 
   $("ver").textContent = "Draft, version " + D.VERSION + ", updated " + D.UPDATED;
 
