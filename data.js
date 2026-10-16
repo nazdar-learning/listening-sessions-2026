@@ -4,7 +4,7 @@
 // Leader version is discussion-first: no effort, owners, types, or HR solution lists (Cindy, Oct 15).
 // HR's drafts of those are kept in OneDrive, Listening Session Recaps.
 window.LISTENING_DATA = {
- "VERSION": "1.7",
+ "VERSION": "1.8",
  "UPDATED": "October 16, 2026",
  "SESSIONS": [
   {
@@ -764,6 +764,13 @@ window.LISTENING_DATA = {
    "a": "Like the early start because they get off work early in the afternoon.",
    "lb": "Other employees",
    "b": "Say the early start discourages job candidates and makes it harder to refer friends."
+  },
+  {
+   "t": "Experience from Fuji",
+   "la": "How former Fuji employees see it",
+   "a": "They bring years of experience and want to put it to use, including helping train others.",
+   "lb": "How they feel leadership sees it",
+   "b": "They feel that experience isn't valued here, and that their ideas are often met with \"that's not how we do it here.\""
   }
  ],
  "STEPS": [
@@ -777,7 +784,7 @@ window.LISTENING_DATA = {
   },
   {
    "when": "Then",
-   "what": "Employees hear what is changing through morning huddles, the communication wall, and a printed update."
+   "what": "Employees hear what is changing through a timely follow-up communication (methods of communication to be decided)."
   }
  ],
  "SUMMARY": {
