@@ -4,8 +4,8 @@
 // Leader version is discussion-first: no effort, owners, types, or HR solution lists (Cindy, Oct 15).
 // HR's drafts of those are kept in OneDrive, Listening Session Recaps.
 window.LISTENING_DATA = {
- "VERSION": "1.6",
- "UPDATED": "October 15, 2026",
+ "VERSION": "1.7",
+ "UPDATED": "October 16, 2026",
  "SESSIONS": [
   {
    "k": "a",
@@ -830,7 +830,7 @@ window.LISTENING_DATA = {
    6
   ],
   [
-   "What would help new hires settle into one line before they move to the next?",
+   "How can we facilitate packaging new hires to fully learn one line before moving to the next?",
    5
   ],
   [
