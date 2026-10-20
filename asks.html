@@ -2,143 +2,142 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="color-scheme" content="light">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>What employees asked for | Nazdar Learning</title>
-<link rel="stylesheet" href="style.css">
 <style>
-.page-head { padding: 36px 0 20px; }
-.page-head h1 { font-size: clamp(30px, 4vw, 40px); }
-.filters { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-.filters label { display: grid; gap: 4px; font-size: 14px; font-weight: 700; }
-.filters input, .filters select { font: inherit; font-size: 15px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 8px 10px; min-width: 0; }
-.filters input::placeholder { color: var(--ink-2); }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
-.chips span { font-size: 14px; font-weight: 700; margin-right: 4px; }
-.chip { font: inherit; font-size: 14px; padding: 5px 12px; border-radius: var(--r); border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; }
-.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--page); }
-.bar-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 15px; color: var(--ink-2); }
-.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); margin-bottom: 48px; }
-table { border-collapse: collapse; width: 100%; font-size: 15px; }
-th, td { text-align: left; padding: 12px 14px; vertical-align: top; }
-th { font-size: 13px; color: var(--ink-2); border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
-tbody tr + tr td { border-top: 1px solid var(--line); }
-td .sub { display: flex; align-items: center; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
-.empty { padding: 28px; text-align: center; color: var(--ink-2); }
-@media (max-width: 760px) {
-  .filters { grid-template-columns: minmax(0, 1fr); }
-  table, tbody, tr, td { display: block; }
-  thead { display: none; }
-  tbody tr { padding: 12px 14px; }
-  tbody tr + tr { border-top: 1px solid var(--line); }
-  tbody tr + tr td { border-top: 0; }
-  td { padding: 2px 0; }
-  td[data-l]::before { content: attr(data-l) ": "; font-weight: 700; font-size: 13px; color: var(--ink-2); }
-  td[data-l="Ask"]::before { content: none; }
+:root{--red:#D90000;--red-dark:#A91623;--ink:#222;--muted:#5F6368;--line:#E2E2E2;--paper:#fff;--wash:#F6F6F6;--done:#2E6B47;--motion:#9A6400;--tip:#222;--tipink:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#ECECEC;--muted:#A8ABB0;--line:#3A3A3A;--paper:#1B1B1C;--wash:#242426;--done:#7BC79A;--motion:#E2B14F;--tip:#F2F2F2;--tipink:#1B1B1C}}
+:root[data-theme="dark"]{--ink:#ECECEC;--muted:#A8ABB0;--line:#3A3A3A;--paper:#1B1B1C;--wash:#242426;--done:#7BC79A;--motion:#E2B14F;--tip:#F2F2F2;--tipink:#1B1B1C}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding-left:20px;padding-right:20px}
+header{border-bottom:4px solid var(--red)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:16px;padding-bottom:14px}
+.top img{height:28px;display:block}
+.top a.back{color:var(--red);font-size:15px}
+h1{font-size:clamp(28px,4.5vw,44px);line-height:1.1;margin:32px 0 10px}
+.lede{color:var(--muted);max-width:70ch;margin:0 0 24px;font-size:17px}
+.controls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.controls label{display:flex;flex-direction:column;font-size:13px;color:var(--muted);gap:4px}
+input,select,button{font:inherit;color:var(--ink)}
+input[type=search],select{border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:9px 10px;min-height:42px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 10px;flex-wrap:wrap}
+.count{color:var(--muted);font-size:14px}
+.btn{border:1px solid var(--ink);background:var(--paper);border-radius:6px;padding:8px 14px;cursor:pointer;font-size:14px}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.tablewrap{border:1px solid var(--line);border-radius:6px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;font-size:13px;color:var(--muted);font-weight:400;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--wash)}
+td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.ask{position:relative;width:62%}
+.askbtn{all:unset;cursor:pointer;font-weight:700;display:inline;border-bottom:1px dotted var(--muted)}
+.askbtn:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.area{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.tip{display:none;position:absolute;left:12px;top:calc(100% - 6px);z-index:5;max-width:460px;background:var(--tip);color:var(--tipink);padding:10px 12px;border-radius:6px;font-size:14px;line-height:1.45;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+td.ask:hover .tip,td.ask:focus-within .tip,td.ask.open .tip{display:block}
+.dots{display:flex;gap:3px;align-items:center;white-space:nowrap}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--red)}
+.dots em{font-style:normal;color:var(--muted);font-size:13px;margin-left:6px}
+.status{font-size:13px;white-space:nowrap}
+.status.done{color:var(--done);font-weight:700}
+.status.motion{color:var(--motion);font-weight:700}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+footer{padding-top:24px;padding-bottom:40px;color:var(--muted);font-size:14px}
+@media (max-width:700px){
+  .controls{grid-template-columns:1fr 1fr}
+  .controls label:first-child{grid-column:1/-1}
+  thead{display:none}
+  table,tbody,tr,td{display:block;width:100%}
+  tr{border-bottom:1px solid var(--line);padding:6px 0}
+  td{border:0;padding:6px 12px}
+  td.ask{width:auto}
+  .tip{position:static;max-width:none;margin-top:8px;box-shadow:none}
+  td.ask:hover .tip,td.ask:focus-within .tip{display:none}
+  td.ask.open .tip{display:block}
 }
+@media print{.controls,.bar .btn,.tip{display:none}}
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="wrap">
-    <a href="./" aria-label="Back to the brief">
-      <img src="logo/nazdar.png" alt="" width="143" height="22">
-    </a>
-    <div class="right">
-      <a href="./">Back to the brief</a>
-    </div>
+<header>
+  <div class="wrap top">
+    <a href="./"><img src="logo/nazdar.png" alt="Nazdar"></a>
+    <a class="back" href="./">Back to the brief</a>
   </div>
 </header>
-
 <main class="wrap">
-  <div class="page-head">
-    <h1>What employees asked for</h1>
-    <p class="lede" id="intro"></p>
+  <h1>What employees asked for</h1>
+  <p class="lede">Every ask from the 2026 frontline listening sessions. Hover over an ask, or tap it on a phone, to see the context behind it.</p>
+  <div class="controls">
+    <label>Search<input type="search" id="q" placeholder="Try batteries, tubs, training"></label>
+    <label>Area<select id="fArea"></select></label>
+    <label>Status<select id="fStatus"></select></label>
   </div>
-  <div class="filters">
-    <label>Search<input type="search" id="f-q" placeholder="Try: tubs, scales, trainer"></label>
-    <label>Area<select id="f-area"></select></label>
-    <label>Status<select id="f-status"></select></label>
+  <div class="bar">
+    <div class="count" id="count" aria-live="polite"></div>
+    <div><button class="btn" id="resetBtn" type="button">Clear filters</button> <button class="btn" id="csvBtn" type="button">Download CSV</button></div>
   </div>
-  <div class="bar-row">
-    <span id="count" aria-live="polite"></span>
-    <span style="display:flex;gap:8px">
-      <button class="btn" type="button" id="reset">Clear filters</button>
-      <button class="btn primary" type="button" id="csv">Download CSV</button>
-    </span>
-  </div>
-  <div class="table-wrap">
+  <div class="tablewrap">
     <table>
-      <caption class="sr">All asks from the listening sessions</caption>
-      <thead><tr><th>Ask</th><th>Sessions</th><th>Status</th></tr></thead>
+      <thead><tr><th scope="col">Ask</th><th scope="col">Sessions</th><th scope="col">Status</th></tr></thead>
       <tbody id="rows"></tbody>
     </table>
-    <p class="empty" id="empty" hidden>No asks match these filters. Clear filters to see everything.</p>
   </div>
-  <p id="ver" style="font-size:14px;color:var(--ink-2);margin:-32px 0 40px"></p>
 </main>
-
-<script src="data.js"></script>
+<footer class="wrap">
+  <p>All asks from the listening sessions. Context summarizes what employees described across sessions. Nothing here is attributed to any one person.</p>
+</footer>
 <script>
-(function () {
-  var D = window.LISTENING_DATA;
-  var $ = function (id) { return document.getElementById(id); };
-  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
-  var label = function (st) { return st === "In motion" ? "Underway" : st; };
-  var tone = function (st) { return st === "Done" ? "st-done" : st === "In motion" ? "st-motion" : "st-idle"; };
-  // Underway badge with its proof quote on hover or focus.
-  var proofBadge = function (st, key) {
-    var p = st === "In motion" && D.PROOF && D.PROOF[key];
-    if (!p) return '<span class="st ' + tone(st) + '">' + esc(label(st)) + "</span>";
-    return '<span class="st ' + tone(st) + ' proof" tabindex="0" aria-label="Underway. Proof: ' + esc(p.q) + " " + esc(p.who) + '">' + esc(label(st)) +
-      '<span class="tip" aria-hidden="true">“' + esc(p.q) + "”<i>" + esc(p.who) + "</i></span></span>";
-  };
-  var slot = {};
-  D.AREAS.forEach(function (a, n) { slot[a[2]] = n + 1; });
-  var area = function (i) { return '<span class="sw" style="background:var(--a' + (slot[i.a] || 9) + ')"></span>' + esc(D.AREA_NAMES[i.a]); };
-
-  $("intro").textContent = "All " + D.ITEMS.length + " asks from the sessions, in employees' words, with how many sessions raised each and where it stands today.";
-  var F = { q: "", area: "", status: "" };
-  var opts = function (el, first, list) { el.innerHTML = '<option value="">' + first + "</option>" + list.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join(""); };
-  opts($("f-area"), "All areas", D.AREA_NAMES.map(function (a, i) { return [i, a]; }));
-  opts($("f-status"), "Any status", ["Done", "In motion", "Not started"].map(function (s) { return [s, label(s)]; }));
-  // Most widely raised first.
-  var score = function (i) { return i.s.length; };
-  var filtered = function () {
-    var q = F.q.toLowerCase();
-    return D.ITEMS.filter(function (i) {
-      return (!q || (i.t + " " + (i.n || "") + " " + D.AREA_NAMES[i.a]).toLowerCase().indexOf(q) > -1) &&
-        (F.area === "" || String(i.a) === F.area) && (!F.status || i.st === F.status);
-    }).sort(function (x, y) { return score(y) - score(x); });
-  };
-  var draw = function () {
-    var list = filtered();
-    $("count").textContent = "Showing " + list.length + " of " + D.ITEMS.length + " asks";
-    $("empty").hidden = list.length > 0;
-    $("rows").innerHTML = list.map(function (i) {
-      return '<tr><td data-l="Ask"><b>' + esc(i.t) + "</b>" + (i.n ? '<span class="sub">' + esc(i.n) + "</span>" : "") + '<span class="sub">' + area(i) +
-        '</span></td><td data-l="Sessions" class="num">' + i.s.length + ' of 8</td><td data-l="Status">' + proofBadge(i.st, i.t) + "</td></tr>";
-    }).join("");
-  };
-  [["f-q", "q", "input"], ["f-area", "area", "change"], ["f-status", "status", "change"]].forEach(function (x) {
-    $(x[0]).addEventListener(x[2], function (e) { F[x[1]] = e.target.value; draw(); });
-  });
-  $("reset").onclick = function () {
-    F = { q: "", area: "", status: "" };
-    ["f-q", "f-area", "f-status"].forEach(function (id) { $(id).value = ""; });
-    draw();
-  };
-  $("csv").onclick = function () {
-    var head = ["Ask", "Note", "Area", "Sessions raised", "Status"];
-    var rows = filtered().map(function (i) { return [i.t, i.n || "", D.AREA_NAMES[i.a], i.s.length, label(i.st)]; });
-    var csv = [head].concat(rows).map(function (r) { return r.map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(","); }).join("\r\n");
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
-    a.download = "listening-session-asks.csv"; a.click(); URL.revokeObjectURL(a.href);
-  };
-  $("ver").textContent = "Version " + D.VERSION + ", updated " + D.UPDATED;
-  draw();
-})();
+const SESSIONS=["Sep 22","Sep 29","Sep 30","Oct 1","Oct 5","Oct 7","Oct 8","Oct 13"];
+const KEYS="abcdefgh";
+const AREAS=["Training and qualification","Materials and planning","Shift handoffs","Clear priorities","Follow-through on concerns","Basic safety","Equipment and workflow","Leadership on the floor","Hiring, pay, and policy"];
+const STATUSES=["Done","In motion","Not started"];
+const ITEMS=[{"a": 0,"t": "Dedicated trainer in each area who is paid more","s": "abcdefgh","st": "Not started","c": "Every session raised it. Training often falls to whoever is free, usually with no extra pay and their own work still waiting. Several groups suggested one dedicated trainer per area."},{"a": 0,"t": "At least 30 days of training, with the trainer confirming readiness","s": "bdefgh","st": "Not started","c": "New hires described two or three days on a line, then working on their own. Employees suggested a full 30 days, with the trainer deciding when someone is ready."},{"a": 0,"t": "Hands-on final check instead of the tablet test","s": "cdfgh","st": "Not started","c": "Employees said the tablet test can be passed by guessing or retaking it. Watching someone do the job was seen as the real test."},{"a": 0,"t": "Train-the-trainer program using show, tell, do, review","s": "cdegh","st": "In motion","c": "Experienced employees described a show, tell, do, and review method from past employers, with a card the trainer signs as each skill is learned."},{"a": 0,"t": "Revive or replace the specialist program, with specialists doing training","s": "abcdefgh","st": "Not started","c": "Raised in every session. People signed up, waited, and heard little about why the program paused. Many see specialists as the natural trainers."},{"a": 0,"t": "Keep new hires on one line until they're comfortable","s": "abdgh","st": "Not started","c": "New hires are often moved to a new line every few days. Lines use different labels, bottles, and paperwork, so it's hard to get comfortable on any one."},{"a": 0,"t": "Procedures and troubleshooting guides posted at each machine","s": "de","st": "Not started","c": "Procedures live in Red Zone, but tablets are often dead or missing and videos may not load. Employees asked for simple guides posted where the work happens."},{"a": 0,"t": "Collect the first-week checklist and record training sign-off","s": "fg","st": "Not started","c": "A first-week checklist exists, but employees said it gets turned in and never comes back."},{"a": 0,"t": "Short preview video for each job","s": "cf","st": "Not started","c": "New hires said they didn't know what the work looked like until they started. A short video per job would show the heat, the gear, and the pace."},{"a": 0,"t": "Explain chemical safety at hire and in orientation","s": "bcfg","st": "Not started","c": "Some new hires left because no one explained how to handle the chemicals safely. Several employees said they first thought they'd be working with paint."},{"a": 0,"t": "More scanner, tablet, and Red Zone training for new hires","s": "cgh","st": "Not started","c": "Some new hires were afraid to use the scanner or tablet after hearing mistakes could lead to points. Others wanted more help with the computer side."},{"a": 0,"t": "One scanning rule on both shifts","s": "deh","st": "Not started","c": "One shift was told to scan out defective bottles and the other wasn't, which threw inventory off by hundreds of units."},{"a": 0,"t": "Trainers have at least a year of tenure","s": "g","st": "Not started","c": "Employees said trainers with only a few months on the job can't answer many of the questions new hires ask."},{"a": 0,"t": "A day shift specialist trains new mid shift hires for their first 2 to 3 weeks","s": "g","st": "Not started","c": "Mid shift has no manufacturing specialists. Employees suggested a day shift specialist spend the first few weeks with each new mid shift hire."},{"a": 0,"t": "Clarify what trainers are accountable for when a trainee makes a mistake","s": "h","st": "Not started","c": "Employees heard that trainers would be held responsible for their trainees' mistakes. With no extra pay, that makes people reluctant to train."},{"a": 0,"t": "Cross-training plan with refreshers so skills don't fade","s": "b","st": "Not started","c": "People cross-trained years ago have forgotten the work because they rarely use it. Some areas sit idle while others are short."},{"a": 1,"t": "Confirm materials are physically there before a batch starts","s": "abcdefgh","st": "Not started","c": "Raised in every session. Batches get started, then stall when the last ingredient isn't where the system says. Half-made batches can sit for days."},{"a": 1,"t": "Allocate materials when a ticket prints, and hold tickets that can't be filled","s": "ah","st": "Not started","c": "Tickets reach the floor before all materials are on hand. Employees noted the system is supposed to reserve materials when a ticket prints."},{"a": 1,"t": "Show whether material is pulled, in transit, or on site","s": "a","st": "Not started","c": "Material can show as available while it's still on a truck or in another building, so people search for something that isn't here yet."},{"a": 1,"t": "Scan materials back to their location, keep locations stable, and count regularly","s": "cdeh","st": "Not started","c": "Locations change often, and materials don't always get scanned to where they're put. Employees compared finding things to searching a big box store."},{"a": 1,"t": "Faster material handler response, with an estimated time","s": "abde","st": "Not started","c": "Waits for a restock ran from 30 minutes to over an hour in some sessions. Mid shift praised handlers who post an estimated arrival time."},{"a": 1,"t": "More forklift-licensed employees to obtain raw materials for batches","s": "df","st": "Not started","c": "Only licensed employees may drive a forklift, so people wait. Some who got their own materials to avoid long waits got in trouble for it."},{"a": 1,"t": "Coverage for weigh-ups, varnish, and powders so mills keep running","s": "cdfh","st": "In motion","c": "Some areas have only one trained person. When that person is out or overloaded, batches and mills wait. Employees said some gaps were flagged well ahead of time."},{"a": 1,"t": "Buy more tubs by size, including stainless","s": "ef","st": "Not started","c": "Batch makers wait for tubs, and finished product can sit in large tubs for weeks. Water-based batches rust tubs that aren't stainless."},{"a": 1,"t": "Follow up with suppliers on mixed lot numbers that shorten shelf life","s": "h","st": "Not started","c": "One shipment arrived in a single color with several lot numbers and shorter shelf life. Lots can't be mixed, so one order became several."},{"a": 1,"t": "Release tickets to match available equipment, and stagger the same batch type","s": "a","st": "Not started","c": "More tickets get released than there is equipment to run them, so whoever gets there first gets the mixer."},{"a": 2,"t": "Shift handoff checklist that both leads sign, with set cleanup times","s": "bcdefh","st": "Not started","c": "Both shifts say the other leaves batches on mixers, dirty areas, and unfinished work. Employees suggested set cleanup times and a short sign-off."},{"a": 2,"t": "Charge batteries, scan stock, and split orders before every shift ends","s": "befg","st": "Not started","c": "Day shift often arrives to dead scale batteries, stock that wasn't scanned, and orders that weren't split."},{"a": 2,"t": "Day and mid shift leads hold the shift change huddle together","s": "egh","st": "Not started","c": "Employees suggested leads from both shifts walk the lines together at shift change, covering paperwork, labels, and what's next."},{"a": 2,"t": "Lead-to-lead handoff note for anything left on a desk","s": "g","st": "Not started","c": "Items left on a desk at shift change often come with no explanation, so the next lead doesn't know what they're for."},{"a": 2,"t": "If you stop to photograph a hazard, fix it","s": "e","st": "In motion","c": "Employees described hazards being photographed to show the other shift left them, then left in place."},{"a": 2,"t": "Hold both shifts to the same rules","s": "abc","st": "Not started","c": "Each shift feels held to stricter standards than the other, from dress rules to cleanup."},{"a": 3,"t": "One hot list per shift that every area can see, so red folders mean real priority","s": "aef","st": "Not started","c": "Nearly every order ends up in a red folder, so no one can tell what's truly urgent. The hot list helps when it's posted where everyone can see it."},{"a": 3,"t": "Set priorities once per shift and limit mid-run switches","s": "aef","st": "Not started","c": "Orders get switched mid-run, which means stopping, cleaning, and setting up again. Sometimes the rushed order then sits."},{"a": 3,"t": "Share the day's must-ship orders at the morning meeting","s": "ah","st": "Not started","c": "Employees asked to hear the day's must-ship orders at the start of the shift, not near the end."},{"a": 3,"t": "Schedule by color to cut cleandowns, and run hot orders on the fastest crew","s": "a","st": "Not started","c": "Running similar colors back to back cuts cleanouts. Employees also suggested the fastest crew take the hot orders."},{"a": 3,"t": "Hot list screen back on the canning side","s": "a","st": "Not started","c": "A screen that showed the hot list was removed from the canning side."},{"a": 4,"t": "Report back to every participant on what's changing","s": "cdef","st": "In motion","c": "Several groups asked directly whether anything would come of these sessions."},{"a": 4,"t": "A visible way to submit ideas and hear back","s": "d","st": "Not started","c": "Employees said ideas often get \"We're handling it\" with no update afterward."},{"a": 4,"t": "Update internal applicants when a posting changes or is pulled","s": "df","st": "Not started","c": "Employees who applied for internal openings sometimes heard nothing for months, then learned the opening had been pulled."},{"a": 4,"t": "Production employees on the engagement committee","s": "f","st": "In motion","c": "Employees offered to help plan events and asked that production be represented."},{"a": 4,"t": "Communication wall with news, safety, and benefit QR codes","s": "adg","st": "In motion","c": "News often reaches the floor late or by word of mouth. Many floor employees don't use email or phones at work."},{"a": 4,"t": "Phone access to HR resources using your time clock badge login","s": "g","st": "Done","c": "Floor employees can now reach HR resources through QR codes using their time clock badge login."},{"a": 5,"t": "No one works alone where an injury would go unnoticed, including new hires on nights","s": "ah","st": "Not started","c": "Employees described people working alone, including new hires on nights, where an injury might go unnoticed."},{"a": 5,"t": "Inspect tub hoist hooks and the safety chain setup","s": "e","st": "Not started","c": "Hooks can slip when dumping heavy tubs, and the safety chain can pull the operator along with the tub."},{"a": 5,"t": "Lock out machines before any repair","s": "e","st": "Not started","c": "Some experienced employees fix machines while they're running, including machines with sharp blades."},{"a": 5,"t": "Inspect the small batch rack lift","s": "b","st": "Not started","c": "The lift at one rack has stalled with someone at the top."},{"a": 5,"t": "Review heat and new hire PPE before next summer","s": "bcdf","st": "Not started","c": "Summer heat drives early exits. Required new hire sleeves and aprons add to it, and ink or solvent on sweaty skin can cause reactions."},{"a": 5,"t": "Pallet jacks or powered movers for heavy tubs, with training","s": "h","st": "Not started","c": "Tubs weighing up to about 1,000 pounds are sometimes pushed by hand, often by several people pulled off their own work."},{"a": 5,"t": "Patch concrete divots in batch","s": "g","st": "Not started","c": "Divots in the floor in batch catch carts."},{"a": 5,"t": "Add mixer chains and keep grounding wires clean","s": "f","st": "In motion","c": "Some mixers lack chains, and dried chemical can coat grounding wires so they don't make good contact."},{"a": 5,"t": "Look into skin reactions to uniforms","s": "c","st": "Not started","c": "Some new hires break out from the uniforms, which adds to early discomfort."},{"a": 5,"t": "Decide whether personal radios or speakers are safe to use","s": "h","st": "Not started","c": "Employees asked whether a radio or personal speaker could be allowed. Safety would need to weigh in."},{"a": 6,"t": "Dedicated scale batteries and charging stations","s": "abfgh","st": "In motion","c": "People walk around looking for a charged battery, and there's no easy way to tell which ones are charged."},{"a": 6,"t": "Calibrate line scales and use the same increments on every line","s": "acg","st": "Not started","c": "Scales drift when fans blow on them, and lines use different increments, so the same product can weigh differently."},{"a": 6,"t": "Working tablets and chargers in every area, including mills","s": "bdh","st": "Not started","c": "Tablets go missing or won't charge, which cuts off access to tickets, procedures, and material requests."},{"a": 6,"t": "Backup label printers and preventive maintenance","s": "g","st": "Not started","c": "Two key label printers have no backup. When one failed, part of a hot order sat for days."},{"a": 6,"t": "Permanent fixes for the line 4 and line 5 labelers","s": "gh","st": "Not started","c": "Labelers on two lines keep breaking, so large orders get labeled by hand for weeks at a time."},{"a": 6,"t": "Maintenance coverage after 4:00 PM for mid shift","s": "g","st": "Not started","c": "Mid shift runs until midnight, but maintenance leaves around 4:00 PM. A breakdown can stall a line for the rest of the shift."},{"a": 6,"t": "More maintenance training on digital lines, and a repeat-problem report","s": "h","st": "Not started","c": "Some repairs on digital lines don't hold. A report on repeat problems would show which issues keep coming back."},{"a": 6,"t": "Replace tape dispenser blades on a schedule","s": "g","st": "Not started","c": "Dull tape dispenser blades rarely get replaced, and people aren't sure where the spares are kept."},{"a": 6,"t": "Restock tools by line, with a stocked toolbox per area","s": "abg","st": "Not started","c": "Tools disappear from boards and boxes, so people go line to line looking for basics like scrapers and wrenches."},{"a": 6,"t": "Test a stronger tub cleaning solvent","s": "e","st": "Not started","c": "Recycled cleaning solvent may be too weak to clean stained tubs, which can change batch colors. The smell causes headaches for some."},{"a": 6,"t": "Fill alarm or camera so one person isn't tied up watching a pour","s": "f","st": "Not started","c": "Some fills can't be left because they can overflow in seconds, so one person may stand by for hours."},{"a": 6,"t": "Rebuild aging lines one at a time while others keep running","s": "c","st": "Not started","c": "Some lines are held together with temporary fixes, and replacement parts can take months to arrive."},{"a": 6,"t": "Fix Red Zone line sensors and videos that won't load","s": "ad","st": "Not started","c": "Red Zone line sensors were down for weeks, and procedure videos often won't load."},{"a": 7,"t": "Leads know the work they lead, and work alongside the team when short","s": "bdegh","st": "Not started","c": "Employees in several sessions said some leads can't answer how-to questions about the work they oversee."},{"a": 7,"t": "Leads huddle together before the floor huddle and stay reachable after the morning meeting","s": "efh","st": "Not started","c": "Leads are in the morning meeting until about 8:45 or 9:00 AM, and problems wait until they're back."},{"a": 7,"t": "It's OK to step into the morning leads meeting when you need help","s": "h","st": "In motion","c": "Employees didn't know they could step into the morning leads meeting. HR has confirmed they can."},{"a": 7,"t": "Act on staffing gaps when they're first raised","s": "cf","st": "Not started","c": "Employees said gaps they flagged well in advance weren't addressed until the area was far behind."},{"a": 7,"t": "Recognize good work, especially during tough stretches","s": "def","st": "Not started","c": "Recognition tends to show up when output is high. Employees would value it during tough stretches too."},{"a": 7,"t": "Let trained volunteers help other areas, including half days on overtime","s": "abch","st": "Not started","c": "Willing volunteers have been told to stay in their own area or work a full day, even when their area had no work."},{"a": 7,"t": "Check coverage by area before approving time off","s": "eh","st": "Not started","c": "Time-off limits apply across a whole department, even when a separate area has its own coverage."},{"a": 7,"t": "Use overtime on real orders","s": "f","st": "Not started","c": "Overtime sometimes feels like busy work, such as repacks, rather than moving the backlog."},{"a": 8,"t": "$2 an hour manufacturing raise","s": "acdef","st": "Done","c": "Pay came up in most sessions. Manufacturing received a $2 an hour raise in October."},{"a": 8,"t": "Referral bonus doubled to $1,400","s": "fg","st": "Done","c": "The referral bonus doubled to $1,400, paid in two parts."},{"a": 8,"t": "Clear boot requirements before day one, and boots on hand if needed","s": "f","st": "Done","c": "A new hire was sent home on day one without safety boots. The first-day email now shows acceptable boots, and HR can provide a pair."},{"a": 8,"t": "One application where candidates pick the jobs they want, with follow-up","s": "f","st": "Not started","c": "Candidates applied for each job separately, and some heard nothing for weeks while postings refreshed."},{"a": 8,"t": "Tell new hires about overtime, dirt, hours, and break clock-outs before day one","s": "cf","st": "Not started","c": "New hires said they weren't told overtime is mandatory, how dirty the work gets, or that they must clock out for breaks."},{"a": 8,"t": "Realistic job preview: try the physical work and talk with employees on the tour","s": "acfh","st": "Not started","c": "Employees suggested letting candidates try the physical work, like pushing a tub, and hear about the job from the people doing it."},{"a": 8,"t": "Explain the attendance policy in person, and let employees see their own points","s": "cefg","st": "Not started","c": "Many believed the tardy grace period was longer than it is, or didn't know documentation can prevent a point. Employees also asked to see their own points."},{"a": 8,"t": "Attendance policy update for January 1","s": "abcdef","st": "In motion","c": "Attendance points came up in most sessions. An update to the policy is planned for January 1."},{"a": 8,"t": "Easier make-up time on a 4x10 schedule","s": "c","st": "Not started","c": "Making up time within the same week is harder on a four-day schedule."},{"a": 8,"t": "Short grace period with docked pay instead of a point","s": "e","st": "Not started","c": "One suggestion was a short grace period that docks pay but doesn't add a point."},{"a": 8,"t": "Review shift differential and pay when moving between areas","s": "e","st": "Not started","c": "Some day shift employees see the mid shift differential as unfair, and moving to another area can mean a pay cut."},{"a": 8,"t": "Honor commitments made to former Fuji employees","s": "bdeh","st": "Not started","c": "Employees who joined from Fuji said their experience and seniority weren't recognized, and some commitments made at the transition weren't kept."},{"a": 8,"t": "Quarterly bonus option","s": "ad","st": "Not started","c": "Some employees would prefer a smaller bonus each quarter over one annual payment."},{"a": 8,"t": "Show what each job's pay range tops out at","s": "d","st": "Not started","c": "Employees asked to know how high their job's pay can go, not just the starting rate."},{"a": 8,"t": "Hire and hold job fairs before the summer heat","s": "ce","st": "Not started","c": "People hired in peak heat often left quickly. Employees suggested hiring and job fairs in cooler months."},{"a": 8,"t": "Janitorial help, possibly on a crossover shift","s": "cf","st": "In motion","c": "Restrooms went uncleaned for days, and spills build up under racks. There's no dedicated janitor."},{"a": 8,"t": "More room in the women's locker room at shift start","s": "f","st": "In motion","c": "The women's locker room is too crowded at shift start, which can make people late."},{"a": 8,"t": "Temporary weekend crew to cut the backlog","s": "h","st": "Not started","c": "Employees suggested a temporary weekend crew to cut the backlog."},{"a": 8,"t": "A later or staggered start option","s": "bd","st": "Not started","c": "The 5:30 AM start works for many but keeps some candidates and referrals away."}];
+const $=s=>document.querySelector(s);
+const state={q:"",area:"",status:""};
+$("#fArea").innerHTML='<option value="">All areas</option>'+AREAS.map((a,i)=>`<option value="${i}">${a}</option>`).join("");
+$("#fStatus").innerHTML='<option value="">Any status</option>'+STATUSES.map(s=>`<option>${s}</option>`).join("");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function list(){
+  return ITEMS.map((i,idx)=>({...i,idx})).filter(i=>
+    (!state.q||(i.t+" "+i.c+" "+AREAS[i.a]).toLowerCase().includes(state.q))&&
+    (state.area===""||i.a==state.area)&&
+    (!state.status||i.st===state.status)
+  ).sort((x,y)=>y.s.length-x.s.length||x.idx-y.idx);
+}
+function render(){
+  const l=list();
+  $("#count").textContent=`Showing ${l.length} of ${ITEMS.length} asks`;
+  if(!l.length){$("#rows").innerHTML='<tr><td colspan="3" class="empty">No asks match these filters. Clear filters to see everything.</td></tr>';return}
+  $("#rows").innerHTML=l.map(i=>{
+    const dots=SESSIONS.map((s,k)=>`<i class="${i.s.includes(KEYS[k])?"on":""}" title="${s}"></i>`).join("");
+    const sc=i.st==="Done"?"done":i.st==="In motion"?"motion":"";
+    return `<tr><td class="ask"><button type="button" class="askbtn" aria-expanded="false" aria-describedby="tip${i.idx}">${esc(i.t)}</button><span class="area">${AREAS[i.a]}</span><span class="tip" role="tooltip" id="tip${i.idx}">${esc(i.c)}</span></td>
+      <td><span class="dots" aria-label="Raised in ${i.s.length} of 8 sessions">${dots}<em>${i.s.length} of 8</em></span></td>
+      <td><span class="status ${sc}">${i.st}</span></td></tr>`}).join("");
+}
+$("#rows").addEventListener("click",e=>{
+  const b=e.target.closest(".askbtn"); if(!b)return;
+  const td=b.closest("td"); const open=!td.classList.contains("open");
+  document.querySelectorAll("td.ask.open").forEach(x=>{x.classList.remove("open");x.querySelector(".askbtn").setAttribute("aria-expanded","false")});
+  if(open){td.classList.add("open");b.setAttribute("aria-expanded","true")}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){document.querySelectorAll("td.ask.open").forEach(x=>x.classList.remove("open"));if(document.activeElement)document.activeElement.blur()}});
+$("#q").addEventListener("input",e=>{state.q=e.target.value.trim().toLowerCase();render()});
+$("#fArea").addEventListener("change",e=>{state.area=e.target.value;render()});
+$("#fStatus").addEventListener("change",e=>{state.status=e.target.value;render()});
+$("#resetBtn").addEventListener("click",()=>{state.q="";state.area="";state.status="";$("#q").value="";$("#fArea").value="";$("#fStatus").value="";render()});
+$("#csvBtn").addEventListener("click",()=>{
+  const head=["Ask","Area","Context","Sessions raised","Status"];
+  const rows=list().map(i=>[i.t,AREAS[i.a],i.c,i.s.length,i.st]);
+  const csv=[head,...rows].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\r\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="listening-session-asks.csv";a.click();URL.revokeObjectURL(a.href);
+});
+render();
 </script>
 </body>
 </html>
