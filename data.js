@@ -4,8 +4,8 @@
 // Leader version is discussion-first: no effort, owners, types, or HR solution lists (Cindy, Oct 15).
 // HR's drafts of those are kept in OneDrive, Listening Session Recaps.
 window.LISTENING_DATA = {
- "VERSION": "1.8",
- "UPDATED": "October 16, 2026",
+ "VERSION": "1.9",
+ "UPDATED": "November 23, 2026",
  "SESSIONS": [
   {
    "k": "a",
@@ -89,7 +89,8 @@ window.LISTENING_DATA = {
   "Safety",
   "Equipment and workflow",
   "Support from leads",
-  "Hiring, pay, and policy"
+  "Hiring, pay, and policy",
+  "Overtime and workload"
  ],
  "ITEMS": [
   {
@@ -502,7 +503,7 @@ window.LISTENING_DATA = {
    "st": "Not started"
   },
   {
-   "a": 7,
+   "a": 9,
    "t": "Let trained volunteers help other areas, including half days on overtime",
    "s": "abch",
    "st": "Not started"
@@ -514,7 +515,7 @@ window.LISTENING_DATA = {
    "st": "Not started"
   },
   {
-   "a": 7,
+   "a": 9,
    "t": "Overtime focused on orders that need to ship",
    "s": "f",
    "st": "Not started"
@@ -616,7 +617,7 @@ window.LISTENING_DATA = {
    "st": "Not started"
   },
   {
-   "a": 8,
+   "a": 9,
    "t": "Temporary weekend crew to cut the backlog",
    "s": "h",
    "st": "Not started"
@@ -660,6 +661,11 @@ window.LISTENING_DATA = {
    7
   ],
   [
+   "Overtime and workload",
+   7,
+   9
+  ],
+  [
    "Closing the loop on concerns",
    6,
    4
@@ -697,12 +703,16 @@ window.LISTENING_DATA = {
   ]
  ],
  "DONE": [
+  "The daily UV safety checklist for new hires is back in use",
   "Manufacturing employees received a $2 an hour raise",
   "The referral bonus doubled to $1,400",
   "New hires see the boot requirement in their first-day email, and HR can get boots through the company Walmart account"
  ],
  "UNDERWAY": [
-  "A communication wall with company news, safety information, and QR codes for benefits"
+  "A communication wall with company news, safety information, and QR codes for benefits",
+  "A renewed 5S effort, now led by the safety team",
+  "Each batch maker gets their own locked toolbox",
+  "New scales that hold a charge are being trialed to end the battery problem"
  ],
  "DECISIONS": [
   [
@@ -713,10 +723,13 @@ window.LISTENING_DATA = {
    ]
   ],
   [
-   "What should the trainer role look like, and how should it be supported?",
+   "Training came up in every session. What should it look like, from who trains to how we know someone is ready?",
    [
+    "Train-the-trainer program",
     "Dedicated trainer in each area",
     "Trainers have at least a year",
+    "At least 30 days of training",
+    "A hands-on final check",
     "Clarify the trainer's role when"
    ]
   ],
@@ -793,8 +806,9 @@ window.LISTENING_DATA = {
   "2": "Both shifts want a clear, shared picture of what a finished handoff looks like.",
   "3": "Employees want one clear picture of what comes first each shift.",
   "4": "Employees want to hear back on what happens after they raise something.",
-  "5": "A few safety questions to look at together: working alone at night, lockout before repairs, the small batch rack lift, and summer heat with chemicals.",
+  "5": "Summer heat with chemicals came up in every session as a reason new hires leave. Other questions to look at: working alone at night, lockout before repairs, and the small batch rack lift.",
   "6": "Tubs, scale and scanner batteries, aging lines, and labelers came up most as the things that slow work down.",
+  "9": "Mandatory overtime has run most of the year. Employees want it spent on orders that need to ship, and the chance to help where the work is.",
   "7": "Employees value leads who know the work and jump in when the team is short, and want more of that."
  },
  "KEEP_SAY": {
@@ -833,6 +847,10 @@ window.LISTENING_DATA = {
    8
   ],
   [
+   "Heat came up in every session as a reason new hires leave. What would make a first summer on the floor easier?",
+   8
+  ],
+  [
    "Both shifts asked for a shared standard. What should a good handoff look like?",
    6
   ],
@@ -850,6 +868,18 @@ window.LISTENING_DATA = {
   ]
  ],
  "PROOF": {
+  "A renewed 5S effort, now led by the safety team": {
+   "q": "Now it's coming back up... I think this one's gonna stick for a while.",
+   "who": "Woody, manufacturing, in the October 20 recap meeting"
+  },
+  "Each batch maker gets their own locked toolbox": {
+   "q": "We have been working on the tool situation to give every person their own toolbox.",
+   "who": "Woody, manufacturing, in the October 20 recap meeting"
+  },
+  "New scales that hold a charge are being trialed to end the battery problem": {
+   "q": "They seem to hold charges, and I told them if it does, let's start cycling out those scales.",
+   "who": "Woody, manufacturing, in the October 20 recap meeting"
+  },
   "A communication wall with company news, safety information, and QR codes for benefits": {
    "q": "The communications wall should be up and done within about a month.",
    "who": "Cindy, HR, in the October 8 session"

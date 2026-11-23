@@ -77,10 +77,6 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
 .views p b { font-weight: 700; }
 
 /* Next */
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-.steps li { border-top: 3px solid var(--line-strong); padding-top: 12px; }
-.steps li:first-child { border-color: var(--red); }
-.steps b { display: block; margin-bottom: 4px; }
 .input { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 20px; }
 .input p { flex: 1 1 320px; }
 
@@ -89,7 +85,7 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
   .why { clip-path: none; padding: 24px; }
 }
 @media (max-width: 760px) {
-  .pair, .areas, .views, .steps { grid-template-columns: minmax(0, 1fr); }
+  .pair, .areas, .views { grid-template-columns: minmax(0, 1fr); }
   .quick li { grid-template-columns: 56px minmax(0, 1fr); }
   .hero { padding: 32px 0 28px; }
   .why b { font-size: 52px; }
@@ -136,7 +132,7 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
       <div>
         <div class="head">
           <h2>Already changed</h2>
-          <p class="lede">Done or underway while the sessions ran.</p>
+          <p class="lede">Done or underway, from HR and manufacturing leadership. Hover over Underway to see where it was said.</p>
         </div>
         <ul class="changes" id="changes"></ul>
       </div>
@@ -156,7 +152,7 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
   <section class="block">
     <div class="wrap">
       <div class="head">
-        <h2>Eight areas we heard about</h2>
+        <h2>Nine areas we heard about</h2>
         <p class="lede">Ranked by how many of the 8 sessions raised each one.</p>
       </div>
       <ul class="areas" id="areas"></ul>
@@ -185,10 +181,8 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
 
   <section class="block">
     <div class="wrap">
-      <div class="head"><h2>What happens next</h2></div>
-      <ol class="steps" id="steps"></ol>
       <div class="input">
-        <p><b>Every ask in one place.</b> Everything employees asked for, and how many sessions raised it, to look through before Tuesday.</p>
+        <p><b>Every ask in one place.</b> Everything employees asked for, and how many sessions raised it, in their own words.</p>
         <a class="btn primary n-asks" href="asks.html">Review all asks</a>
       </div>
     </div>
@@ -261,12 +255,10 @@ summary:hover .open-asks { text-decoration: underline; text-underline-offset: 3p
     return "<div><h3>" + esc(s.t) + "</h3><p><b>" + esc(s.la) + ":</b> " + esc(s.a) + "</p><p><b>" + esc(s.lb) + ":</b> " + esc(s.b) + "</p></div>";
   }).join("");
 
-  // Ask count comes from the data, so links stay right when asks change.
-  document.querySelectorAll(".n-asks").forEach(function (a) { a.textContent = a.textContent.replace("all asks", "all " + D.ITEMS.length + " asks").replace("All asks", "All " + D.ITEMS.length + " asks"); });
 
   $("ver").textContent = "Draft, version " + D.VERSION + ", updated " + D.UPDATED;
 
-  $("steps").innerHTML = D.STEPS.map(function (s) { return "<li><b>" + esc(s.when) + "</b>" + esc(s.what) + "</li>"; }).join("");
+
 })();
 </script>
 </body>
